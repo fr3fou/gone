@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"math"
 	"math/rand"
 )
 
@@ -13,13 +15,14 @@ type Perceptron struct {
 	Epochs       int
 }
 
-func NewPerceptron(lRate float64) *Perceptron {
+func NewPerceptron(lRate float64, epochs int) *Perceptron {
 	xW := float64(rand.Intn(2) - 1)
 	yW := float64(rand.Intn(2) - 1)
 
 	return &Perceptron{
 		XWeight:      xW,
 		YWeight:      yW,
+		Epochs:       epochs,
 		LearningRate: lRate,
 	}
 }
@@ -34,15 +37,22 @@ func (p *Perceptron) Guess(input Point) int {
 }
 
 func (p *Perceptron) Train(inputs []Point) {
+	bestErr := math.MaxFloat64
+	lastErr := 0.0
 	for i := 0; i < p.Epochs; i++ {
 		for _, input := range inputs {
 			guess := p.Guess(input)
 			err := float64(input.Label - guess)
 
+			bestErr = math.Min(err, bestErr)
+			lastErr = err
+
 			p.XWeight += err * p.LearningRate
 			p.YWeight += err * p.LearningRate
 		}
 	}
+
+	log.Printf("Training completed with error %f and best error %f", lastErr, bestErr)
 }
 
 // Sign is an activation function

@@ -10,7 +10,7 @@ func init() {
 }
 
 func main() {
-	p := NewPerceptron(0.1)
+	p := NewPerceptron(0.1, 20)
 
 	// Training data
 	pts := []Point{}
