@@ -1,6 +1,8 @@
 package main
 
-import "math/rand"
+import (
+	"math/rand"
+)
 
 const Inputs = 2
 
@@ -19,7 +21,7 @@ func NewPerceptron() *Perceptron {
 	}
 }
 
-func (p *Perceptron) Guess(inputs []float64) int {
+func (p *Perceptron) Guess(inputs [Inputs]float64) int {
 	sum := 0.0
 
 	for i := range inputs {

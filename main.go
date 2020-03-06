@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
-	fmt.Println("gosh")
+	p := NewPerceptron()
+	fmt.Println(p.Guess([Inputs]float64{-1, 0.5}))
 }
