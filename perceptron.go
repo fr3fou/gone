@@ -8,6 +8,7 @@ import (
 
 const Inputs = 2
 
+// Perceptron is a perceptron
 type Perceptron struct {
 	XWeight      float64
 	YWeight      float64
@@ -15,9 +16,10 @@ type Perceptron struct {
 	Epochs       int
 }
 
+// NewPerceptron is a constructor for a Perceptron
 func NewPerceptron(lRate float64, epochs int) *Perceptron {
-	xW := float64(rand.Intn(2) - 1)
-	yW := float64(rand.Intn(2) - 1)
+	xW := float64(rand.Intn(2) - 1) // range between -1 and 1
+	yW := float64(rand.Intn(2) - 1) // range between -1 and 1
 
 	return &Perceptron{
 		XWeight:      xW,
@@ -27,7 +29,8 @@ func NewPerceptron(lRate float64, epochs int) *Perceptron {
 	}
 }
 
-func (p *Perceptron) Guess(input Point) int {
+// Feedfoward predicts based on the input
+func (p *Perceptron) Feedfoward(input Point) int {
 	sum := 0.0
 
 	sum += input.X * p.XWeight
@@ -36,12 +39,13 @@ func (p *Perceptron) Guess(input Point) int {
 	return Sign(sum)
 }
 
+// Train trains the perceptron based on inputs
 func (p *Perceptron) Train(inputs []Point) {
 	bestErr := math.MaxFloat64
 	lastErr := 0.0
 	for i := 0; i < p.Epochs; i++ {
 		for _, input := range inputs {
-			guess := p.Guess(input)
+			guess := p.Feedfoward(input)
 			err := float64(input.Label - guess)
 
 			bestErr = math.Min(err, bestErr)
@@ -53,6 +57,7 @@ func (p *Perceptron) Train(inputs []Point) {
 	}
 
 	log.Printf("Training completed with error %f and best error %f", lastErr, bestErr)
+	log.Printf("%+v", p)
 }
 
 // Sign is an activation function
