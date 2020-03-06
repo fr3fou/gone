@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"math"
-	"math/rand"
 )
 
 const Inputs = 2
@@ -19,8 +18,8 @@ type Perceptron struct {
 
 // NewPerceptron is a constructor for a Perceptron
 func NewPerceptron(lRate float64, epochs int) *Perceptron {
-	xW := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
-	yW := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
+	xW := randFloat(-1, 2)
+	yW := randFloat(-1, 2)
 
 	return &Perceptron{
 		XWeight:      xW,

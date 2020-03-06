@@ -1,7 +1,5 @@
 package main
 
-import "math/rand"
-
 const (
 	Width  = 800
 	Height = 800
@@ -15,8 +13,8 @@ type Point struct {
 }
 
 func NewPoint() *Point {
-	x := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
-	y := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
+	x := randFloat(-1, 2)
+	y := randFloat(-1, 2)
 	label := -1
 
 	if x > y { // f(x) = x
