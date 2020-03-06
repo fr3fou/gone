@@ -19,8 +19,8 @@ type Perceptron struct {
 
 // NewPerceptron is a constructor for a Perceptron
 func NewPerceptron(lRate float64, epochs int) *Perceptron {
-	xW := rand.Float64() - 1 // range between -1 and 1
-	yW := rand.Float64() - 1 // range between -1 and 1
+	xW := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
+	yW := rand.NormFloat64() / math.MaxFloat64 // range between -1 and 1
 
 	return &Perceptron{
 		XWeight:      xW,
