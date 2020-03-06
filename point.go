@@ -20,8 +20,6 @@ func NewPoint() *Point {
 
 	if x > y { // f(x) = x
 		label = 1
-	} else {
-		label = -1
 	}
 
 	return &Point{
@@ -31,11 +29,14 @@ func NewPoint() *Point {
 	}
 }
 
+func f(x float64) float64 {
+	return 0.3*x + 0.2
+}
+
 func NewPointXY(x, y float64) *Point {
-	if x > y { // f(x) = x
+	label := -1
+	if y > f(x) { // f(x) = x
 		label = 1
-	} else {
-		label = -1
 	}
 
 	return &Point{
