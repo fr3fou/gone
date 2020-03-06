@@ -15,8 +15,8 @@ type Point struct {
 }
 
 func NewPoint() *Point {
-	x := float64(rand.Intn(2) - 1) // range between -1 and 1
-	y := float64(rand.Intn(2) - 1) // range between -1 and 1
+	x := rand.Float64() - 1 // range between -1 and 1
+	y := rand.Float64() - 1 // range between -1 and 1
 	label := -1
 
 	if x > y { // f(x) = x
