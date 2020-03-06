@@ -30,3 +30,17 @@ func NewPoint() *Point {
 		Label: label,
 	}
 }
+
+func NewPointXY(x, y float64) *Point {
+	if x > y { // f(x) = x
+		label = 1
+	} else {
+		label = -1
+	}
+
+	return &Point{
+		X:     x,
+		Y:     y,
+		Label: label,
+	}
+}
