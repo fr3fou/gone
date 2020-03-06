@@ -7,28 +7,42 @@ import (
 const Inputs = 2
 
 type Perceptron struct {
-	Weights [2]float64
+	XWeight      float64
+	YWeight      float64
+	LearningRate float64
+	Epochs       int
 }
 
-func NewPerceptron() *Perceptron {
-	weights := [Inputs]float64{}
-	for i := 0; i < Inputs; i++ {
-		weights[i] = float64(rand.Intn(2) - 1)
-	}
+func NewPerceptron(lRate float64) *Perceptron {
+	xW := float64(rand.Intn(2) - 1)
+	yW := float64(rand.Intn(2) - 1)
 
 	return &Perceptron{
-		Weights: weights,
+		XWeight:      xW,
+		YWeight:      yW,
+		LearningRate: lRate,
 	}
 }
 
-func (p *Perceptron) Guess(inputs [Inputs]float64) int {
+func (p *Perceptron) Guess(input Point) int {
 	sum := 0.0
 
-	for i := range inputs {
-		sum += inputs[i] * p.Weights[i]
-	}
+	sum += input.X * p.XWeight
+	sum += input.Y * p.YWeight
 
 	return Sign(sum)
+}
+
+func (p *Perceptron) Train(inputs []Point) {
+	for i := 0; i < p.Epochs; i++ {
+		for _, input := range inputs {
+			guess := p.Guess(input)
+			err := float64(input.Label - guess)
+
+			p.XWeight += err * p.LearningRate
+			p.YWeight += err * p.LearningRate
+		}
+	}
 }
 
 // Sign is an activation function

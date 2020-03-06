@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -11,6 +10,13 @@ func init() {
 }
 
 func main() {
-	p := NewPerceptron()
-	fmt.Println(p.Guess([Inputs]float64{-1, 0.5}))
+	p := NewPerceptron(0.1)
+
+	// Training data
+	pts := []Point{}
+	for i := 0; i < 100; i++ {
+		pts = append(pts, *NewPoint())
+	}
+
+	p.Train(pts)
 }
