@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -19,4 +20,5 @@ func main() {
 	}
 
 	p.Train(pts)
+	fmt.Println(p.Feedfoward(Point{X: -1, Y: -1}))
 }

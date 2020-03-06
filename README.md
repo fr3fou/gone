@@ -1,2 +1,3 @@
 # gone
-A neural network in Go
+
+A neural network perceptron in Go
