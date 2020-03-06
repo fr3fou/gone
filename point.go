@@ -10,6 +10,7 @@ const (
 type Point struct {
 	X     float64
 	Y     float64
+	Bias  float64
 	Label int
 }
 
@@ -26,6 +27,7 @@ func NewPoint() *Point {
 		X:     x,
 		Y:     y,
 		Label: label,
+		Bias:  1,
 	}
 }
 
@@ -43,5 +45,6 @@ func NewPointXY(x, y float64) *Point {
 		X:     x,
 		Y:     y,
 		Label: label,
+		Bias:  1,
 	}
 }

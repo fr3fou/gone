@@ -12,6 +12,7 @@ const Inputs = 2
 type Perceptron struct {
 	XWeight      float64
 	YWeight      float64
+	Bias         float64
 	LearningRate float64
 	Epochs       int
 }
@@ -35,6 +36,7 @@ func (p *Perceptron) Feedfoward(input Point) int {
 
 	sum += input.X * p.XWeight
 	sum += input.Y * p.YWeight
+	sum += input.Bias * p.Bias
 
 	return Sign(sum)
 }
@@ -53,6 +55,7 @@ func (p *Perceptron) Train(inputs []Point) {
 
 			p.XWeight += err * p.LearningRate
 			p.YWeight += err * p.LearningRate
+			p.Bias += err * p.LearningRate
 		}
 	}
 
