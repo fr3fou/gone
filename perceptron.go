@@ -59,7 +59,6 @@ func (p *Perceptron) Train(inputs []Point) {
 	}
 
 	log.Printf("Training completed with error %f and best error %f", lastErr, bestErr)
-	log.Printf("%+v", p)
 }
 
 // Sign is an activation function
