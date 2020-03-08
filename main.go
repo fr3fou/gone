@@ -11,14 +11,17 @@ func init() {
 }
 
 func main() {
-	p := NewPerceptron(0.1, 1000)
+	p := NewPerceptron(0.1, 10000)
 
 	// Training data
 	pts := []Point{}
 	for i := 0; i < 1000; i++ {
-		x := randFloat(-100, 100)
-		y := randFloat(-100, 100)
-		pts = append(pts, *NewPointXY(x, y))
+		pt := Point{
+			X: float64(rand.Int31n(201) - 101),
+			Y: float64(rand.Int31n(201) - 101),
+		}
+		pt.Label = aboveF(pt.X, pt.Y)
+		pts = append(pts, pt)
 	}
 
 	p.Train(pts)

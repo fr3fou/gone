@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 const (
 	Width  = 800
 	Height = 800
@@ -42,6 +44,7 @@ func aboveF(x, y float64) int {
 
 func NewPointXY(x, y float64) *Point {
 	label := aboveF(x, y)
+	fmt.Printf("(%f, %f) is labeled %d\n", x, y, label)
 
 	return &Point{
 		X:     x,
