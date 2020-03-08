@@ -11,16 +11,16 @@ func init() {
 }
 
 func main() {
-	p := NewPerceptron(0.1, 20)
+	p := NewPerceptron(0.1, 1000)
 
 	// Training data
 	pts := []Point{}
-	for i := 0; i < 100000; i++ {
-		pts = append(pts, *NewPointXY(float64(i), f(float64(i))))
-		// p := *NewPoint()
-		// pts = append(pts, p)
+	for i := 0; i < 1000; i++ {
+		x := randFloat(-100, 100)
+		y := randFloat(-100, 100)
+		pts = append(pts, *NewPointXY(x, y))
 	}
 
 	p.Train(pts)
-	fmt.Println(p.Feedfoward(Point{X: 0.5, Y: f(0.5)}))
+	fmt.Println(p.Verify())
 }

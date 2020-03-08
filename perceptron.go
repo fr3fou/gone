@@ -61,6 +61,21 @@ func (p *Perceptron) Train(inputs []Point) {
 	log.Printf("Training completed with error %f and best error %f", lastErr, bestErr)
 }
 
+func (p *Perceptron) Verify() int {
+	correct := 0
+	for i := 0; i < 100; i++ {
+		point := Point{
+			X: randFloat(-100, 100),
+			Y: randFloat(-100, 100),
+		}
+		res := p.Feedfoward(point)
+		if res == aboveF(point.X, point.Y) {
+			correct++
+		}
+	}
+	return correct
+}
+
 // Sign is an activation function
 func Sign(n float64) int {
 	if n >= 0 {
