@@ -1,12 +1,8 @@
 package main
 
 import (
-	"log"
-	"math"
 	"math/rand"
 )
-
-const Inputs = 2
 
 // Perceptron is a perceptron
 type Perceptron struct {
@@ -43,25 +39,19 @@ func (p *Perceptron) Feedfoward(input Point) int {
 
 // Train trains the perceptron based on inputs
 func (p *Perceptron) Train(inputs []Point) {
-	bestErr := math.MaxFloat64
-	lastErr := 0.0
 	for i := 0; i < p.Epochs; i++ {
 		for _, input := range inputs {
 			guess := p.Feedfoward(input)
 			err := float64(input.Label - guess)
-
-			bestErr = math.Min(err, bestErr)
-			lastErr = err
 
 			p.XWeight += err * p.LearningRate * input.X
 			p.YWeight += err * p.LearningRate * input.Y
 			p.Bias += err * p.LearningRate
 		}
 	}
-
-	log.Printf("Training completed with error %f and best error %f", lastErr, bestErr)
 }
 
+// Verify benches the perceptron
 func (p *Perceptron) Verify() int {
 	correct := 0
 	for i := 0; i < 100; i++ {

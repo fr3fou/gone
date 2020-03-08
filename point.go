@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-)
-
+// Point represents a point in a coordinate system
 type Point struct {
 	X     float64
 	Y     float64
@@ -12,12 +8,13 @@ type Point struct {
 	Label int
 }
 
+// NewPoint creates a random point
 func NewPoint() *Point {
-	x := float64(rand.Int31n(201) - 101)
-	y := float64(rand.Int31n(201) - 101)
-	label := -1
+	x := randFloat(-100, 101)
+	y := randFloat(-100, 101)
 
-	if x > y { // f(x) = x
+	label := -1
+	if x > y { // f(x) = x (identity function)
 		label = 1
 	}
 
@@ -40,10 +37,9 @@ func aboveF(x, y float64) int {
 	return -1
 }
 
+// NewPointXY is a ctor for point which takes in an X and Y
 func NewPointXY(x, y float64) *Point {
 	label := aboveF(x, y)
-	fmt.Printf("(%f, %f) is labeled %d\n", x, y, label)
-
 	return &Point{
 		X:     x,
 		Y:     y,

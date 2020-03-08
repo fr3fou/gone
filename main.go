@@ -17,8 +17,8 @@ func main() {
 	pts := []Point{}
 	for i := 0; i < 1000; i++ {
 		pt := Point{
-			X: float64(rand.Int31n(201) - 101),
-			Y: float64(rand.Int31n(201) - 101),
+			X: randFloat(-100, 101),
+			Y: randFloat(-100, 101),
 		}
 		pt.Label = aboveF(pt.X, pt.Y)
 		pts = append(pts, pt)
