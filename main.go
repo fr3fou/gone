@@ -22,5 +22,5 @@ func main() {
 	}
 
 	p.Train(pts)
-	fmt.Println(p.Verify())
+	fmt.Printf("%d%% correct.\n", p.Verify())
 }
