@@ -53,8 +53,8 @@ func (p *Perceptron) Train(inputs []Point) {
 			bestErr = math.Min(err, bestErr)
 			lastErr = err
 
-			p.XWeight += err * p.LearningRate
-			p.YWeight += err * p.LearningRate
+			p.XWeight += err * p.LearningRate * input.X
+			p.YWeight += err * p.LearningRate * input.Y
 			p.Bias += err * p.LearningRate
 		}
 	}

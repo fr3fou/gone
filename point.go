@@ -1,10 +1,8 @@
 package main
 
-import "fmt"
-
-const (
-	Width  = 800
-	Height = 800
+import (
+	"fmt"
+	"math/rand"
 )
 
 type Point struct {
@@ -15,8 +13,8 @@ type Point struct {
 }
 
 func NewPoint() *Point {
-	x := randFloat(-1, 2)
-	y := randFloat(-1, 2)
+	x := float64(rand.Int31n(201) - 101)
+	y := float64(rand.Int31n(201) - 101)
 	label := -1
 
 	if x > y { // f(x) = x
