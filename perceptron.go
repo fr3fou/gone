@@ -1,9 +1,5 @@
 package main
 
-import (
-	"math/rand"
-)
-
 // Perceptron is a perceptron
 type Perceptron struct {
 	XWeight      float64
@@ -56,8 +52,8 @@ func (p *Perceptron) Verify() int {
 	correct := 0
 	for i := 0; i < 100; i++ {
 		pt := Point{
-			X: float64(rand.Int31n(201) - 101),
-			Y: float64(rand.Int31n(201) - 101),
+			X: randFloat(-100, 101),
+			Y: randFloat(-100, 101),
 		}
 		pt.Label = aboveF(pt.X, pt.Y)
 		res := p.Feedfoward(pt)
