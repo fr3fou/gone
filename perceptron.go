@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"math"
+	"math/rand"
 )
 
 const Inputs = 2
@@ -64,12 +65,13 @@ func (p *Perceptron) Train(inputs []Point) {
 func (p *Perceptron) Verify() int {
 	correct := 0
 	for i := 0; i < 100; i++ {
-		point := Point{
-			X: randFloat(-100, 100),
-			Y: randFloat(-100, 100),
+		pt := Point{
+			X: float64(rand.Int31n(201) - 101),
+			Y: float64(rand.Int31n(201) - 101),
 		}
-		res := p.Feedfoward(point)
-		if res == aboveF(point.X, point.Y) {
+		pt.Label = aboveF(pt.X, pt.Y)
+		res := p.Feedfoward(pt)
+		if res == pt.Label {
 			correct++
 		}
 	}
