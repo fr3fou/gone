@@ -13,8 +13,8 @@ type Point struct {
 }
 
 func NewPoint() *Point {
-	x := randFloat(-1, 2)
-	y := randFloat(-1, 2)
+	x := randFloat(-1, 1)
+	y := randFloat(-1, 1)
 	label := -1
 
 	if x > y { // f(x) = x

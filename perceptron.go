@@ -18,8 +18,8 @@ type Perceptron struct {
 
 // NewPerceptron is a constructor for a Perceptron
 func NewPerceptron(lRate float64, epochs int) *Perceptron {
-	xW := randFloat(-1, 2)
-	yW := randFloat(-1, 2)
+	xW := randFloat(-1, 1)
+	yW := randFloat(-1, 1)
 
 	return &Perceptron{
 		XWeight:      xW,

@@ -15,10 +15,12 @@ func main() {
 
 	// Training data
 	pts := []Point{}
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 100000; i++ {
 		pts = append(pts, *NewPointXY(float64(i), f(float64(i))))
+		// p := *NewPoint()
+		// pts = append(pts, p)
 	}
 
 	p.Train(pts)
-	fmt.Println(p.Feedfoward(Point{X: 0, Y: f(0)}))
+	fmt.Println(p.Feedfoward(Point{X: 0.5, Y: f(0.5)}))
 }
