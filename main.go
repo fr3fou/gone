@@ -20,6 +20,7 @@ func main() {
 
 	m := matrix.New(5, 3, nil)
 	m.Randomize()
+	fmt.Println(m)
 
 	// Training data
 	pts := []point.Point{}
