@@ -1,7 +1,7 @@
-package main
+package rand
 
 import "math/rand"
 
-func randFloat(min, max float64) float64 {
+func Float(min, max float64) float64 {
 	return rand.Float64()*max + min
 }

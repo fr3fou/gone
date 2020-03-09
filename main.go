@@ -2,28 +2,40 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
+	stdrand "math/rand"
 	"time"
+
+	"github.com/fr3fou/gone/matrix"
+	"github.com/fr3fou/gone/perceptron"
+	"github.com/fr3fou/gone/point"
+	"github.com/fr3fou/gone/rand"
 )
 
 func init() {
-	rand.Seed(time.Now().UnixNano())
+	stdrand.Seed(time.Now().UnixNano())
 }
 
 func main() {
-	p := NewPerceptron(0.1, 10000)
+	p := perceptron.New(0.1, 10000)
+
+	m := matrix.New(5, 3, nil)
+	m.Randomize()
 
 	// Training data
-	pts := []Point{}
+	pts := []point.Point{}
 	for i := 0; i < 1000; i++ {
-		pt := Point{
-			X: randFloat(-100, 101),
-			Y: randFloat(-100, 101),
+		pt := point.Point{
+			X: rand.Float(-100, 101),
+			Y: rand.Float(-100, 101),
 		}
-		pt.Label = aboveF(pt.X, pt.Y)
+		pt.Label = point.AboveF(pt.X, pt.Y, f)
 		pts = append(pts, pt)
 	}
 
 	p.Train(pts)
-	fmt.Printf("%d%% correct.\n", p.Verify())
+	fmt.Printf("%d%% correct.\n", p.Verify(f))
+}
+
+func f(x float64) float64 {
+	return 3*x + 2
 }

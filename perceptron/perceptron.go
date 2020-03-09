@@ -1,4 +1,9 @@
-package main
+package perceptron
+
+import (
+	"github.com/fr3fou/gone/point"
+	"github.com/fr3fou/gone/rand"
+)
 
 // Perceptron is a perceptron
 type Perceptron struct {
@@ -10,9 +15,9 @@ type Perceptron struct {
 }
 
 // NewPerceptron is a constructor for a Perceptron
-func NewPerceptron(lRate float64, epochs int) *Perceptron {
-	xW := randFloat(-1, 2)
-	yW := randFloat(-1, 2)
+func New(lRate float64, epochs int) *Perceptron {
+	xW := rand.Float(-1, 2)
+	yW := rand.Float(-1, 2)
 
 	return &Perceptron{
 		XWeight:      xW,
@@ -23,7 +28,7 @@ func NewPerceptron(lRate float64, epochs int) *Perceptron {
 }
 
 // Feedfoward predicts based on the input
-func (p *Perceptron) Feedfoward(input Point) int {
+func (p *Perceptron) Feedfoward(input point.Point) int {
 	sum := 0.0
 
 	sum += input.X * p.XWeight
@@ -34,7 +39,7 @@ func (p *Perceptron) Feedfoward(input Point) int {
 }
 
 // Train trains the perceptron based on inputs
-func (p *Perceptron) Train(inputs []Point) {
+func (p *Perceptron) Train(inputs []point.Point) {
 	for i := 0; i < p.Epochs; i++ {
 		for _, input := range inputs {
 			guess := p.Feedfoward(input)
@@ -48,14 +53,14 @@ func (p *Perceptron) Train(inputs []Point) {
 }
 
 // Verify benches the perceptron
-func (p *Perceptron) Verify() int {
+func (p *Perceptron) Verify(f point.F) int {
 	correct := 0
 	for i := 0; i < 100; i++ {
-		pt := Point{
-			X: randFloat(-100, 101),
-			Y: randFloat(-100, 101),
+		pt := point.Point{
+			X: rand.Float(-100, 101),
+			Y: rand.Float(-100, 101),
 		}
-		pt.Label = aboveF(pt.X, pt.Y)
+		pt.Label = point.AboveF(pt.X, pt.Y, f)
 		res := p.Feedfoward(pt)
 		if res == pt.Label {
 			correct++

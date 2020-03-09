@@ -1,4 +1,8 @@
-package main
+package point
+
+import "github.com/fr3fou/gone/rand"
+
+type F func(float64) float64
 
 // Point represents a point in a coordinate system
 type Point struct {
@@ -10,8 +14,8 @@ type Point struct {
 
 // NewPoint creates a random point
 func NewPoint() *Point {
-	x := randFloat(-100, 101)
-	y := randFloat(-100, 101)
+	x := rand.Float(-100, 101)
+	y := rand.Float(-100, 101)
 
 	label := -1
 	if x > y { // f(x) = x (identity function)
@@ -26,11 +30,7 @@ func NewPoint() *Point {
 	}
 }
 
-func f(x float64) float64 {
-	return 3*x + 2
-}
-
-func aboveF(x, y float64) int {
+func AboveF(x, y float64, f F) int {
 	if y > f(x) { // f(x) = x
 		return 1
 	}
@@ -38,8 +38,8 @@ func aboveF(x, y float64) int {
 }
 
 // NewPointXY is a ctor for point which takes in an X and Y
-func NewPointXY(x, y float64) *Point {
-	label := aboveF(x, y)
+func NewPointXY(x, y float64, f F) *Point {
+	label := AboveF(x, y, f)
 	return &Point{
 		X:     x,
 		Y:     y,
