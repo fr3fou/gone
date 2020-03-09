@@ -5,6 +5,7 @@ import (
 	stdrand "math/rand"
 	"time"
 
+	"github.com/fr3fou/gone/gone"
 	"github.com/fr3fou/gone/perceptron"
 	"github.com/fr3fou/gone/point"
 	"github.com/fr3fou/gone/rand"
@@ -15,6 +16,21 @@ func init() {
 }
 
 func main() {
+	gone.New(
+		.1,
+		gone.Layer{
+			Nodes: 2,
+		},
+		gone.Layer{
+			Nodes: 10,
+		},
+		gone.Layer{
+			Nodes: 2,
+		},
+	)
+}
+
+func main2() {
 	p := perceptron.New(0.1, 10000)
 
 	// Training data
