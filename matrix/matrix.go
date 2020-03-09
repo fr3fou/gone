@@ -28,10 +28,10 @@ func New(r, c int, data [][]float64) Matrix {
 	}
 }
 
-func (m *Matrix) Randomize() {
+func (m *Matrix) Randomize(low, high float64) {
 	for i := 0; i < m.Rows; i++ {
 		for j := 0; j < m.Columns; j++ {
-			m.Data[i][j] = rand.Float(-50, 50)
+			m.Data[i][j] = rand.Float(low, high)
 		}
 	}
 }
