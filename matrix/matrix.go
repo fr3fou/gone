@@ -38,33 +38,11 @@ func (m *Matrix) Randomize() {
 
 func (m Matrix) String() string {
 	b := &strings.Builder{}
-	for i, line := range m.Data {
-		if i%m.Rows == 0 {
-			fmt.Fprintln(b, "+---------+---------+---------+")
+	for _, line := range m.Data {
+		for _, num := range line {
+			fmt.Fprintf(b, " %f ", num)
 		}
-		for j, num := range line {
-			if j%m.Columns == 0 {
-				fmt.Fprint(b, "|")
-
-			}
-			if num == 0 {
-				fmt.Fprint(b, " . ")
-
-			} else {
-				fmt.Fprintf(b, " %f ", num)
-
-			}
-			if j == 8 {
-				fmt.Fprint(b, "|")
-
-			}
-
-		}
-		if i == m.Columns-1 {
-			fmt.Fprint(b, "\n+---------+---------+---------+")
-
-		}
-		fmt.Fprintln(b)
+		b.WriteString("\n")
 	}
 
 	return b.String()
