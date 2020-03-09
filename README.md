@@ -1,6 +1,6 @@
 # gone
 
-A simple neural network perceptron in Go
+A simple neural network library in Go
 
 ## TODO:
 
