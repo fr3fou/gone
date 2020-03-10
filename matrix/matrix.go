@@ -80,6 +80,16 @@ func Add(m Matrix, n float64) Matrix {
 	})
 }
 
+func SubtractMatrix(m, n Matrix) Matrix {
+	if m.Rows != n.Rows || m.Columns != n.Rows {
+		panic("matrix: can't add different sized matricies")
+	}
+
+	return Map(m, func(val float64, x, y int) float64 {
+		return val - n.Data[x][y]
+	})
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {
