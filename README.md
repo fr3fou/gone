@@ -12,6 +12,8 @@ A simple neural network library in Go
 - [ ] Bias
 - [ ] Feedforward
 - [ ] Train
+    - [ ] Support shuffling the data
+    - [ ] Epochs
 - [ ] Backpropagation
 
 ### `matrix/`
@@ -23,6 +25,19 @@ A simple neural network library in Go
 - [ ] Subtract
 - [ ] Multiply
 - [ ] Map
+
+### Research
+
+- [ ] Derivatives
+- [ ] Linear vs non-linear problems (activation function)
+- [ ] Gradient Descent
+    - [ ] Stochastic vs Batch
+- [ ] Mean Squared Error
+
+### Examples
+
+- [ ] XOR Problem
+- [ ] Digit Classifier
 
 ## Resources used:
 
