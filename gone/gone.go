@@ -1,6 +1,8 @@
 package gone
 
 import (
+	"fmt"
+
 	"github.com/fr3fou/gone/matrix"
 )
 
@@ -37,9 +39,9 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		LearningRate: lr,
 	}
 
-	for i := 1; i < l; i++ {
-		prev := layers[i-1]
-		current := layers[i]
+	for i := 0; i < l-1; i++ {
+		prev := layers[i]
+		current := layers[i+1]
 		weights := matrix.New(
 			prev.Nodes,    // the rows are the outputs of the previous layer
 			current.Nodes, // the cols are the inputs of the current one
@@ -70,13 +72,27 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 }
 
 // Predict is the feedforward process
-func (n *NeuralNetwork) Predict(data []float64) {
+func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 	if len(data) != n.Layers[0].Nodes {
 		panic("gone: not enough data in input layer")
 	}
 
-	input := matrix.NewFromArray(data)
-	for i := range n.Layers {
+	output := matrix.NewFromArray(data)
 
+	for i := 2; i < len(n.Weights); i++ {
+		fmt.Println(n.Weights[i-1])
+		fmt.Println(output)
+		output =
+			matrix.Map(
+				matrix.Multiply(n.Weights[i], output),
+				func(val float64, x, y int) float64 {
+					return n.Layers[i-1].ActivationFunction.F(val)
+				})
 	}
+
+	return output
 }
+
+// func (n *NeuralNetwork) predict(layer int, ) type {
+
+// }
