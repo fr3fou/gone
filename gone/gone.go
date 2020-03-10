@@ -63,7 +63,6 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		if prev.ActivationFunction.FPrime == nil {
 			prev.ActivationFunction.FPrime = Id.FPrime
 		}
-
 	}
 
 	return n

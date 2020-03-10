@@ -139,3 +139,15 @@ func TestFlatten(t *testing.T) {
 
 	assert.Equal(t, expected, m.Flatten())
 }
+
+func TestNewFromArray(t *testing.T) {
+	m := NewFromArray(3, 3, []float64{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	expected := New(3, 3, [][]float64{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9},
+	})
+
+	assert.Equal(t, expected, m)
+}
