@@ -65,7 +65,7 @@ func Scale(m Matrix, a float64) Matrix {
 }
 
 func AddMatrix(m, n Matrix) Matrix {
-	if m.Rows != n.Rows || m.Columns != n.Rows {
+	if m.Rows != n.Rows || m.Columns != n.Columns {
 		panic("matrix: can't add different sized matricies")
 	}
 
@@ -81,8 +81,8 @@ func Add(m Matrix, n float64) Matrix {
 }
 
 func SubtractMatrix(m, n Matrix) Matrix {
-	if m.Rows != n.Rows || m.Columns != n.Rows {
-		panic("matrix: can't add different sized matricies")
+	if m.Rows != n.Rows || m.Columns != n.Columns {
+		panic("matrix: can't subtract different sized matricies")
 	}
 
 	return Map(m, func(val float64, x, y int) float64 {
@@ -93,6 +93,22 @@ func SubtractMatrix(m, n Matrix) Matrix {
 func Subtract(m Matrix, n float64) Matrix {
 	return Map(m, func(val float64, x, y int) float64 {
 		return val - n
+	})
+}
+
+func Multiply(m, n Matrix) Matrix {
+	if m.Rows != n.Columns || m.Columns != n.Rows {
+		panic("matrix: rows must match with columns of matricies")
+	}
+
+	return Map(New(m.Rows, n.Columns, nil), func(_ float64, x, y int) float64 {
+		sum := 0.0
+
+		for i := 0; i < n.Rows; i++ {
+			sum += m.Data[x][i] * n.Data[i][y]
+		}
+
+		return sum
 	})
 }
 
