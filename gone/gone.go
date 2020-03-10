@@ -30,8 +30,8 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		panic("gone: need more layers for a neural network")
 	}
 	n := &NeuralNetwork{
-		Weights:      make([]matrix.Matrix, l),
-		Errors:       make([]matrix.Matrix, l),
+		Weights:      make([]matrix.Matrix, l-1),
+		Errors:       make([]matrix.Matrix, l-1),
 		Task:         task,
 		Layers:       layers,
 		LearningRate: lr,
