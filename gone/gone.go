@@ -18,6 +18,9 @@ type NeuralNetwork struct {
 
 func New(lr float64, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
+	if l < 3 { // minimum amount of layers
+		panic("gone: need more layers for a neural network")
+	}
 	n := &NeuralNetwork{
 		Weights:      make([]matrix.Matrix, l),
 		Errors:       make([]matrix.Matrix, l),
