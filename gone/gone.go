@@ -60,11 +60,16 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 			prev.ActivationFunction.F = Id.F
 		}
 
-   		if prev.ActivationFunction.FPrime == nil {
+		if prev.ActivationFunction.FPrime == nil {
 			prev.ActivationFunction.FPrime = Id.FPrime
 		}
 
 	}
 
 	return n
+}
+
+// Predict is the feedforward process
+func (n *NeuralNetwork) Predict(inputs []float64) {
+
 }

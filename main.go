@@ -5,7 +5,9 @@ import (
 	stdrand "math/rand"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/fr3fou/gone/gone"
+	"github.com/fr3fou/gone/matrix"
 	"github.com/fr3fou/gone/perceptron"
 	"github.com/fr3fou/gone/point"
 	"github.com/fr3fou/gone/rand"
@@ -35,6 +37,10 @@ func main() {
 			// we shouldn't use ReLU on the outputs, so we fallback to Id
 		},
 	)
+
+	m := matrix.New(5, 5, nil)
+	m.Randomize(-5, 5)
+	spew.Dump(m)
 }
 
 func main2() {

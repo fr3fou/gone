@@ -112,6 +112,17 @@ func Multiply(m, n Matrix) Matrix {
 	})
 }
 
+func (m Matrix) Flatten() []float64 {
+	r := make([]float64, m.Rows*m.Columns)
+	for i, line := range m.Data {
+		for j, val := range line {
+			r[m.Rows*i+j] = val
+		}
+	}
+
+	return r
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {
