@@ -20,7 +20,7 @@ A simple neural network library in Go
 
 - [x] Randomize
 - [x] Transpose
-- [ ] Scale
+- [x] Scale
 - [ ] Add
 - [ ] Subtract
 - [ ] Multiply

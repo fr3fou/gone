@@ -21,3 +21,19 @@ func TestTranspose(t *testing.T) {
 
 	assert.Equal(t, trans, Transpose(m))
 }
+
+func TestScale(t *testing.T) {
+	m := New(3, 3, [][]float64{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9},
+	})
+
+	expected := New(3, 3, [][]float64{
+		{1 * 0.5, 2 * 0.5, 3 * 0.5},
+		{4 * 0.5, 5 * 0.5, 6 * 0.5},
+		{7 * 0.5, 8 * 0.5, 9 * 0.5},
+	})
+
+	assert.Equal(t, expected, Scale(m, 0.5))
+}
