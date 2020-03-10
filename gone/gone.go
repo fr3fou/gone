@@ -9,14 +9,22 @@ type Layer struct {
 	ActivationFunction Activation
 }
 
+type Task string
+
+const (
+	Classification Task = "Classification"
+	Regression     Task = "Regression"
+)
+
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
 	Errors       []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
+	Task         Task
 }
 
-func New(lr float64, layers ...Layer) *NeuralNetwork {
+func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -24,6 +32,7 @@ func New(lr float64, layers ...Layer) *NeuralNetwork {
 	n := &NeuralNetwork{
 		Weights:      make([]matrix.Matrix, l),
 		Errors:       make([]matrix.Matrix, l),
+		Task:         task,
 		Layers:       layers,
 		LearningRate: lr,
 	}
