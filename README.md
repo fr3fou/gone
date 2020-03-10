@@ -27,6 +27,7 @@ A simple neural network library in Go
 - [x] Subtract
 - [x] Multiply
 - [x] Flatten
+- [x] NewFromArray - makes a single row
 - [x] Map
 
 ### Research
