@@ -2,6 +2,32 @@
 
 A simple neural network library in Go
 
+## Example
+
+```go
+	g := gone.New(
+		.1,
+		gone.Classification,
+		gone.Layer{
+			Nodes: 2,
+		},
+		gone.Layer{
+			Nodes:     3,
+			Activator: gone.ReLU,
+		},
+		gone.Layer{
+			Nodes:     3,
+			Activator: gone.ReLU,
+		},
+		gone.Layer{
+			Nodes: 1,
+			// we shouldn't use ReLU on the outputs, so we fallback to Id
+		},
+	)
+
+	g.Predict([]float64{1, 2})
+  ```
+
 ## TODO:
 
 ### `gone/`
