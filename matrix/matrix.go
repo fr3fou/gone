@@ -69,15 +69,9 @@ func AddMatrix(m, n Matrix) Matrix {
 		panic("matrix: can't add different sized matricies")
 	}
 
-	result := New(m.Rows, m.Columns, m.Data)
-
-	for i := 0; i < m.Rows; i++ {
-		for j := 0; j < m.Columns; j++ {
-			result.Data[i][j] += n.Data[i][j]
-		}
-	}
-
-	return result
+	return Map(m, func(val float64, x, y int) float64 {
+		return val + n.Data[x][y]
+	})
 }
 
 func Add(m Matrix, n float64) Matrix {
