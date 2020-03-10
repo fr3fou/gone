@@ -10,6 +10,9 @@ A simple neural network library in Go
     - [ ] Classification
     - [ ] Regression
 - [ ] Bias
+- [ ] Feedforward
+- [ ] Train
+- [ ] Backpropagation
 
 ### `matrix/`
 
