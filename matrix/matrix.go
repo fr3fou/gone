@@ -32,7 +32,7 @@ func New(r, c int, data [][]float64) Matrix {
 
 func NewFromArray(d []float64) Matrix {
 	return Map(New(len(d), 1, nil), func(val float64, x, y int) float64 {
-		return d[y]
+		return d[x]
 	})
 }
 
