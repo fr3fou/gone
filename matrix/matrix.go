@@ -7,7 +7,7 @@ import (
 	"github.com/fr3fou/gone/rand"
 )
 
-type Mapper func(val float64, x float64, y float64) Matrix
+type Mapper func(val float64, x int, y int) float64
 
 type Matrix struct {
 	Rows    int
@@ -36,6 +36,19 @@ func (m *Matrix) Randomize(low, high float64) {
 			m.Data[i][j] = rand.Float(low, high)
 		}
 	}
+}
+
+func Map(m Matrix, f Mapper) Matrix {
+	n := New(m.Rows, m.Columns, m.Data)
+
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			val := n.Data[i][j]
+			n.Data[i][j] = f(val, i, j)
+		}
+	}
+
+	return n
 }
 
 func Transpose(m Matrix) Matrix {
