@@ -4,10 +4,22 @@ A simple neural network library in Go
 
 ## TODO:
 
+### `gone/`
+
 - [ ] Types of task:
     - [ ] Classification
     - [ ] Regression
 - [ ] Bias
+
+### `matrix/`
+
+- [x] Randomize
+- [ ] Transpose
+- [ ] Scale
+- [ ] Add
+- [ ] Subtract
+- [ ] Multiply
+- [ ] Map
 
 ## Resources used:
 
