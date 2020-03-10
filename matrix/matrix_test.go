@@ -93,3 +93,15 @@ func TestSubtractMatrix(t *testing.T) {
 
 	assert.Equal(t, expected, SubtractMatrix(m, n))
 }
+
+func TestSubtract(t *testing.T) {
+	m := New(3, 3, [][]float64{
+		{10, 10, 10},
+		{10, 10, 10},
+		{10, 10, 10},
+	})
+
+	expected := New(3, 3, nil)
+
+	assert.Equal(t, expected, Subtract(m, 10))
+}

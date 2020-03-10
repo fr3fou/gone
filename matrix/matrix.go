@@ -90,6 +90,12 @@ func SubtractMatrix(m, n Matrix) Matrix {
 	})
 }
 
+func Subtract(m Matrix, n float64) Matrix {
+	return Map(m, func(val float64, x, y int) float64 {
+		return val - n
+	})
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {
