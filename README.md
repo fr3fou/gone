@@ -35,7 +35,7 @@ A simple neural network library in Go
 - [ ] Types of task:
   - [ ] Classification
   - [ ] Regression
-- [ ] Bias
+- [x] Bias
 - [x] Feedforward (Predict)
 - [ ] Train
   - [ ] Support shuffling the data

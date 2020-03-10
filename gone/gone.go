@@ -7,6 +7,7 @@ import (
 type Layer struct {
 	Nodes     int
 	Activator Activation
+	Bias      float64
 }
 
 type Task string
@@ -56,6 +57,7 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		n.Errors[i] = errors
 	}
 
+	// Set fallbacks
 	for i := range layers {
 		if layers[i].Activator.F == nil {
 			layers[i].Activator.F = Id.F
@@ -63,6 +65,10 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 
 		if layers[i].Activator.FPrime == nil {
 			layers[i].Activator.FPrime = Id.FPrime
+		}
+
+		if layers[i].Bias == 0.0 {
+			layers[i].Bias = 1
 		}
 	}
 
@@ -79,7 +85,10 @@ func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 
 	for i := 0; i < len(n.Weights); i++ {
 		output = matrix.Map(
-			matrix.Multiply(n.Weights[i], output),
+			matrix.Add(
+				matrix.Multiply(n.Weights[i], output),
+				n.Layers[i+1].Bias,
+			),
 			func(val float64, x, y int) float64 {
 				return n.Layers[i+1].Activator.F(val)
 			})
