@@ -30,26 +30,10 @@ func New(r, c int, data [][]float64) Matrix {
 	}
 }
 
-func NewFromArray(r, c int, d []float64) Matrix {
-	if len(d) != r*c {
-		panic("matrix: not enough items in data")
-	}
-	var data [][]float64
-	data = make([][]float64, r)
-	for i := range data {
-		data[i] = make([]float64, c)
-	}
-
-	for i, val := range d {
-		data[i/r][i%c] = val
-	}
-
-	return Matrix{
-		Rows:    r,
-		Columns: c,
-		Data:    data,
-	}
-
+func NewFromArray(d []float64) Matrix {
+	return Map(New(1, len(d), nil), func(val float64, x, y int) float64 {
+		return d[y]
+	})
 }
 
 func (m *Matrix) Randomize(low, high float64) {
