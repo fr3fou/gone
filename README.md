@@ -33,6 +33,7 @@ A simple neural network library in Go
 - [ ] Gradient Descent
     - [ ] Stochastic vs Batch
 - [ ] Mean Squared Error
+- [ ] How to determine how many layers and nodes to use
 
 ### Examples
 
