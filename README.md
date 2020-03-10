@@ -7,13 +7,13 @@ A simple neural network library in Go
 ### `gone/`
 
 - [ ] Types of task:
-    - [ ] Classification
-    - [ ] Regression
+  - [ ] Classification
+  - [ ] Regression
 - [ ] Bias
-- [ ] Feedforward (Predict)
+- [~] Feedforward (Predict)
 - [ ] Train
-    - [ ] Support shuffling the data
-    - [ ] Epochs
+  - [ ] Support shuffling the data
+  - [ ] Epochs
 - [ ] Backpropagation
 
 ### `matrix/`
@@ -35,7 +35,7 @@ A simple neural network library in Go
 - [ ] Derivatives
 - [ ] Linear vs non-linear problems (activation function)
 - [ ] Gradient Descent
-    - [ ] Stochastic vs Batch
+  - [ ] Stochastic vs Batch
 - [ ] Mean Squared Error
 - [ ] How to determine how many layers and nodes to use
 
