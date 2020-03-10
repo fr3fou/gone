@@ -41,8 +41,8 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		prev := layers[i]
 		current := layers[i+1]
 		weights := matrix.New(
-			current.Nodes, // the cols are the inputs of the current one
-			prev.Nodes,    // the rows are the outputs of the previous layer
+			current.Nodes, // the rows are the inputs of the current one
+			prev.Nodes,    // the cols are the outputs of the previous layer
 			nil,
 		)
 		weights.Randomize(-1, 2) // Initialize the weights randomly
