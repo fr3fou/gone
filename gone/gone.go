@@ -87,7 +87,3 @@ func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 
 	return output
 }
-
-// func (n *NeuralNetwork) predict(layer int, ) type {
-
-// }
