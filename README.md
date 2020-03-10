@@ -26,7 +26,7 @@ A simple neural network library in Go
 	)
 
 	g.Predict([]float64{1, 2})
-  ```
+```
 
 ## TODO:
 
@@ -61,6 +61,7 @@ A simple neural network library in Go
 - [ ] Derivatives
 - [ ] Linear vs non-linear problems (activation function)
 - [ ] Gradient Descent
+- [ ] Softmax
   - [ ] Stochastic vs Batch
 - [ ] Mean Squared Error
 - [ ] How to determine how many layers and nodes to use
