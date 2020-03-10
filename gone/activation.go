@@ -1,5 +1,7 @@
 package gone
 
+import "math"
+
 type Activation struct {
 	F      func(float64) float64
 	FPrime func(float64) float64
@@ -33,4 +35,17 @@ func reluPrime(x float64) float64 {
 	}
 
 	return 0
+}
+
+var Id = Activation{
+	F:      id,
+	FPrime: idPrime,
+}
+
+func id(x float64) float64 {
+	return x
+}
+
+func idPrime(_ float64) float64 {
+	return 1
 }

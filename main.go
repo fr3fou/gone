@@ -22,10 +22,16 @@ func main() {
 			Nodes: 2,
 		},
 		gone.Layer{
-			Nodes: 10,
+			Nodes:              3,
+			ActivationFunction: gone.ReLU,
 		},
 		gone.Layer{
-			Nodes: 2,
+			Nodes:              3,
+			ActivationFunction: gone.ReLU,
+		},
+		gone.Layer{
+			Nodes: 1,
+			// we shouldn't use ReLU on the outputs, so we fallback to Id
 		},
 	)
 }
