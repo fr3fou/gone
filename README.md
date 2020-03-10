@@ -54,3 +54,4 @@ A simple neural network library in Go
 - https://www.wikiwand.com/en/Matrix_(mathematics)
 - https://www.wikiwand.com/en/Activation_function
 - https://www.jeremyjordan.me/intro-to-neural-networks/
+- https://www.arxiv-vanity.com/papers/2003.02139/
