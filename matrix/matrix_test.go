@@ -37,3 +37,25 @@ func TestScale(t *testing.T) {
 
 	assert.Equal(t, expected, Scale(m, 0.5))
 }
+
+func TestAddMatrix(t *testing.T) {
+	m := New(3, 3, [][]float64{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9},
+	})
+
+	n := New(3, 3, [][]float64{
+		{9, 8, 7},
+		{6, 5, 4},
+		{3, 2, 1},
+	})
+
+	expected := New(3, 3, [][]float64{
+		{10, 10, 10},
+		{10, 10, 10},
+		{10, 10, 10},
+	})
+
+	assert.Equal(t, expected, AddMatrix(m, n))
+}

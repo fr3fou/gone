@@ -60,6 +60,22 @@ func Scale(m Matrix, a float64) Matrix {
 	return n
 }
 
+func AddMatrix(m, n Matrix) Matrix {
+	if m.Rows != n.Rows || m.Columns != n.Rows {
+		panic("matrix: can't add different sized matricies")
+	}
+
+	result := New(m.Rows, m.Columns, m.Data)
+
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			result.Data[i][j] += n.Data[i][j]
+		}
+	}
+
+	return result
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {
