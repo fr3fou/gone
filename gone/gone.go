@@ -54,14 +54,15 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 			nil,
 		)
 		n.Errors[i] = errors
+	}
 
-		// fallback to Id
-		if prev.ActivationFunction.F == nil {
-			prev.ActivationFunction.F = Id.F
+	for i := range layers {
+		if layers[i].ActivationFunction.F == nil {
+			layers[i].ActivationFunction.F = Id.F
 		}
 
-		if prev.ActivationFunction.FPrime == nil {
-			prev.ActivationFunction.FPrime = Id.FPrime
+		if layers[i].ActivationFunction.FPrime == nil {
+			layers[i].ActivationFunction.FPrime = Id.FPrime
 		}
 	}
 
