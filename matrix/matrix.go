@@ -7,6 +7,8 @@ import (
 	"github.com/fr3fou/gone/rand"
 )
 
+type Mapper func(val float64, x float64, y float64) Matrix
+
 type Matrix struct {
 	Rows    int
 	Columns int
@@ -70,6 +72,18 @@ func AddMatrix(m, n Matrix) Matrix {
 	for i := 0; i < m.Rows; i++ {
 		for j := 0; j < m.Columns; j++ {
 			result.Data[i][j] += n.Data[i][j]
+		}
+	}
+
+	return result
+}
+
+func Add(m Matrix, n float64) Matrix {
+	result := New(m.Rows, m.Columns, m.Data)
+
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			result.Data[i][j] += n
 		}
 	}
 
