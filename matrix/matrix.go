@@ -52,27 +52,16 @@ func Map(m Matrix, f Mapper) Matrix {
 }
 
 func Transpose(m Matrix) Matrix {
-	n := New(m.Rows, m.Columns, nil)
-
-	for i := 0; i < m.Rows; i++ {
-		for j := 0; j < m.Columns; j++ {
-			n.Data[i][j] = m.Data[j][i]
-		}
-	}
-
-	return n
+	return Map(New(m.Rows, m.Columns, nil),
+		func(val float64, x, y int) float64 {
+			return m.Data[y][x]
+		})
 }
 
 func Scale(m Matrix, a float64) Matrix {
-	n := New(m.Rows, m.Columns, m.Data)
-
-	for i := 0; i < m.Rows; i++ {
-		for j := 0; j < m.Columns; j++ {
-			n.Data[i][j] *= a
-		}
-	}
-
-	return n
+	return Map(m, func(val float64, x, y int) float64 {
+		return val * a
+	})
 }
 
 func AddMatrix(m, n Matrix) Matrix {
