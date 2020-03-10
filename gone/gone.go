@@ -5,8 +5,8 @@ import (
 )
 
 type Layer struct {
-	Nodes              int
-	ActivationFunction Activation
+	Nodes     int
+	Activator Activation
 }
 
 type Task string
@@ -57,12 +57,12 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 	}
 
 	for i := range layers {
-		if layers[i].ActivationFunction.F == nil {
-			layers[i].ActivationFunction.F = Id.F
+		if layers[i].Activator.F == nil {
+			layers[i].Activator.F = Id.F
 		}
 
-		if layers[i].ActivationFunction.FPrime == nil {
-			layers[i].ActivationFunction.FPrime = Id.FPrime
+		if layers[i].Activator.FPrime == nil {
+			layers[i].Activator.FPrime = Id.FPrime
 		}
 	}
 
@@ -81,7 +81,7 @@ func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 		output = matrix.Map(
 			matrix.Multiply(n.Weights[i], output),
 			func(val float64, x, y int) float64 {
-				return n.Layers[i+1].ActivationFunction.F(val)
+				return n.Layers[i+1].Activator.F(val)
 			})
 	}
 

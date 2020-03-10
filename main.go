@@ -23,12 +23,12 @@ func main() {
 			Nodes: 2,
 		},
 		gone.Layer{
-			Nodes:              3,
-			ActivationFunction: gone.ReLU,
+			Nodes:     3,
+			Activator: gone.ReLU,
 		},
 		gone.Layer{
-			Nodes:              3,
-			ActivationFunction: gone.ReLU,
+			Nodes:     3,
+			Activator: gone.ReLU,
 		},
 		gone.Layer{
 			Nodes: 1,
