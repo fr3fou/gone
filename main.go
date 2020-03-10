@@ -5,9 +5,7 @@ import (
 	stdrand "math/rand"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/fr3fou/gone/gone"
-	"github.com/fr3fou/gone/matrix"
 	"github.com/fr3fou/gone/perceptron"
 	"github.com/fr3fou/gone/point"
 	"github.com/fr3fou/gone/rand"
@@ -18,7 +16,7 @@ func init() {
 }
 
 func main() {
-	gone.New(
+	g := gone.New(
 		.1,
 		gone.Classification,
 		gone.Layer{
@@ -38,9 +36,7 @@ func main() {
 		},
 	)
 
-	m := matrix.New(5, 5, nil)
-	m.Randomize(-5, 5)
-	spew.Dump(m)
+	fmt.Println(g.Predict([]float64{1, 2}))
 }
 
 func main2() {

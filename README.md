@@ -10,7 +10,7 @@ A simple neural network library in Go
     - [ ] Classification
     - [ ] Regression
 - [ ] Bias
-- [ ] Feedforward
+- [ ] Feedforward (Predict)
 - [ ] Train
     - [ ] Support shuffling the data
     - [ ] Epochs

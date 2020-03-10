@@ -31,7 +31,7 @@ func New(r, c int, data [][]float64) Matrix {
 }
 
 func NewFromArray(d []float64) Matrix {
-	return Map(New(1, len(d), nil), func(val float64, x, y int) float64 {
+	return Map(New(len(d), 1, nil), func(val float64, x, y int) float64 {
 		return d[y]
 	})
 }
@@ -42,18 +42,6 @@ func (m *Matrix) Randomize(low, high float64) {
 			m.Data[i][j] = rand.Float(low, high)
 		}
 	}
-}
-
-func (m Matrix) Flatten() []float64 {
-	r := make([]float64, m.Rows*m.Columns)
-
-	for i, line := range m.Data {
-		for j, val := range line {
-			r[m.Rows*i+j] = val
-		}
-	}
-
-	return r
 }
 
 func Map(m Matrix, f Mapper) Matrix {
@@ -115,7 +103,7 @@ func Subtract(m Matrix, n float64) Matrix {
 }
 
 func Multiply(m, n Matrix) Matrix {
-	if m.Rows != n.Columns || m.Columns != n.Rows {
+	if m.Columns != n.Rows {
 		panic("matrix: rows must match with columns of matricies")
 	}
 
