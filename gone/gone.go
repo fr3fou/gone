@@ -69,6 +69,13 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 }
 
 // Predict is the feedforward process
-func (n *NeuralNetwork) Predict(inputs []float64) {
+func (n *NeuralNetwork) Predict(data []float64) {
+	if len(data) != n.Layers[0].Nodes {
+		panic("gone: not enough data in input layer")
+	}
 
+	input := matrix.NewFromArray(data)
+	for i := range n.Layers {
+
+	}
 }
