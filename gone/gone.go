@@ -84,14 +84,11 @@ func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 	output := matrix.NewFromArray(data)
 
 	for i := 0; i < len(n.Weights); i++ {
-		output = matrix.Map(
-			matrix.Add(
-				matrix.Multiply(n.Weights[i], output),
-				n.Layers[i+1].Bias,
-			),
-			func(val float64, x, y int) float64 {
-				return n.Layers[i+1].Activator.F(val)
-			})
+		output = matrix.Multiply(n.Weights[i], output)                    // weighted sum of the previous layer
+		output = matrix.Add(output, n.Layers[i+1].Bias)                   // bias
+		output = matrix.Map(output, func(val float64, x, y int) float64 { // activation
+			return n.Layers[i+1].Activator.F(val)
+		})
 	}
 
 	return output

@@ -44,78 +44,36 @@ func (m *Matrix) Randomize(low, high float64) {
 	}
 }
 
-func Map(m Matrix, f Mapper) Matrix {
-	n := New(m.Rows, m.Columns, m.Data)
-
-	for i := 0; i < m.Rows; i++ {
-		for j := 0; j < m.Columns; j++ {
-			val := n.Data[i][j]
-			n.Data[i][j] = f(val, i, j)
-		}
-	}
-
-	return n
+func (m Matrix) Map(f Mapper) Matrix {
+	return Map(m, f)
 }
 
-func Transpose(m Matrix) Matrix {
-	return Map(New(m.Rows, m.Columns, nil),
-		func(val float64, x, y int) float64 {
-			return m.Data[y][x]
-		})
+func (m Matrix) Transpose() Matrix {
+	return Transpose(m)
 }
 
-func Scale(m Matrix, a float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val * a
-	})
+func (m Matrix) Scale(a float64) Matrix {
+	return Scale(m, a)
 }
 
-func AddMatrix(m, n Matrix) Matrix {
-	if m.Rows != n.Rows || m.Columns != n.Columns {
-		panic("matrix: can't add different sized matricies")
-	}
-
-	return Map(m, func(val float64, x, y int) float64 {
-		return val + n.Data[x][y]
-	})
+func (m Matrix) AddMatrix(n Matrix) Matrix {
+	return AddMatrix(m, n)
 }
 
-func Add(m Matrix, n float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val + n
-	})
+func (m Matrix) Add(a float64) Matrix {
+	return Add(m, a)
 }
 
-func SubtractMatrix(m, n Matrix) Matrix {
-	if m.Rows != n.Rows || m.Columns != n.Columns {
-		panic("matrix: can't subtract different sized matricies")
-	}
-
-	return Map(m, func(val float64, x, y int) float64 {
-		return val - n.Data[x][y]
-	})
+func (m Matrix) SubtractMatrix(n Matrix) Matrix {
+	return SubtractMatrix(m, n)
 }
 
-func Subtract(m Matrix, n float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val - n
-	})
+func (m Matrix) Subtract(a float64) Matrix {
+	return Subtract(m, a)
 }
 
-func Multiply(m, n Matrix) Matrix {
-	if m.Columns != n.Rows {
-		panic("matrix: rows must match with columns of matricies")
-	}
-
-	return Map(New(m.Rows, n.Columns, nil), func(_ float64, x, y int) float64 {
-		sum := 0.0
-
-		for i := 0; i < n.Rows; i++ {
-			sum += m.Data[x][i] * n.Data[i][y]
-		}
-
-		return sum
-	})
+func (m Matrix) Multiply(n Matrix) Matrix {
+	return Multiply(m, n)
 }
 
 func (m Matrix) Flatten() []float64 {
