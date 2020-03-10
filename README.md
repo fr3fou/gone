@@ -24,7 +24,7 @@ A simple neural network library in Go
 - [x] AddMatrix
 - [x] Add
 - [x] SubtractMatrix
-- [ ] Subtract
+- [x] Subtract
 - [ ] Multiply
 - [x] Map
 
