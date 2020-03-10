@@ -10,7 +10,7 @@ A simple neural network library in Go
   - [ ] Classification
   - [ ] Regression
 - [ ] Bias
-- [~] Feedforward (Predict)
+- [x] Feedforward (Predict)
 - [ ] Train
   - [ ] Support shuffling the data
   - [ ] Epochs
@@ -53,3 +53,4 @@ A simple neural network library in Go
 - https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:properties-of-matrix-addition-and-scalar-multiplication/a/properties-of-matrix-addition
 - https://www.wikiwand.com/en/Matrix_(mathematics)
 - https://www.wikiwand.com/en/Activation_function
+- https://www.jeremyjordan.me/intro-to-neural-networks/
