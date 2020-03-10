@@ -36,6 +36,18 @@ func (m *Matrix) Randomize(low, high float64) {
 	}
 }
 
+func Transpose(m Matrix) Matrix {
+	n := New(m.Rows, m.Columns, nil)
+
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			n.Data[i][j] = m.Data[j][i]
+		}
+	}
+
+	return n
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {

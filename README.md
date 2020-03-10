@@ -19,7 +19,7 @@ A simple neural network library in Go
 ### `matrix/`
 
 - [x] Randomize
-- [ ] Transpose
+- [x] Transpose
 - [ ] Scale
 - [ ] Add
 - [ ] Subtract
