@@ -44,6 +44,18 @@ func (m *Matrix) Randomize(low, high float64) {
 	}
 }
 
+func (m Matrix) Flatten() []float64 {
+	r := make([]float64, m.Rows*m.Columns)
+
+	for i, line := range m.Data {
+		for j, val := range line {
+			r[m.Rows*i+j] = val
+		}
+	}
+
+	return r
+}
+
 func Map(m Matrix, f Mapper) Matrix {
 	n := New(m.Rows, m.Columns, m.Data)
 
