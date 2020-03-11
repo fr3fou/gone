@@ -24,10 +24,11 @@ type NeuralNetwork struct {
 	Errors       []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
+	BatchSize    int
 	Task         Task
 }
 
-func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
+func New(lr float64, bs int, task Task, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -37,6 +38,7 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 		Errors:       make([]matrix.Matrix, l-1),
 		Task:         task,
 		Layers:       layers,
+		BatchSize:    bs,
 		LearningRate: lr,
 	}
 

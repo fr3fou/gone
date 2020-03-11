@@ -18,6 +18,7 @@ func init() {
 func main() {
 	g := gone.New(
 		.1,
+		10,
 		gone.Classification,
 		gone.Layer{
 			Nodes: 2,
