@@ -54,7 +54,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		500,
+		1,
 	)
 }
 

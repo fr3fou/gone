@@ -101,10 +101,10 @@ func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 }
 
 // DataSet represents a slice of all the entires in a data set
-type DataSet []DataCase
+type DataSet []DataSample
 
-// DataCase represents a single train data set
-type DataCase struct {
+// DataSample represents a single train data set
+type DataSample struct {
 	Inputs  []float64
 	Targets []float64
 }
@@ -136,14 +136,28 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 		// Shuffle the data
 		dataSet.Shuffle()
 
+		// TODO: do stochastic gradient descent
+		errors := []matrix.Matrix{} // all the errors
 		for _, data := range dataSet {
 			inputs := matrix.NewFromArray(data.Inputs)
 			targets := matrix.NewFromArray(data.Targets)
+
 			outputs := n.predict(inputs)
 
-			// Calculate the error
-			// E =
-			errors := targets.SubtractMatrix(outputs)
+			// Calculate the error and add it
+			// Errors = Target_{i,j} - Output_{i,j}
+			errors = append(errors, targets.SubtractMatrix(outputs))
 		}
+
+		mse := cost(errors)
 	}
+}
+
+func cost(errors []matrix.Matrix) float64 {
+	sum := 0.0
+	for _, err := range errors {
+		sum += err. ???
+	}
+
+	return 
 }
