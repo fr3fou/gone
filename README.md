@@ -41,6 +41,8 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [ ] Support shuffling the data
   - [ ] Epochs
   - [ ] Backpropagation
+- [ ] Saving data
+- [ ] Loading data
 
 ### `matrix/`
 
