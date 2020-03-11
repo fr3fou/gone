@@ -56,6 +56,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] SubtractMatrix
 - [x] Subtract
 - [x] Multiply
+- [x] Multiply
 - [x] Flatten
 - [x] NewFromArray - makes a single row
 - [x] Map
