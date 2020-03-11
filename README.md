@@ -71,8 +71,8 @@ A simple neural network library in Go
 - [ ] Derivatives
 - [ ] Linear vs non-linear problems (activation function)
 - [ ] Gradient Descent
-- [ ] Softmax
   - [ ] Stochastic vs Batch
+- [ ] Softmax
 - [ ] Mean Squared Error
 - [ ] How to determine how many layers and nodes to use
 
