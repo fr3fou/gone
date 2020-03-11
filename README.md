@@ -38,8 +38,8 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] Bias
 - [x] Feedforward (Predict)
 - [ ] Train
-  - [ ] Support shuffling the data
-  - [ ] Epochs
+  - [x] Support shuffling the data
+  - [x] Epochs
   - [ ] Backpropagation
 - [ ] Saving data
 - [ ] Loading data
@@ -70,9 +70,9 @@ A simple neural network library in Go from scratch. 0 dependencies.
 
 ### Research
 
-- [ ] Derivatives
+- [x] Derivatives ~
 - [ ] Linear vs non-linear problems (activation function)
-- [ ] Gradient Descent
+- [x] Gradient Descent ~
   - [ ] Stochastic vs Batch
 - [ ] Softmax
 - [ ] Mean Squared Error

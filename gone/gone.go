@@ -107,8 +107,8 @@ type DataSet []DataCase
 
 // DataCase represents a single train data set
 type DataCase struct {
-	Inputs []float64
-	Labels []float64
+	Inputs  []float64
+	Targets []float64
 }
 
 // Shuffle shuffles the data in a random order
@@ -129,7 +129,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 			panic("gone: not enough data in input layer")
 		}
 
-		if len(dataCase.Labels) != outputLayer.Nodes {
+		if len(dataCase.Targets) != outputLayer.Nodes {
 			panic("gone: not enough labels in output layer")
 		}
 	}
@@ -140,8 +140,12 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 		for _, data := range dataSet {
 			inputs := matrix.NewFromArray(data.Inputs)
-			n.predict(inputs)
+			targets := matrix.NewFromArray(data.Targets)
+			outputs := n.predict(inputs)
 
+			// Calculate the error
+			// E =
+			errors := targets.SubtractMatrix(outputs)
 		}
 	}
 }

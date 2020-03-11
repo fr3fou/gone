@@ -38,20 +38,20 @@ func main() {
 
 	g.Train(gone.DataSet{
 		{
-			Inputs: []float64{1, 0},
-			Labels: []float64{1},
+			Inputs:  []float64{1, 0},
+			Targets: []float64{1},
 		},
 		{
-			Inputs: []float64{0, 1},
-			Labels: []float64{1},
+			Inputs:  []float64{0, 1},
+			Targets: []float64{1},
 		},
 		{
-			Inputs: []float64{1, 1},
-			Labels: []float64{0},
+			Inputs:  []float64{1, 1},
+			Targets: []float64{0},
 		},
 		{
-			Inputs: []float64{0, 0},
-			Labels: []float64{0},
+			Inputs:  []float64{0, 0},
+			Targets: []float64{0},
 		},
 	},
 		500,
