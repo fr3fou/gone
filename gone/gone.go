@@ -119,27 +119,29 @@ func (t DataSet) Shuffle() {
 }
 
 // Train trains the neural network using backpropagation
-func (n *NeuralNetwork) Train(trainData DataSet, epochs int) {
+func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	// Check if the user has provided enough inputs
-	inptuLayer := n.Layers[0]
+	inputLayer := n.Layers[0]
 	outputLayer := n.Layers[len(n.Layers)-1]
 
-	for _, data := range trainData {
-		if len(data.Inputs) != inptuLayer.Nodes {
+	for _, dataCase := range dataSet {
+		if len(dataCase.Inputs) != inputLayer.Nodes {
 			panic("gone: not enough data in input layer")
 		}
 
-		if len(data.Labels) != outputLayer.Nodes {
+		if len(dataCase.Labels) != outputLayer.Nodes {
 			panic("gone: not enough labels in output layer")
 		}
 	}
 
 	for epoch := 0; epoch < epochs; epoch++ {
 		// Shuffle the data
+		dataSet.Shuffle()
 
-		for _, data := range trainData {
+		for _, data := range dataSet {
 			inputs := matrix.NewFromArray(data.Inputs)
 			n.predict(inputs)
+
 		}
 	}
 }
