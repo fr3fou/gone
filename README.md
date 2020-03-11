@@ -7,6 +7,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 ```go
 	g := gone.New(
 		.1,
+		100,
 		gone.Classification,
 		gone.Layer{
 			Nodes: 2,
