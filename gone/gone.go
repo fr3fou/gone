@@ -1,6 +1,8 @@
 package gone
 
 import (
+	"math/rand"
+
 	"github.com/fr3fou/gone/matrix"
 )
 
@@ -93,4 +95,45 @@ func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
 	}
 
 	return output
+}
+
+// TrainData represents a slice of all the entires in a data set
+type TrainData []Entry
+
+// Entry represents a single train data set
+type Entry struct {
+	Inputs []float64
+	Labels []float64
+}
+
+// Shuffle shuffles the data in a random order
+func (t TrainData) Shuffle() {
+	rand.Shuffle(len(t), func(i, j int) {
+		t[i], t[j] = t[j], t[i]
+	})
+}
+
+// Train trains the neural network using backpropagation
+func (n *NeuralNetwork) Train(trainData TrainData, epochs int) {
+	// Check if the user has provided enough inputs
+	inptuLayer := n.Layers[0]
+	outputLayer := n.Layers[len(n.Layers)-1]
+
+	for _, data := range trainData {
+		if len(data.Inputs) != inptuLayer.Nodes {
+			panic("gone: not enough data in input layer")
+		}
+
+		if len(data.Labels) != outputLayer.Nodes {
+			panic("gone: not enough labels in output layer")
+		}
+	}
+
+	for epoch := 0; epoch < epochs; epoch++ {
+		// Shuffle the data
+
+		for _, data := range trainData {
+			o := n.Predict(data.Inputs)
+		}
+	}
 }

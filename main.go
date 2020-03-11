@@ -36,7 +36,26 @@ func main() {
 		},
 	)
 
-	fmt.Println(g.Predict([]float64{1, 2}))
+	g.Train(gone.TrainData{
+		{
+			Inputs: []float64{1, 0},
+			Labels: []float64{1},
+		},
+		{
+			Inputs: []float64{0, 1},
+			Labels: []float64{1},
+		},
+		{
+			Inputs: []float64{1, 1},
+			Labels: []float64{0},
+		},
+		{
+			Inputs: []float64{0, 0},
+			Labels: []float64{0},
+		},
+	},
+		500,
+	)
 }
 
 func main2() {
