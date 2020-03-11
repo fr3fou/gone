@@ -87,19 +87,17 @@ func (n *NeuralNetwork) Predict(data []float64) []float64 {
 }
 
 // predict is a helper function that uses matricies instead of slices
-func (n *NeuralNetwork) predict(input matrix.Matrix) matrix.Matrix {
-	output := input
-
+func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 	for i := 0; i < len(n.Weights); i++ {
-		output = n.Weights[i].
-			Multiply(output).                         // weighted sum of the previous layer)
+		mat = n.Weights[i].
+			Multiply(mat).                            // weighted sum of the previous layer)
 			Add(n.Layers[i+1].Bias).                  // bias
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
 			})
 	}
 
-	return output
+	return mat
 }
 
 // DataSet represents a slice of all the entires in a data set
