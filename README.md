@@ -40,7 +40,7 @@ A simple neural network library in Go
 - [ ] Train
   - [ ] Support shuffling the data
   - [ ] Epochs
-- [ ] Backpropagation
+  - [ ] Backpropagation
 
 ### `matrix/`
 
