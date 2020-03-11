@@ -55,6 +55,16 @@ A simple neural network library in Go
 - [x] Flatten
 - [x] NewFromArray - makes a single row
 - [x] Map
+- [x] Methods to support chaining
+
+```go
+	    n.Weights[i].
+		Multiply(output).                         // weighted sum of the previous layer)
+		Add(n.Layers[i+1].Bias).                  // bias
+		Map(func(val float64, x, y int) float64 { // activation
+			return n.Layers[i+1].Activator.F(val)
+		})
+```
 
 ### Research
 
