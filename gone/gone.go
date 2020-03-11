@@ -119,15 +119,15 @@ func (t DataSet) Shuffle() {
 // Train trains the neural network using backpropagation
 func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	// Check if the user has provided enough inputs
-	inputLayer := n.Layers[0]
-	outputLayer := n.Layers[len(n.Layers)-1]
+	inputNodes := n.Layers[0].Nodes
+	outputNodes := n.Layers[len(n.Layers)-1].Nodes
 
 	for _, dataCase := range dataSet {
-		if len(dataCase.Inputs) != inputLayer.Nodes {
+		if len(dataCase.Inputs) != inputNodes {
 			panic("gone: not enough data in input layer")
 		}
 
-		if len(dataCase.Targets) != outputLayer.Nodes {
+		if len(dataCase.Targets) != outputNodes {
 			panic("gone: not enough labels in output layer")
 		}
 	}
@@ -136,8 +136,8 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 		// Shuffle the data
 		dataSet.Shuffle()
 
-		// TODO: do stochastic gradient descent
-		errors := []matrix.Matrix{} // all the errors
+		// TODO: do batch gradient descent
+		errors := matrix.New()
 		for _, data := range dataSet {
 			inputs := matrix.NewFromArray(data.Inputs)
 			targets := matrix.NewFromArray(data.Targets)
@@ -153,11 +153,11 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 }
 
-func cost(errors []matrix.Matrix) float64 {
-	sum := 0.0
-	for _, err := range errors {
-		sum += err. ???
-	}
+// func cost(errors []matrix.Matrix) float64 {
+// 	sum := 0.0
+// 	for _, err := range errors {
+// 		sum += err. ???
+// 	}
 
-	return 
-}
+// 	return
+// }
