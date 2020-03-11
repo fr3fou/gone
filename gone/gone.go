@@ -92,7 +92,7 @@ func (n *NeuralNetwork) Predict(data []float64) []float64 {
 func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 	for i := 0; i < len(n.Weights); i++ {
 		mat = n.Weights[i].
-			Multiply(mat).                            // weighted sum of the previous layer)
+			DotProduct(mat).                          // weighted sum of the previous layer)
 			Add(n.Layers[i+1].Bias).                  // bias
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
@@ -165,7 +165,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 				outputs.Data[i] = n.predict(currentInputs).Flatten()
 			}
 
-			error := mse(outputs, targets)
+			mse(outputs, targets)
 
 		}
 	}
@@ -173,10 +173,9 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 	// Calculate the error
-	// Error_{i,j} =
+	// Error_{i,j} = Target_{i,j} - Outputs_{i,j}
 	errs := targets.SubtractMatrix(outputs)
-	squared := errs.Multiply(errs)
-
+	return errs.DotProduct(errs)
 }
 
 // func cost(errors []matrix.Matrix) float64 {

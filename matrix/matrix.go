@@ -82,8 +82,14 @@ func (m Matrix) Subtract(a float64) Matrix {
 	return Subtract(m, a)
 }
 
+// Multiply does Hadamard product (entrywise)
 func (m Matrix) Multiply(n Matrix) Matrix {
 	return Multiply(m, n)
+}
+
+// DotProduct doest matrix product
+func (m Matrix) DotProduct(n Matrix) Matrix {
+	return DotProduct(m, n)
 }
 
 func (m Matrix) Flatten() []float64 {

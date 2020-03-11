@@ -58,7 +58,19 @@ func Subtract(m Matrix, n float64) Matrix {
 	})
 }
 
-func Multiply(m, n Matrix) Matrix {
+// Multiply does Hadamard Product
+func Multiply(m Matrix, n Matrix) Matrix {
+	if m.Columns != n.Columns || m.Rows != n.Rows {
+		panic("matrix: matricies must have the same shape")
+	}
+
+	return Map(m, func(val float64, x, y int) float64 {
+		return val * n.Data[x][y]
+	})
+}
+
+// DotProduct does matrix product
+func DotProduct(m, n Matrix) Matrix {
 	if m.Columns != n.Rows {
 		panic("matrix: rows must match with columns of matricies")
 	}

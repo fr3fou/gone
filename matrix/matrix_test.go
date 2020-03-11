@@ -106,7 +106,7 @@ func TestSubtract(t *testing.T) {
 	assert.Equal(t, expected, Subtract(m, 10))
 }
 
-func TestMultiply(t *testing.T) {
+func TestDotProduct(t *testing.T) {
 	m := New(3, 3, [][]float64{
 		{1, 2, 3},
 		{4, 5, 6},
@@ -123,6 +123,25 @@ func TestMultiply(t *testing.T) {
 		{30, 24, 18},
 		{84, 69, 54},
 		{138, 114, 90},
+	})
+
+	assert.Equal(t, expected, DotProduct(m, n))
+}
+
+func TestMultiply(t *testing.T) {
+	m := New(2, 1, [][]float64{
+		{1},
+		{2},
+	})
+
+	n := New(2, 1, [][]float64{
+		{3},
+		{4},
+	})
+
+	expected := New(2, 1, [][]float64{
+		{3},
+		{8},
 	})
 
 	assert.Equal(t, expected, Multiply(m, n))
