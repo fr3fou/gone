@@ -73,7 +73,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] Derivatives ~
 - [ ] Linear vs non-linear problems (activation function)
 - [x] Gradient Descent ~
-  - [ ] Stochastic vs Batch
+  - [ ] Stochastic vs "Normal" (?)
 - [ ] Softmax
 - [ ] Mean Squared Error
 - [ ] How to determine how many layers and nodes to use
