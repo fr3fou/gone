@@ -78,12 +78,17 @@ func New(lr float64, task Task, layers ...Layer) *NeuralNetwork {
 }
 
 // Predict is the feedforward process
-func (n *NeuralNetwork) Predict(data []float64) matrix.Matrix {
+func (n *NeuralNetwork) Predict(data []float64) []float64 {
 	if len(data) != n.Layers[0].Nodes {
 		panic("gone: not enough data in input layer")
 	}
 
-	output := matrix.NewFromArray(data)
+	return n.predict(matrix.NewFromArray(data)).Flatten()
+}
+
+// predict is a helper function that uses matricies instead of slices
+func (n *NeuralNetwork) predict(input matrix.Matrix) matrix.Matrix {
+	output := input
 
 	for i := 0; i < len(n.Weights); i++ {
 		output = n.Weights[i].
@@ -133,7 +138,8 @@ func (n *NeuralNetwork) Train(trainData TrainData, epochs int) {
 		// Shuffle the data
 
 		for _, data := range trainData {
-			o := n.Predict(data.Inputs)
+			inputs := matrix.NewFromArray(data.Inputs)
+			n.predict(inputs)
 		}
 	}
 }
