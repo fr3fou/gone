@@ -23,6 +23,16 @@ func New(r, c int, data [][]float64) Matrix {
 		}
 	}
 
+	if len(data) != r {
+		panic("matrix: invalid shape of data")
+	}
+
+	for _, inputs := range data {
+		if len(inputs) != c {
+			panic("matrix: invalid shape of data")
+		}
+	}
+
 	return Matrix{
 		Rows:    r,
 		Columns: c,
