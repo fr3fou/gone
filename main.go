@@ -36,7 +36,7 @@ func main() {
 		},
 	)
 
-	g.Train(gone.TrainData{
+	g.Train(gone.DataSet{
 		{
 			Inputs: []float64{1, 0},
 			Labels: []float64{1},

@@ -102,24 +102,24 @@ func (n *NeuralNetwork) predict(input matrix.Matrix) matrix.Matrix {
 	return output
 }
 
-// TrainData represents a slice of all the entires in a data set
-type TrainData []Entry
+// DataSet represents a slice of all the entires in a data set
+type DataSet []DataCase
 
-// Entry represents a single train data set
-type Entry struct {
+// DataCase represents a single train data set
+type DataCase struct {
 	Inputs []float64
 	Labels []float64
 }
 
 // Shuffle shuffles the data in a random order
-func (t TrainData) Shuffle() {
+func (t DataSet) Shuffle() {
 	rand.Shuffle(len(t), func(i, j int) {
 		t[i], t[j] = t[j], t[i]
 	})
 }
 
 // Train trains the neural network using backpropagation
-func (n *NeuralNetwork) Train(trainData TrainData, epochs int) {
+func (n *NeuralNetwork) Train(trainData DataSet, epochs int) {
 	// Check if the user has provided enough inputs
 	inptuLayer := n.Layers[0]
 	outputLayer := n.Layers[len(n.Layers)-1]
