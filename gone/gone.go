@@ -28,7 +28,7 @@ type NeuralNetwork struct {
 	Task         Task
 }
 
-func New(lr float64, bs int, task Task, layers ...Layer) *NeuralNetwork {
+func New(alpha float64, b int, task Task, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -38,8 +38,8 @@ func New(lr float64, bs int, task Task, layers ...Layer) *NeuralNetwork {
 		Errors:       make([]matrix.Matrix, l-1),
 		Task:         task,
 		Layers:       layers,
-		BatchSize:    bs,
-		LearningRate: lr,
+		BatchSize:    b,
+		LearningRate: alpha,
 	}
 
 	for i := 0; i < l-1; i++ {
@@ -118,18 +118,16 @@ func (t DataSet) Shuffle() {
 	})
 }
 
+// Batch chunks the slice
 func (t DataSet) Batch(current int, batchSize int) DataSet {
 	length := len(t)
-	if current >= length {
+	end := current + batchSize
+
+	if current >= length || current == -1 || end > length {
 		return DataSet{}
 	}
 
-	end := current + batchSize
-	if end > length {
-		return t[current:] // return the rest
-	}
-
-	return t[current:end]
+	return t[current:end] // return the current chunk
 }
 
 // Train trains the neural network using backpropagation
@@ -150,27 +148,35 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 	for epoch := 0; epoch < epochs; epoch++ {
 		for i := 0; i < n.BatchSize; i += n.BatchSize {
+			// Batch for Batch Gradient Descent
 			batch := dataSet.Batch(i, n.BatchSize)
 
 			// Shuffle the data
 			batch.Shuffle()
 
-			// TODO: do batch gradient descent
-			output := matrix.New(n.BatchSize, outputNodes, nil)
+			// Output matrix
+			outputs := matrix.New(n.BatchSize, outputNodes, nil)
+
+			// Target matrix
+			targets := matrix.New(n.BatchSize, outputNodes, nil)
+
 			for _, data := range batch {
-				inputs := matrix.NewFromArray(data.Inputs)
-				targets := matrix.NewFromArray(data.Targets)
-
-				outputs := n.predict(inputs)
-
-				// Calculate the error and add it
-				// Errors = Target_{i,j} - Output_{i,j}
-				errors = append(errors, targets.SubtractMatrix(outputs))
+				currentInputs := matrix.NewFromArray(data.Inputs)
+				outputs.Data[i] = n.predict(currentInputs).Flatten()
 			}
 
-			mse := cost(errors)
+			error := mse(outputs, targets)
+
 		}
 	}
+}
+
+func mse(outputs, targets matrix.Matrix) matrix.Matrix {
+	// Calculate the error
+	// Error_{i,j} =
+	errs := targets.SubtractMatrix(outputs)
+	squared := errs.Multiply(errs)
+
 }
 
 // func cost(errors []matrix.Matrix) float64 {
