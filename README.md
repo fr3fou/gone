@@ -41,6 +41,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [x] Support shuffling the data
   - [x] Epochs
   - [ ] Backpropagation
+  - [x] Batching
 - [ ] Saving data
 - [ ] Loading data
 
@@ -73,7 +74,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] Derivatives ~
 - [ ] Linear vs non-linear problems (activation function)
 - [x] Gradient Descent ~
-  - [x] Stochastic vs "Normal" (?) ~
+  - [x] Stochastic vs Batching ~
 - [ ] Softmax
 - [ ] Mean Squared Error
 - [ ] How to determine how many layers and nodes to use
@@ -94,3 +95,4 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - https://www.wikiwand.com/en/Activation_function
 - https://www.jeremyjordan.me/intro-to-neural-networks/
 - https://www.arxiv-vanity.com/papers/2003.02139/
+- https://machinelearningmastery.com/gentle-introduction-mini-batch-gradient-descent-configure-batch-size/

@@ -118,6 +118,20 @@ func (t DataSet) Shuffle() {
 	})
 }
 
+func (t DataSet) Batch(current int, batchSize int) DataSet {
+	length := len(t)
+	if current >= length {
+		return DataSet{}
+	}
+
+	end := current + batchSize
+	if end > length {
+		return t[current:] // return the rest
+	}
+
+	return t[current:end]
+}
+
 // Train trains the neural network using backpropagation
 func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	// Check if the user has provided enough inputs
@@ -135,23 +149,27 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 
 	for epoch := 0; epoch < epochs; epoch++ {
-		// Shuffle the data
-		dataSet.Shuffle()
+		for i := 0; i < n.BatchSize; i += n.BatchSize {
+			batch := dataSet.Batch(i, n.BatchSize)
 
-		// TODO: do batch gradient descent
-		errors := matrix.New()
-		for _, data := range dataSet {
-			inputs := matrix.NewFromArray(data.Inputs)
-			targets := matrix.NewFromArray(data.Targets)
+			// Shuffle the data
+			batch.Shuffle()
 
-			outputs := n.predict(inputs)
+			// TODO: do batch gradient descent
+			output := matrix.New(n.BatchSize, outputNodes, nil)
+			for _, data := range batch {
+				inputs := matrix.NewFromArray(data.Inputs)
+				targets := matrix.NewFromArray(data.Targets)
 
-			// Calculate the error and add it
-			// Errors = Target_{i,j} - Output_{i,j}
-			errors = append(errors, targets.SubtractMatrix(outputs))
+				outputs := n.predict(inputs)
+
+				// Calculate the error and add it
+				// Errors = Target_{i,j} - Output_{i,j}
+				errors = append(errors, targets.SubtractMatrix(outputs))
+			}
+
+			mse := cost(errors)
 		}
-
-		mse := cost(errors)
 	}
 }
 
