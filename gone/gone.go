@@ -138,7 +138,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 
 	for epoch := 0; epoch < epochs; epoch++ {
-		for i := 0; i < n.BatchSize; i += n.BatchSize {
+		for i := 0; i < len(dataSet); i += n.BatchSize {
 			// Batch for Batch Gradient Descent
 			batch := dataSet.Batch(i, n.BatchSize)
 
