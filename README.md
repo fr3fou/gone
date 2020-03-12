@@ -98,3 +98,4 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - https://www.jeremyjordan.me/intro-to-neural-networks/
 - https://www.arxiv-vanity.com/papers/2003.02139/
 - https://machinelearningmastery.com/gentle-introduction-mini-batch-gradient-descent-configure-batch-size/
+- http://neuralnetworksanddeeplearning.com/chap2.html

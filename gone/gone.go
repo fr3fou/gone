@@ -166,7 +166,6 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 			}
 
 			mse(outputs, targets)
-
 		}
 	}
 }
@@ -175,7 +174,8 @@ func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 	// Calculate the error
 	// Error_{i,j} = Target_{i,j} - Outputs_{i,j}
 	errs := targets.SubtractMatrix(outputs)
-	return errs.DotProduct(errs)
+	squared := errs.DotProduct(errs)
+	return squared
 }
 
 // func cost(errors []matrix.Matrix) float64 {
