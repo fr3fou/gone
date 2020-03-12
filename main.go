@@ -20,6 +20,7 @@ func main() {
 		.1,
 		1,
 		gone.Classification,
+		gone.MSE,
 		gone.Layer{
 			Nodes: 2,
 		},

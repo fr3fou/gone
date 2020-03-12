@@ -9,6 +9,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 		.1,
 		100,
 		gone.Classification,
+		gone.MSE,
 		gone.Layer{
 			Nodes: 2,
 		},
