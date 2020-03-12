@@ -14,7 +14,7 @@ func Map(m Matrix, f Mapper) Matrix {
 }
 
 func Transpose(m Matrix) Matrix {
-	return Map(New(m.Rows, m.Columns, nil),
+	return Map(New(m.Columns, m.Rows, nil),
 		func(val float64, x, y int) float64 {
 			return m.Data[y][x]
 		})
