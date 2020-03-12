@@ -144,7 +144,7 @@ func TestMultiply(t *testing.T) {
 		{8},
 	})
 
-	assert.Equal(t, expected, Multiply(m, n))
+	assert.Equal(t, expected, HadamardProduct(m, n))
 }
 
 func TestFlatten(t *testing.T) {

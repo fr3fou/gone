@@ -59,7 +59,7 @@ func Subtract(m Matrix, n float64) Matrix {
 }
 
 // Multiply does Hadamard Product
-func Multiply(m Matrix, n Matrix) Matrix {
+func HadamardProduct(m Matrix, n Matrix) Matrix {
 	if m.Columns != n.Columns || m.Rows != n.Rows {
 		panic("matrix: matricies must have the same shape")
 	}

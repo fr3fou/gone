@@ -82,9 +82,9 @@ func (m Matrix) Subtract(a float64) Matrix {
 	return Subtract(m, a)
 }
 
-// Multiply does Hadamard product (entrywise)
-func (m Matrix) Multiply(n Matrix) Matrix {
-	return Multiply(m, n)
+// HadamardProduct does Hadamard product (entrywise)
+func (m Matrix) HadamardProduct(n Matrix) Matrix {
+	return HadamardProduct(m, n)
 }
 
 // DotProduct doest matrix product
