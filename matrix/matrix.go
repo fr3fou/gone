@@ -87,7 +87,7 @@ func (m Matrix) HadamardProduct(n Matrix) Matrix {
 	return HadamardProduct(m, n)
 }
 
-// DotProduct doest matrix product
+// DotProduct does matrix product
 func (m Matrix) DotProduct(n Matrix) Matrix {
 	return DotProduct(m, n)
 }

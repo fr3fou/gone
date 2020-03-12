@@ -173,14 +173,16 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 			// })
 
 			// Backpropagate
-			for i := len(n.Weights) - 1; i > 0; i-- {
+			for i := len(n.Weights); i > 0; i-- {
 				// The previous layer's weights but transposed
 				transposed := n.Weights[i-1].Transpose()
+
+				currentErrors := transposed.DotProduct(errors)
 
 				// Calculate deltas
 				deltas := 
 
-				n.Weights[i] = n.Weights[i].AddMatrix(deltas)
+				n.Weights[i-1] = n.Weights[i-1].AddMatrix(deltas)
 
 			}
 
