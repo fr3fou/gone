@@ -21,7 +21,6 @@ const (
 
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
-	Errors       []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
 	BatchSize    int
@@ -35,7 +34,6 @@ func New(alpha float64, b int, task Task, layers ...Layer) *NeuralNetwork {
 	}
 	n := &NeuralNetwork{
 		Weights:      make([]matrix.Matrix, l-1),
-		Errors:       make([]matrix.Matrix, l-1),
 		Task:         task,
 		Layers:       layers,
 		BatchSize:    b,
@@ -52,13 +50,6 @@ func New(alpha float64, b int, task Task, layers ...Layer) *NeuralNetwork {
 		)
 		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
-
-		errors := matrix.New(
-			prev.Nodes, // the rows are the outputs of the previous layer
-			1,
-			nil,
-		)
-		n.Errors[i] = errors
 	}
 
 	// Set fallbacks
