@@ -194,11 +194,12 @@ func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 	errs := targets.SubtractMatrix(outputs)
 
 	// Raise them to the 2nd power
-	squared := errs.DotProduct(errs)
+	squared := errs.HadamardProduct(errs)
 
 	// Make a new one dimensional vector of all the mean errors
 	return matrix.Map(matrix.New(squared.Columns, 1, nil), func(val float64, x, y int) float64 {
 		sum := 0.0
+
 		for i := 0; i < squared.Columns; i++ {
 			sum += squared.Data[x][i]
 		}
