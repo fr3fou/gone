@@ -77,7 +77,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [ ] Linear vs non-linear problems (activation function)
 - [x] Gradient Descent ~
   - [x] Stochastic vs Batching ~
-- [ ] Softmax (needed for regression!)
+- [ ] Softmax (needed for multi class classification!)
 - [ ] Mean Squared Error
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
