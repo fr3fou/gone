@@ -197,7 +197,7 @@ func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 	squared := errs.DotProduct(errs)
 
 	// Make a new one dimensional vector of all the mean errors
-	mean := matrix.Map(matrix.New(squared.Columns, 1, nil), func(val float64, x, y int) float64 {
+	return matrix.Map(matrix.New(squared.Columns, 1, nil), func(val float64, x, y int) float64 {
 		sum := 0.0
 		for i := 0; i < squared.Columns; i++ {
 			sum += squared.Data[x][i]
@@ -205,15 +205,4 @@ func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 
 		return sum / float64(squared.Columns)
 	})
-
-	return mean
 }
-
-// func cost(errors []matrix.Matrix) float64 {
-// 	sum := 0.0
-// 	for _, err := range errors {
-// 		sum += err. ???
-// 	}
-
-// 	return
-// }
