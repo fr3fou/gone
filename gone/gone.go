@@ -25,9 +25,10 @@ type NeuralNetwork struct {
 	Layers       []Layer
 	BatchSize    int
 	Task         Task
+	Loss         Loss
 }
 
-func New(alpha float64, b int, task Task, loss Loss, layers ...Layer) *NeuralNetwork {
+func New(learningRate float64, batchSize int, task Task, loss Loss, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -35,9 +36,10 @@ func New(alpha float64, b int, task Task, loss Loss, layers ...Layer) *NeuralNet
 	n := &NeuralNetwork{
 		Weights:      make([]matrix.Matrix, l-1),
 		Task:         task,
+		Loss:         loss,
 		Layers:       layers,
-		BatchSize:    b,
-		LearningRate: alpha,
+		BatchSize:    batchSize,
+		LearningRate: learningRate,
 	}
 
 	for i := 0; i < l-1; i++ {
@@ -159,7 +161,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 			// Nx1 Matrix (N being the number of output nodes)
 			// Compute the errors
-			errors := MSE(outputs, targets)
+			errors := n.Loss(outputs, targets)
 			// .Map(func(val float64, x, y int) float64 {
 			// 	// Calculate the gradients
 			// 	return n.Layers[len(n.Layers)-1].Activator.FPrime(val)

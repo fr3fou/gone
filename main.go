@@ -17,7 +17,7 @@ func init() {
 
 func main() {
 	g := gone.New(
-		.1,
+		0.1,
 		1,
 		gone.Classification,
 		gone.MSE,
