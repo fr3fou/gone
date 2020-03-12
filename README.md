@@ -79,7 +79,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [x] Stochastic vs Batching ~
 - [ ] Softmax (needed for regression!)
 - [ ] Mean Squared Error
-- [ ] Cross Entropy Error (needed for regression!)
+- [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
 
 ### Examples
