@@ -21,6 +21,7 @@ const (
 
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
+	Activations  []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
 	BatchSize    int
@@ -35,6 +36,7 @@ func New(learningRate float64, batchSize int, task Task, loss Loss, layers ...La
 	}
 	n := &NeuralNetwork{
 		Weights:      make([]matrix.Matrix, l-1),
+		Activations:  make([]matrix.Matrix, l-1),
 		Task:         task,
 		Loss:         loss,
 		Layers:       layers,
@@ -43,15 +45,17 @@ func New(learningRate float64, batchSize int, task Task, loss Loss, layers ...La
 	}
 
 	for i := 0; i < l-1; i++ {
-		prev := layers[i]
-		current := layers[i+1]
+		current := layers[i]
+		next := layers[i+1]
 		weights := matrix.New(
-			current.Nodes, // the rows are the inputs of the current one
-			prev.Nodes,    // the cols are the outputs of the previous layer
+			next.Nodes,    // the rows are the inputs of the current one
+			current.Nodes, // the cols are the outputs of the previous layer
 			nil,
 		)
 		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
+
+		n.Activations[i] = matrix.New(current.Nodes, 1, nil)
 	}
 
 	// Set fallbacks
@@ -161,7 +165,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 			// Nx1 Matrix (N being the number of output nodes)
 			// Compute the errors
-			errors := n.Loss(outputs, targets)
+			errors := n.Loss.F(outputs, targets)
 			// .Map(func(val float64, x, y int) float64 {
 			// 	// Calculate the gradients
 			// 	return n.Layers[len(n.Layers)-1].Activator.FPrime(val)

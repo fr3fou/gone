@@ -4,10 +4,14 @@ import "github.com/fr3fou/gone/matrix"
 
 type Loss struct {
 	F func(outputs, targets matrix.Matrix) matrix.Matrix
-	FPrime func ??? 
+	// FPrime func
 }
 
-func MSE(outputs, targets matrix.Matrix) matrix.Matrix {
+var MSE = Loss{
+	F: mse,
+}
+
+func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 	// Calculate the error
 	// Error_{i,j} = Target_{i,j} - Outputs_{i,j}
 	errs := targets.SubtractMatrix(outputs)
@@ -25,5 +29,4 @@ func MSE(outputs, targets matrix.Matrix) matrix.Matrix {
 
 		return sum / float64(squared.Rows)
 	})
-
 }
