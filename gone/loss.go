@@ -2,7 +2,10 @@ package gone
 
 import "github.com/fr3fou/gone/matrix"
 
-type Loss func(outputs, targets matrix.Matrix) matrix.Matrix
+type Loss struct {
+	F func(outputs, targets matrix.Matrix) matrix.Matrix
+	FPrime func ??? 
+}
 
 func MSE(outputs, targets matrix.Matrix) matrix.Matrix {
 	// Calculate the error
