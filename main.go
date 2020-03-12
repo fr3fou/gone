@@ -55,11 +55,13 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		1,
+		100,
 	)
+
+	fmt.Println(g.Predict([]float64{1, 0}))
 }
 
-func main2() {
+func _main() {
 	p := perceptron.New(0.1, 10000)
 
 	// Training data
