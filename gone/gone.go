@@ -166,10 +166,11 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 			}
 
 			// Nx1 Matrix (N being the number of output nodes)
-			gradients := mse(outputs.Map(func(val float64, x, y int) float64 {
-				// Calculate the gradients
-				return n.Layers[len(n.Layers)-1].Activator.FPrime(val)
-			}), targets)
+			errors := mse(outputs, targets)
+			// .Map(func(val float64, x, y int) float64 {
+			// 	// Calculate the gradients
+			// 	return n.Layers[len(n.Layers)-1].Activator.FPrime(val)
+			// })
 
 			// Backpropagate
 			for i := len(n.Weights) - 1; i > 0; i-- {
@@ -177,7 +178,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 				transposed := n.Weights[i-1].Transpose()
 
 				// Calculate deltas
-				deltas := gradients.DotProduct(transposed)
+				deltas := 
 
 				n.Weights[i] = n.Weights[i].AddMatrix(deltas)
 
