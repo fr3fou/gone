@@ -148,15 +148,39 @@ func TestMultiply(t *testing.T) {
 }
 
 func TestFlatten(t *testing.T) {
-	m := New(3, 3, [][]float64{
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9},
-	})
+	{
+		m := New(3, 3, [][]float64{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9},
+		})
 
-	expected := []float64{1, 2, 3, 4, 5, 6, 7, 8, 9}
+		expected := []float64{1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-	assert.Equal(t, expected, m.Flatten())
+		assert.Equal(t, expected, m.Flatten())
+	}
+
+	{
+		m := New(3, 1, [][]float64{
+			{1},
+			{4},
+			{7},
+		})
+
+		expected := []float64{1, 4, 7}
+
+		assert.Equal(t, expected, m.Flatten())
+	}
+
+	{
+		m := New(1, 3, [][]float64{
+			{1, 2, 3},
+		})
+
+		expected := []float64{1, 2, 3}
+
+		assert.Equal(t, expected, m.Flatten())
+	}
 }
 
 func TestNewFromArray(t *testing.T) {

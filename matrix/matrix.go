@@ -94,9 +94,12 @@ func (m Matrix) DotProduct(n Matrix) Matrix {
 
 func (m Matrix) Flatten() []float64 {
 	r := make([]float64, m.Rows*m.Columns)
-	for i, line := range m.Data {
-		for j, val := range line {
-			r[m.Rows*i+j] = val
+	i := 0
+
+	for _, line := range m.Data {
+		for _, val := range line {
+			r[i] = val
+			i++
 		}
 	}
 
