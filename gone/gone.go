@@ -29,7 +29,7 @@ type NeuralNetwork struct {
 	// Loss         Loss
 }
 
-func New(learningRate float64, batchSize int, task Task,
+func New(learningRate float64, task Task,
 	// loss Loss,
 	layers ...Layer) *NeuralNetwork {
 	l := len(layers)
@@ -41,8 +41,8 @@ func New(learningRate float64, batchSize int, task Task,
 		Activations: make([]matrix.Matrix, l-1),
 		Task:        task,
 		// Loss:         loss,
-		Layers:       layers,
-		BatchSize:    batchSize,
+		Layers: layers,
+		// BatchSize:    batchSize,
 		LearningRate: learningRate,
 	}
 
@@ -150,13 +150,17 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 
 	for epoch := 0; epoch < epochs; epoch++ {
-
+		dataSet.Shuffle()
 		for i, data := range dataSet {
-			currentInputs := matrix.NewFromArray(data.Inputs)
+			// Stochastic Gradient Descent (Online Training)
+			n.backpropagate(data)
 		}
 	}
 }
 
 func (n *NeuralNetwork) backpropagate(ds DataSample) {
+	inputs := matrix.NewFromArray(ds.Inputs)
+	targets := matrix.NewFromArray(ds.Targets)
+	outcome := n.predict(inputs)
 
 }

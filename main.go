@@ -17,8 +17,8 @@ func init() {
 
 func main() {
 	g := gone.New(
-		0.1,
-		1,
+		0.1, // learning rate (alpha)
+		1,   // batch size
 		gone.Classification,
 		// gone.MSE,
 		gone.Layer{

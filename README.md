@@ -78,11 +78,14 @@ A simple neural network library in Go from scratch. 0 dependencies.
 ### Research
 
 - [x] Derivatives ~
+- [x] Partial Derivatives ~
 - [ ] Linear vs non-linear problems (activation function)
-- [x] Gradient Descent ~
-  - [x] Stochastic vs Batching ~
+- [x] Gradient Descent
+  - [x] (Batch) Gradient Descent (GD)
+  - [x] Stochastic Gradient Descent (SGD)
+  - [x] Mini-Batch Gradient Descent (MBGD?)
 - [ ] Softmax (needed for multi class classification!)
-- [ ] Mean Squared Error
+- [x] Mean Squared Error
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
 
