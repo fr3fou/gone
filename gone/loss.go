@@ -3,12 +3,13 @@ package gone
 import "github.com/fr3fou/gone/matrix"
 
 type Loss struct {
-	F func(outputs, targets matrix.Matrix) matrix.Matrix
-	// FPrime func
+	F      func(outputs, targets matrix.Matrix) matrix.Matrix
+	FPrime func(output, target, activation matrix.Matrix) matrix.Matrix
 }
 
 var MSE = Loss{
-	F: mse,
+	F:      mse,
+	FPrime: msePrime,
 }
 
 func mse(outputs, targets matrix.Matrix) matrix.Matrix {
@@ -29,4 +30,8 @@ func mse(outputs, targets matrix.Matrix) matrix.Matrix {
 
 		return sum / float64(squared.Rows)
 	})
+}
+
+func msePrime(output, target, activation matrix.Matrix) matrix.Matrix {
+	return activation.(output - target)
 }
