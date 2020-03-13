@@ -9,7 +9,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 		.1,
 		100,
 		gone.Classification,
-		gone.MSE,
+		// gone.MSE,
 		gone.Layer{
 			Nodes: 2,
 		},
@@ -43,7 +43,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [x] Support shuffling the data
   - [x] Epochs
   - [ ] Backpropagation
-  - [x] Batching
+  - [ ] Batching
   - [ ] Different loss functions
     - [x] Mean Squared Error
     - [ ] Cross Entropy Error
@@ -106,3 +106,5 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - https://machinelearningmastery.com/gentle-introduction-mini-batch-gradient-descent-configure-batch-size/
 - http://neuralnetworksanddeeplearning.com/chap2.html
 - https://arxiv.org/pdf/1802.01528.pdf
+- https://github.com/stevenmiller888/mind/blob/master/index.js
+- https://github.com/stevenmiller888/go-mind

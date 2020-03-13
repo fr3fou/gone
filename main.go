@@ -20,17 +20,13 @@ func main() {
 		0.1,
 		1,
 		gone.Classification,
-		gone.MSE,
+		// gone.MSE,
 		gone.Layer{
 			Nodes: 2,
 		},
 		gone.Layer{
-			Nodes:     3,
-			Activator: gone.ReLU,
-		},
-		gone.Layer{
-			Nodes:     3,
-			Activator: gone.ReLU,
+			Nodes:     2,
+			Activator: gone.Sigmoid,
 		},
 		gone.Layer{
 			Nodes: 1,

@@ -26,19 +26,21 @@ type NeuralNetwork struct {
 	Layers       []Layer
 	BatchSize    int
 	Task         Task
-	Loss         Loss
+	// Loss         Loss
 }
 
-func New(learningRate float64, batchSize int, task Task, loss Loss, layers ...Layer) *NeuralNetwork {
+func New(learningRate float64, batchSize int, task Task,
+	// loss Loss,
+	layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
 	}
 	n := &NeuralNetwork{
-		Weights:      make([]matrix.Matrix, l-1),
-		Activations:  make([]matrix.Matrix, l-1),
-		Task:         task,
-		Loss:         loss,
+		Weights:     make([]matrix.Matrix, l-1),
+		Activations: make([]matrix.Matrix, l-1),
+		Task:        task,
+		// Loss:         loss,
 		Layers:       layers,
 		BatchSize:    batchSize,
 		LearningRate: learningRate,
@@ -148,56 +150,13 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 
 	for epoch := 0; epoch < epochs; epoch++ {
-		for i := 0; i < len(dataSet); i += n.BatchSize {
-			// Shuffle the data
-			dataSet.Shuffle()
 
-			// Batch for Batch Gradient Descent
-			batch := dataSet.Batch(i, n.BatchSize)
-
-			// Output matrix
-			outputs := matrix.New(n.BatchSize, outputNodes, nil)
-
-			// Target matrix
-			targets := matrix.New(n.BatchSize, outputNodes, nil)
-
-			for _, data := range batch {
-				currentInputs := matrix.NewFromArray(data.Inputs)
-				outputs.Data[i] = n.predict(currentInputs).Flatten()
-			}
-
-			// Nx1 Matrix (N being the number of output nodes)
-			// Compute the errors
-			// TODO: do MSE
-			errors := n.Loss.F(outputs, targets)
-			// errors := targets.SubtractMatrix(outputs)
-
-			delta := errors.HadamardProduct(n.Activations[activationAmount-1].Map(
-				func(val float64, x, y int) float64 {
-					return n.Layers[layerAmount-1].Activator.FPrime(val) // derivative func
-				},
-			))
-
-			// Backpropagate
-			for i := weightAmount - 2; i >= 0; i-- {
-				// TODO: bias
-				// // The previous layer's weights but transposed
-				// transposed := n.Weights[i-1].
-				// 	Transpose().
-				// 	Map(func(val float64, x, y int) float64 {
-				// 		// Calculate the gradients
-				// 		return n.Layers[len(n.Layers)-1].Activator.FPrime(val)
-				// 	})
-
-				// // Update the errors with the current layer's errors
-				// errors = transposed.HadamardProduct(errors)
-
-				// // Calculate deltas
-				// deltas := errors.DotProduct(transposed)
-
-				// // Adjust the weights
-				// n.Weights[i-1] = n.Weights[i-1].AddMatrix(deltas)
-			}
+		for i, data := range dataSet {
+			currentInputs := matrix.NewFromArray(data.Inputs)
 		}
 	}
+}
+
+func (n *NeuralNetwork) backpropagate(ds DataSample) {
+
 }
