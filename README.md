@@ -110,3 +110,5 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - https://arxiv.org/pdf/1802.01528.pdf
 - https://github.com/stevenmiller888/mind/blob/master/index.js
 - https://github.com/stevenmiller888/go-mind
+- https://medium.com/yottabytes/everything-you-need-to-know-about-gradient-descent-applied-to-neural-networks-d70f85e0cc14
+- https://towardsdatascience.com/deep-learning-which-loss-and-activation-functions-should-i-use-ac02f1c56aa8
