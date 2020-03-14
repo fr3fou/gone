@@ -52,7 +52,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		500,
+		1000,
 	)
 
 	fmt.Println(g.Predict([]float64{1, 0}))

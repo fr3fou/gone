@@ -9,7 +9,6 @@ import (
 type Layer struct {
 	Nodes     int
 	Activator Activation
-	Bias      float64
 }
 
 type Task string
@@ -21,6 +20,7 @@ const (
 
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
+	Biases       []matrix.Matrix
 	Activations  []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
@@ -38,6 +38,7 @@ func New(learningRate float64, task Task,
 	}
 	n := &NeuralNetwork{
 		Weights:     make([]matrix.Matrix, l-1),
+		Biases:      make([]matrix.Matrix, l-1),
 		Activations: make([]matrix.Matrix, l),
 		Task:        task,
 		// Loss:         loss,
@@ -46,18 +47,28 @@ func New(learningRate float64, task Task,
 		LearningRate: learningRate,
 	}
 
+	// Initialize the weights and biases
 	for i := 0; i < l-1; i++ {
 		current := layers[i]
 		next := layers[i+1]
 		weights := matrix.New(
-			next.Nodes,    // the rows are the inputs of the current one
-			current.Nodes, // the cols are the outputs of the previous layer
+			next.Nodes,    // the rows are the inputs of the next one
+			current.Nodes, // the cols are the outputs of the current layer
 			nil,
 		)
 		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
+
+		biases := matrix.New(
+			next.Nodes, // the rows are the inputs of the next one
+			1,
+			nil,
+		)
+		biases.Randomize(-1, 2) // Initialize the biases randomly
+		n.Biases[i] = biases
 	}
 
+	// Initialize the activations
 	for i := 0; i < l; i++ {
 		current := layers[i]
 		n.Activations[i] = matrix.New(current.Nodes, 1, nil)
@@ -71,10 +82,6 @@ func New(learningRate float64, task Task,
 
 		if layers[i].Activator.FPrime == nil {
 			layers[i].Activator.FPrime = Id.FPrime
-		}
-
-		if layers[i].Bias == 0.0 {
-			layers[i].Bias = 1
 		}
 	}
 
@@ -96,7 +103,7 @@ func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 	for i := 0; i < len(n.Weights); i++ {
 		mat = n.Weights[i].
 			DotProduct(mat).                          // weighted sum of the previous layer)
-			Add(n.Layers[i+1].Bias).                  // bias
+			AddMatrix(n.Biases[i]).                   // bias
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
 			})
@@ -196,5 +203,6 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 		)
 
 		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
+		n.Biases[i].HadamardProduct(gradients)
 	}
 }
