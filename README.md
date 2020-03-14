@@ -43,10 +43,10 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [ ] Train
   - [x] Support shuffling the data
   - [x] Epochs
-  - [ ] Backpropagation
+  - [x] Backpropagation
   - [ ] Batching
   - [ ] Different loss functions
-    - [x] Mean Squared Error
+    - [ ] Mean Squared Error
     - [ ] Cross Entropy Error
 - [ ] Saving data
 - [ ] Loading data
