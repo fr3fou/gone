@@ -18,7 +18,7 @@ func init() {
 func main() {
 	g := gone.New(
 		0.1, // learning rate (alpha)
-		1,   // batch size
+		// 1,   // batch size
 		gone.Classification,
 		// gone.MSE,
 		gone.Layer{
@@ -52,7 +52,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		100,
+		500,
 	)
 
 	fmt.Println(g.Predict([]float64{1, 0}))

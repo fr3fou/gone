@@ -38,7 +38,7 @@ func New(learningRate float64, task Task,
 	}
 	n := &NeuralNetwork{
 		Weights:     make([]matrix.Matrix, l-1),
-		Activations: make([]matrix.Matrix, l-1),
+		Activations: make([]matrix.Matrix, l),
 		Task:        task,
 		// Loss:         loss,
 		Layers: layers,
@@ -56,7 +56,10 @@ func New(learningRate float64, task Task,
 		)
 		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
+	}
 
+	for i := 0; i < l; i++ {
+		current := layers[i]
 		n.Activations[i] = matrix.New(current.Nodes, 1, nil)
 	}
 
@@ -89,6 +92,7 @@ func (n *NeuralNetwork) Predict(data []float64) []float64 {
 
 // predict is a helper function that uses matricies instead of slices
 func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
+	n.Activations[0] = mat // add the original input
 	for i := 0; i < len(n.Weights); i++ {
 		mat = n.Weights[i].
 			DotProduct(mat).                          // weighted sum of the previous layer)
@@ -96,7 +100,7 @@ func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
 			})
-		n.Activations[i] = mat
+		n.Activations[i+1] = mat
 	}
 
 	return mat
@@ -132,11 +136,8 @@ func (t DataSet) Batch(current int, batchSize int) DataSet {
 
 // Train trains the neural network using backpropagation
 func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
-	layerAmount := len(n.Layers)
-	weightAmount := len(n.Weights)
-	activationAmount := weightAmount
 	inputNodes := n.Layers[0].Nodes
-	outputNodes := n.Layers[layerAmount-1].Nodes
+	outputNodes := n.Layers[len(n.Layers)-1].Nodes
 
 	// Check if the user has provided enough inputs
 	for _, dataCase := range dataSet {
@@ -151,8 +152,8 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 
 	for epoch := 0; epoch < epochs; epoch++ {
 		dataSet.Shuffle()
-		for i, data := range dataSet {
-			// Stochastic Gradient Descent (Online Training)
+		for _, data := range dataSet {
+			// Stochastic Gradient Descent (On-line Training)
 			n.backpropagate(data)
 		}
 	}
@@ -161,6 +162,47 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 func (n *NeuralNetwork) backpropagate(ds DataSample) {
 	inputs := matrix.NewFromArray(ds.Inputs)
 	targets := matrix.NewFromArray(ds.Targets)
-	outcome := n.predict(inputs)
+	outputs := n.predict(inputs)
 
+	lenLayers := len(n.Layers)
+	lenWeights := lenLayers - 1 // always one less than the layers (we don't have weights for the inputs)
+
+	err := targets.SubtractMatrix(outputs)
+
+	gradients :=
+		// We can also do n.Activations[lenActivations-1]
+		// As the output of the NN is the same as the final activations
+		outputs.
+			Map(func(val float64, x, y int) float64 {
+				return n.Layers[lenLayers-1].Activator.FPrime(val)
+			}).
+			HadamardProduct(err).
+			Scale(n.LearningRate)
+
+	deltas := gradients.DotProduct(
+		n.Activations[lenWeights-1].Transpose(),
+	)
+
+	n.Weights[lenWeights-1].AddMatrix(deltas)
+
+	for i := len(n.Weights) - 2; i > 0; i-- {
+		// The next error is equal to the current error multiplied
+		// by the previous weight matrix but transposed!
+		// The outputs of the previous layer must match with the inputs
+		// of the current layer (the current layer's errors have that shape)
+		err = n.Weights[i+1].Transpose().DotProduct(err)
+
+		gradients = n.Activations[i+1].
+			Map(func(val float64, x, y int) float64 {
+				return n.Layers[i+1].Activator.FPrime(val)
+			}).
+			HadamardProduct(err).
+			Scale(n.LearningRate)
+
+		deltas = gradients.DotProduct(
+			n.Activations[i].Transpose(),
+		)
+
+		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
+	}
 }

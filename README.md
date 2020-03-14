@@ -38,6 +38,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [ ] Classification
   - [ ] Regression
 - [x] Bias
+    - [ ] Matrix, rather than a single number
 - [x] Feedforward (Predict)
 - [ ] Train
   - [x] Support shuffling the data
