@@ -1,11 +1,11 @@
 package matrix
 
 func Map(m Matrix, f Mapper) Matrix {
-	n := New(m.Rows, m.Columns, m.Data)
+	n := New(m.Rows, m.Columns, nil)
 
 	for i := 0; i < m.Rows; i++ {
 		for j := 0; j < m.Columns; j++ {
-			val := n.Data[i][j]
+			val := m.Data[i][j]
 			n.Data[i][j] = f(val, i, j)
 		}
 	}
@@ -21,8 +21,8 @@ func Transpose(m Matrix) Matrix {
 }
 
 func Scale(m Matrix, a float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val * a
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] * a
 	})
 }
 
@@ -31,14 +31,14 @@ func AddMatrix(m, n Matrix) Matrix {
 		panic("matrix: can't add different sized matricies")
 	}
 
-	return Map(m, func(val float64, x, y int) float64 {
-		return val + n.Data[x][y]
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] + n.Data[x][y]
 	})
 }
 
 func Add(m Matrix, n float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val + n
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] + n
 	})
 }
 
@@ -47,25 +47,25 @@ func SubtractMatrix(m, n Matrix) Matrix {
 		panic("matrix: can't subtract different sized matricies")
 	}
 
-	return Map(m, func(val float64, x, y int) float64 {
-		return val - n.Data[x][y]
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] - n.Data[x][y]
 	})
 }
 
 func Subtract(m Matrix, n float64) Matrix {
-	return Map(m, func(val float64, x, y int) float64 {
-		return val - n
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] - n
 	})
 }
 
-// Multiply does Hadamard Product
+// HadamardProduct does Hadamard Product
 func HadamardProduct(m Matrix, n Matrix) Matrix {
 	if m.Columns != n.Columns || m.Rows != n.Rows {
 		panic("matrix: matricies must have the same shape")
 	}
 
-	return Map(m, func(val float64, x, y int) float64 {
-		return val * n.Data[x][y]
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] * n.Data[x][y]
 	})
 }
 
