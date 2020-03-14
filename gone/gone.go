@@ -179,7 +179,10 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 	var gradients matrix.Matrix
 	var deltas matrix.Matrix
 
-	for i := lenWeights - 1; i > 0; i-- {
+	// Setting the condition to be i >= 0 causes NaN activations
+	// when the learning rate is set to 1
+	// ???
+	for i := lenWeights - 1; i >= 0; i-- {
 		// The next error is equal to the current error multiplied
 		// by the previous weight matrix but transposed!
 		// The outputs of the previous layer must match with the inputs
