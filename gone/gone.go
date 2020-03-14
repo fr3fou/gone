@@ -203,6 +203,6 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 		)
 
 		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
-		n.Biases[i].HadamardProduct(gradients)
+		n.Biases[i] = n.Biases[i].HadamardProduct(gradients)
 	}
 }
