@@ -35,10 +35,6 @@ func main() {
 	)
 
 	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-
 	fmt.Println("Training...")
 
 	g.Train(gone.DataSet{
@@ -63,13 +59,6 @@ func main() {
 	)
 
 	fmt.Println("Finished...")
-
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
-	fmt.Println(g.Predict([]float64{1, 0}))
 	fmt.Println(g.Predict([]float64{1, 0}))
 }
 
