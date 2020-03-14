@@ -195,12 +195,11 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 			Map(func(val float64, x, y int) float64 {
 				return n.Layers[i+1].Activator.FPrime(val)
 			}).
-			HadamardProduct(err).
-			Scale(n.LearningRate)
+			HadamardProduct(err)
 
-		deltas = gradients.DotProduct(
-			n.Activations[i].Transpose(),
-		)
+		deltas = gradients.
+			DotProduct(n.Activations[i].Transpose()).
+			Scale(n.LearningRate)
 
 		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
 		n.Biases[i] = n.Biases[i].AddMatrix(gradients)
