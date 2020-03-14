@@ -34,6 +34,13 @@ func main() {
 		},
 	)
 
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+
+	fmt.Println("Training...")
+
 	g.Train(gone.DataSet{
 		{
 			Inputs:  []float64{1, 0},
@@ -54,6 +61,8 @@ func main() {
 	},
 		1000,
 	)
+
+	fmt.Println("Finished...")
 
 	fmt.Println(g.Predict([]float64{1, 0}))
 	fmt.Println(g.Predict([]float64{1, 0}))

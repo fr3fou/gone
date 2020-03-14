@@ -107,7 +107,7 @@ func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
 			})
-		n.Activations[i+1] = mat
+		n.Activations[i+1] = mat.Copy()
 	}
 
 	return mat

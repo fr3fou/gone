@@ -62,6 +62,12 @@ func (m *Matrix) Zero() {
 	}
 }
 
+func (m *Matrix) Copy() Matrix {
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y]
+	})
+}
+
 func (m Matrix) Map(f Mapper) Matrix {
 	return Map(m, f)
 }
