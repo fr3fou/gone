@@ -56,6 +56,12 @@ func main() {
 	)
 
 	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
+	fmt.Println(g.Predict([]float64{1, 0}))
 }
 
 func _main() {

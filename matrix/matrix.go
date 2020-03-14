@@ -54,6 +54,14 @@ func (m *Matrix) Randomize(low, high float64) {
 	}
 }
 
+func (m *Matrix) Zero() {
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			m.Data[i][j] = 0
+		}
+	}
+}
+
 func (m Matrix) Map(f Mapper) Matrix {
 	return Map(m, f)
 }
