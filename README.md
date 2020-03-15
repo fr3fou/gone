@@ -30,7 +30,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 	g.Predict([]float64{1, 2})
 ```
 
-## TODO:
+## TODO
 
 ### `gone/`
 
@@ -38,7 +38,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [ ] Classification
   - [ ] Regression
 - [x] Bias
-    - [x] Matrix, rather than a single number
+  - [x] Matrix, rather than a single number
 - [x] Feedforward (Predict)
 - [ ] Train
   - [x] Support shuffling the data
@@ -86,7 +86,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [x] Stochastic Gradient Descent (SGD)
   - [x] Mini-Batch Gradient Descent (MBGD?)
 - [ ] Softmax (needed for multi class classification!)
-- [x] Mean Squared Error
+- [ ] Mean Squared Error
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
 
