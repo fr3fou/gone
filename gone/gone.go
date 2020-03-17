@@ -6,18 +6,23 @@ import (
 	"github.com/fr3fou/gone/matrix"
 )
 
+// Layer represents a layer in a neural network
 type Layer struct {
 	Nodes     int
 	Activator Activation
 }
 
+// Task is the type of task to do
 type Task string
 
 const (
+	// Classification does a classification
 	Classification Task = "Classification"
-	Regression     Task = "Regression"
+	// Regression does a regression
+	Regression Task = "Regression"
 )
 
+// NeuralNetwork represents a neural network
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
 	Biases       []matrix.Matrix
@@ -29,6 +34,7 @@ type NeuralNetwork struct {
 	// Loss         Loss
 }
 
+// New creates a neural network
 func New(learningRate float64, task Task,
 	// loss Loss,
 	layers ...Layer) *NeuralNetwork {
