@@ -15,11 +15,11 @@ A simple neural network library in Go from scratch. 0 dependencies.
 		},
 		gone.Layer{
 			Nodes:     3,
-			Activator: gone.ReLU,
+			Activator: gone.ReLU(),
 		},
 		gone.Layer{
 			Nodes:     3,
-			Activator: gone.ReLU,
+			Activator: gone.ReLU(),
 		},
 		gone.Layer{
 			Nodes: 1,
