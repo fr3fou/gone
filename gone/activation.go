@@ -2,50 +2,49 @@ package gone
 
 import "math"
 
+// Activation is an activation function
+// it contains the normal f(x) and the derivative f'(x)
 type Activation struct {
-	F      func(float64) float64
-	FPrime func(float64) float64
+	F      func(x float64) float64
+	FPrime func(x float64) float64
 }
 
-var Sigmoid = Activation{
-	F:      sigmoid,
-	FPrime: sigmoidPrime,
-}
-
-func sigmoid(x float64) float64 {
-	return 1 / (1 + math.Exp(-x))
-}
-
-func sigmoidPrime(x float64) float64 {
-	return x * (1 - x)
-}
-
-var ReLU = Activation{
-	F:      relu,
-	FPrime: reluPrime,
-}
-
-func relu(x float64) float64 {
-	return math.Max(0, x)
-}
-
-func reluPrime(x float64) float64 {
-	if x > 0 {
-		return 1
+// Sigmoid is a sigmoid activation function
+func Sigmoid() Activation {
+	return Activation{
+		F: func(x float64) float64 {
+			return 1 / (1 + math.Exp(-x))
+		},
+		FPrime: func(x float64) float64 {
+			return x * (1 - x)
+		},
 	}
-
-	return 0
 }
 
-var Id = Activation{
-	F:      id,
-	FPrime: idPrime,
+// ReLU is a ReLU activation function
+func ReLU() Activation {
+	return Activation{
+		F: func(x float64) float64 {
+			return math.Max(0, x)
+		},
+		FPrime: func(x float64) float64 {
+			if x > 0 {
+				return 1
+			}
+			return 0
+		},
+	}
 }
 
-func id(x float64) float64 {
-	return x
-}
-
-func idPrime(_ float64) float64 {
-	return 1
+// Identity is the identity (linear) function
+// f(x) = x
+func Identity() Activation {
+	return Activation{
+		F: func(x float64) float64 {
+			return x
+		},
+		FPrime: func(_ float64) float64 {
+			return 1
+		},
+	}
 }

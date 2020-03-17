@@ -82,12 +82,8 @@ func New(learningRate float64, task Task,
 
 	// Set fallbacks
 	for i := range layers {
-		if layers[i].Activator.F == nil {
-			layers[i].Activator.F = Id.F
-		}
-
-		if layers[i].Activator.FPrime == nil {
-			layers[i].Activator.FPrime = Id.FPrime
+		if layers[i].Activator.F == nil || layers[i].Activator.FPrime == nil {
+			layers[i].Activator = Identity()
 		}
 	}
 

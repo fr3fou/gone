@@ -26,7 +26,7 @@ func main() {
 		},
 		gone.Layer{
 			Nodes:     2,
-			Activator: gone.Sigmoid,
+			Activator: gone.Sigmoid(),
 		},
 		gone.Layer{
 			Nodes: 1,
