@@ -106,6 +106,7 @@ func (m Matrix) DotProduct(n Matrix) Matrix {
 	return DotProduct(m, n)
 }
 
+// Flatten flattens the matrix
 func (m Matrix) Flatten() []float64 {
 	r := make([]float64, m.Rows*m.Columns)
 	i := 0
