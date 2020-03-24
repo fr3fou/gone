@@ -199,10 +199,11 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 			err = n.Weights[i+1].Transpose().DotProduct(err)
 		}
 
-		gradients = err.HadamardProduct(n.Activations[i+1].
+		gradients = n.Activations[i+1].
 			Map(func(val float64, x, y int) float64 {
 				return n.Layers[i+1].Activator.FPrime(val)
-			}))
+			}).
+			HadamardProduct(err)
 
 		deltas = gradients.
 			DotProduct(n.Activations[i].Transpose()).
