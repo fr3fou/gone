@@ -115,3 +115,4 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - https://towardsdatascience.com/deep-learning-which-loss-and-activation-functions-should-i-use-ac02f1c56aa8
 - https://github.com/milosgajdos/go-neural
 - https://ml-cheatsheet.readthedocs.io/en/latest/forwardpropagation.html
+- https://medium.com/coinmonks/representing-neural-network-with-vectors-and-matrices-c6b0e64db9fb
