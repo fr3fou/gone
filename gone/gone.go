@@ -1,6 +1,7 @@
 package gone
 
 import (
+	"fmt"
 	"math/rand"
 
 	"github.com/fr3fou/gone/matrix"
@@ -181,6 +182,8 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 	var gradients matrix.Matrix
 	var deltas matrix.Matrix
 
+	fmt.Printf("----------- training for %f ^ %f ----------- \n\n", ds.Inputs[0], ds.Inputs[1])
+
 	// Setting the condition to be i >= 0 causes NaN activations
 	// when the learning rate is set to 1
 	// ???
@@ -196,15 +199,18 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 			err = n.Weights[i+1].Transpose().DotProduct(err)
 		}
 
-		gradients = n.Activations[i+1].
+		gradients = err.HadamardProduct(n.Activations[i+1].
 			Map(func(val float64, x, y int) float64 {
 				return n.Layers[i+1].Activator.FPrime(val)
-			}).
-			HadamardProduct(err)
+			}))
 
 		deltas = gradients.
 			DotProduct(n.Activations[i].Transpose()).
 			Scale(n.LearningRate)
+
+		fmt.Printf("deltas for l_%d ->\n%+v", i+1, deltas)
+		fmt.Printf("weights for l_%d ->\n%+v", i+1, n.Weights[i])
+		fmt.Println()
 
 		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
 		n.Biases[i] = n.Biases[i].AddMatrix(gradients)

@@ -34,6 +34,11 @@ func main() {
 		},
 	)
 
+	fmt.Println("1 0 -> ", g.Predict([]float64{1, 0}), "should've been around 1")
+	fmt.Println("0 1 -> ", g.Predict([]float64{0, 1}), "should've been around 1")
+	fmt.Println("1 1 -> ", g.Predict([]float64{1, 1}), "should've been around 0")
+	fmt.Println("0 0 -> ", g.Predict([]float64{0, 0}), "should've been around 0")
+
 	fmt.Println("Training...")
 
 	g.Train(gone.DataSet{
@@ -54,7 +59,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		1000,
+		1,
 	)
 
 	fmt.Println("Finished...")
