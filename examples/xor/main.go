@@ -17,7 +17,7 @@ func main() {
 		0.1, // learning rate (alpha)
 		// 1,   // batch size
 		// gone.Classification,
-		"",
+		gone.SGD(),
 		// gone.MSE,
 		gone.Layer{
 			Nodes: 2,
