@@ -16,7 +16,8 @@ func main() {
 	g := gone.New(
 		0.1, // learning rate (alpha)
 		// 1,   // batch size
-		gone.Classification,
+		// gone.Classification,
+		"",
 		// gone.MSE,
 		gone.Layer{
 			Nodes: 2,
@@ -50,7 +51,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		10000,
+		5000,
 	)
 
 	fmt.Println("Finished...")

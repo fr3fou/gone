@@ -12,16 +12,6 @@ type Layer struct {
 	Activator Activation
 }
 
-// Task is the type of task to do
-type Task string
-
-const (
-	// Classification does a classification
-	Classification Task = "Classification"
-	// Regression does a regression
-	Regression Task = "Regression"
-)
-
 // NeuralNetwork represents a neural network
 type NeuralNetwork struct {
 	Weights      []matrix.Matrix
@@ -30,12 +20,12 @@ type NeuralNetwork struct {
 	LearningRate float64
 	Layers       []Layer
 	BatchSize    int
-	Task         Task
+	Optimizer    Optimizer
 	// Loss         Loss
 }
 
 // New creates a neural network
-func New(learningRate float64, task Task,
+func New(learningRate float64, optimizer Optimizer,
 	// loss Loss,
 	layers ...Layer) *NeuralNetwork {
 	l := len(layers)
@@ -46,7 +36,7 @@ func New(learningRate float64, task Task,
 		Weights:     make([]matrix.Matrix, l-1),
 		Biases:      make([]matrix.Matrix, l-1),
 		Activations: make([]matrix.Matrix, l),
-		Task:        task,
+		Optimizer:   optimizer,
 		// Loss:         loss,
 		Layers: layers,
 		// BatchSize:    batchSize,
@@ -202,6 +192,7 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 
 		deltas = gradients.
 			DotProduct(n.Activations[i].Transpose())
+			// Scale(n.LearningRate)
 
 		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
 		n.Biases[i] = n.Biases[i].AddMatrix(gradients)
