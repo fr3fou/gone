@@ -92,7 +92,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 
 ### Examples
 
-- [ ] XOR Problem
+- [x] XOR Problem
 - [ ] Digit Classifier
 
 ## Resources used:

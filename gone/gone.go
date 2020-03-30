@@ -62,7 +62,7 @@ func New(learningRate float64, task Task,
 			current.Nodes, // the cols are the outputs of the current layer
 			nil,
 		)
-		weights.Randomize(-0.1, 0.2) // Initialize the weights randomly
+		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
 
 		biases := matrix.New(
@@ -70,7 +70,7 @@ func New(learningRate float64, task Task,
 			1,
 			nil,
 		)
-		biases.Randomize(-0.1, 0.2) // Initialize the biases randomly
+		biases.Randomize(-1, 2) // Initialize the biases randomly
 		n.Biases[i] = biases
 	}
 
