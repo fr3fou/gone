@@ -1,7 +1,6 @@
 package gone
 
 import (
-	"fmt"
 	"math/rand"
 
 	"github.com/fr3fou/gone/matrix"
@@ -25,75 +24,53 @@ const (
 
 // NeuralNetwork represents a neural network
 type NeuralNetwork struct {
-	Weights      []matrix.Matrix
-	Biases       []matrix.Matrix
-	Activations  []matrix.Matrix
+	InputNodes   int
+	HiddenNodes  int
+	OutputsNodes int
+
+	InputHiddenWeights  matrix.Matrix
+	HiddenOutputWeights matrix.Matrix
+
+	HiddenBias matrix.Matrix
+	OutputBias matrix.Matrix
+
+	Activation Activation
+
 	LearningRate float64
-	Layers       []Layer
 	BatchSize    int
 	Task         Task
-	// Loss         Loss
 }
 
 // New creates a neural network
-func New(learningRate float64, task Task,
-	// loss Loss,
-	layers ...Layer) *NeuralNetwork {
-	l := len(layers)
-	if l < 3 { // minimum amount of layers
-		panic("gone: need more layers for a neural network")
-	}
+func New(learningRate float64, nodes [3]int, activation Activation) *NeuralNetwork {
 	n := &NeuralNetwork{
-		Weights:     make([]matrix.Matrix, l-1),
-		Biases:      make([]matrix.Matrix, l-1),
-		Activations: make([]matrix.Matrix, l),
-		Task:        task,
-		// Loss:         loss,
-		Layers: layers,
 		// BatchSize:    batchSize,
+		Activation:   activation,
 		LearningRate: learningRate,
 	}
 
-	// Initialize the weights and biases
-	for i := 0; i < l-1; i++ {
-		current := layers[i]
-		next := layers[i+1]
-		weights := matrix.New(
-			next.Nodes,    // the rows are the inputs of the next one
-			current.Nodes, // the cols are the outputs of the current layer
-			nil,
-		)
-		weights.Randomize(-1, 2) // Initialize the weights randomly
-		n.Weights[i] = weights
+	n.InputNodes = nodes[0]
+	n.HiddenNodes = nodes[1]
+	n.OutputsNodes = nodes[2]
 
-		biases := matrix.New(
-			next.Nodes, // the rows are the inputs of the next one
-			1,
-			nil,
-		)
-		biases.Randomize(-1, 2) // Initialize the biases randomly
-		n.Biases[i] = biases
-	}
+	n.InputHiddenWeights = matrix.New(n.HiddenNodes, n.InputNodes, nil)
+	n.HiddenOutputWeights = matrix.New(n.OutputsNodes, n.HiddenNodes, nil)
 
-	// Initialize the activations
-	for i := 0; i < l; i++ {
-		current := layers[i]
-		n.Activations[i] = matrix.New(current.Nodes, 1, nil)
-	}
+	n.InputHiddenWeights.Randomize(-1, 2)
+	n.InputHiddenWeights.Randomize(-1, 2)
 
-	// Set fallbacks
-	for i := range layers {
-		if layers[i].Activator.F == nil || layers[i].Activator.FPrime == nil {
-			layers[i].Activator = Identity()
-		}
-	}
+	n.HiddenBias = matrix.New(n.HiddenNodes, 1, nil)
+	n.OutputBias = matrix.New(n.OutputsNodes, 1, nil)
+
+	n.HiddenBias.Randomize(-1, 2)
+	n.OutputBias.Randomize(-1, 2)
 
 	return n
 }
 
 // Predict is the feedforward process
 func (n *NeuralNetwork) Predict(data []float64) []float64 {
-	if len(data) != n.Layers[0].Nodes {
+	if len(data) != n.InputNodes {
 		panic("gone: not enough data in input layer")
 	}
 
@@ -102,18 +79,19 @@ func (n *NeuralNetwork) Predict(data []float64) []float64 {
 
 // predict is a helper function that uses matricies instead of slices
 func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
-	n.Activations[0] = mat // add the original input
-	for i := 0; i < len(n.Weights); i++ {
-		mat = n.Weights[i].
-			DotProduct(mat).                          // weighted sum of the previous layer)
-			AddMatrix(n.Biases[i]).                   // bias
-			Map(func(val float64, x, y int) float64 { // activation
-				return n.Layers[i+1].Activator.F(val)
-			})
-		n.Activations[i+1] = mat.Copy()
-	}
+	hidden := n.InputHiddenWeights.
+		DotProduct(mat).
+		AddMatrix(n.HiddenBias).
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.F(val)
+		})
 
-	return mat
+	return n.HiddenOutputWeights.
+		DotProduct(hidden).
+		AddMatrix(n.OutputBias).
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.F(val)
+		})
 }
 
 // DataSet represents a slice of all the entires in a data set
@@ -146,8 +124,8 @@ func (t DataSet) Batch(current int, batchSize int) DataSet {
 
 // Train trains the neural network using backpropagation
 func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
-	inputNodes := n.Layers[0].Nodes
-	outputNodes := n.Layers[len(n.Layers)-1].Nodes
+	inputNodes := n.InputNodes
+	outputNodes := n.OutputsNodes
 
 	// Check if the user has provided enough inputs
 	for _, dataCase := range dataSet {
@@ -170,50 +148,55 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 }
 
 func (n *NeuralNetwork) backpropagate(ds DataSample) {
+	// Prediction
 	inputs := matrix.NewFromArray(ds.Inputs)
+	hidden := n.InputHiddenWeights.
+		DotProduct(inputs).
+		AddMatrix(n.HiddenBias).
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.F(val)
+		})
+
+	outputs := n.HiddenOutputWeights.
+		DotProduct(hidden).
+		AddMatrix(n.OutputBias).
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.F(val)
+		})
+
+	// Backpropagation
 	targets := matrix.NewFromArray(ds.Targets)
-	outputs := n.predict(inputs)
 
-	lenLayers := len(n.Layers)
-	lenWeights := lenLayers - 1 // always one less than the layers (we don't have weights for the inputs)
+	outputErrors := targets.SubtractMatrix(outputs)
+	outputGradients := outputs.
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.FPrime(val)
+		}).
+		HadamardProduct(outputErrors).
+		Scale(n.LearningRate)
 
-	err := targets.SubtractMatrix(outputs)
+	hiddenOutputDeltas := outputGradients.
+		DotProduct(hidden.Transpose())
+	n.HiddenOutputWeights = n.HiddenOutputWeights.
+		AddMatrix(hiddenOutputDeltas)
+	n.OutputBias = n.OutputBias.
+		AddMatrix(outputGradients)
 
-	var gradients matrix.Matrix
-	var deltas matrix.Matrix
+	hiddenErrors := n.HiddenOutputWeights.
+		Transpose().
+		DotProduct(outputErrors)
+	hiddenGradients := hidden.
+		Map(func(val float64, x, y int) float64 {
+			return n.Activation.FPrime(val)
+		}).
+		HadamardProduct(hiddenErrors).
+		Scale(n.LearningRate)
 
-	fmt.Printf("----------- training for %f ^ %f ----------- \n\n", ds.Inputs[0], ds.Inputs[1])
+	inputHiddenDeltas := hiddenGradients.
+		DotProduct(inputs.Transpose())
 
-	// Setting the condition to be i >= 0 causes NaN activations
-	// when the learning rate is set to 1
-	// ???
-	for i := lenWeights - 1; i >= 0; i-- {
-		// The next error is equal to the current error multiplied
-		// by the previous weight matrix but transposed!
-		// The outputs of the previous layer must match with the inputs
-		// of the current layer (the current layer's errors have that shape)
-		//
-		// We need not compute the error the first time as it was done
-		// outside the loop
-		if i < lenWeights-1 {
-			err = n.Weights[i+1].Transpose().DotProduct(err)
-		}
-
-		gradients = n.Activations[i+1].
-			Map(func(val float64, x, y int) float64 {
-				return n.Layers[i+1].Activator.FPrime(val)
-			}).
-			HadamardProduct(err)
-
-		deltas = gradients.
-			DotProduct(n.Activations[i].Transpose()).
-			Scale(n.LearningRate)
-
-		fmt.Printf("deltas for l_%d ->\n%+v", i+1, deltas)
-		fmt.Printf("weights for l_%d ->\n%+v", i+1, n.Weights[i])
-		fmt.Println()
-
-		n.Weights[i] = n.Weights[i].AddMatrix(deltas)
-		n.Biases[i] = n.Biases[i].AddMatrix(gradients)
-	}
+	n.InputHiddenWeights = n.InputHiddenWeights.
+		AddMatrix(inputHiddenDeltas)
+	n.HiddenBias = n.HiddenBias.
+		AddMatrix(hiddenGradients)
 }
