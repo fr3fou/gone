@@ -52,7 +52,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		100,
+		10000,
 	)
 
 	fmt.Println("Finished...")

@@ -7,7 +7,7 @@ import "math"
 type Activation struct {
 	Name   acitvationName
 	F      func(x float64) float64
-	FPrime func(x float64) float64
+	FPrime func(y float64) float64
 }
 
 type acitvationName string
@@ -26,8 +26,8 @@ func Sigmoid() Activation {
 		F: func(x float64) float64 {
 			return 1 / (1 + math.Exp(-x))
 		},
-		FPrime: func(x float64) float64 {
-			return x * (1 - x)
+		FPrime: func(y float64) float64 {
+			return y * (1 - y)
 		},
 	}
 }
