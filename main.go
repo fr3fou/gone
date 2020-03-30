@@ -25,7 +25,7 @@ func main() {
 			Nodes: 2,
 		},
 		gone.Layer{
-			Nodes:     2,
+			Nodes:     4,
 			Activator: gone.Sigmoid(),
 		},
 		gone.Layer{
@@ -59,7 +59,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		1,
+		1000,
 	)
 
 	fmt.Println("Finished...")
