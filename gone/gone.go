@@ -25,9 +25,7 @@ type NeuralNetwork struct {
 }
 
 // New creates a neural network
-func New(learningRate float64, optimizer Optimizer,
-	// loss Loss,
-	layers ...Layer) *NeuralNetwork {
+func New(learningRate float64, optimizer Optimizer /* loss Loss */, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -149,5 +147,7 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 		}
 	}
 
-	n.Optimizer(n, dataSet, epochs)
+	for i := 0; i < epochs; i++ {
+		n.Optimizer(n, dataSet)
+	}
 }
