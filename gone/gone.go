@@ -62,7 +62,7 @@ func New(learningRate float64, task Task,
 			current.Nodes, // the cols are the outputs of the current layer
 			nil,
 		)
-		weights.Randomize(-1, 2) // Initialize the weights randomly
+		weights.Randomize(-0.1, 0.2) // Initialize the weights randomly
 		n.Weights[i] = weights
 
 		biases := matrix.New(
@@ -70,7 +70,7 @@ func New(learningRate float64, task Task,
 			1,
 			nil,
 		)
-		biases.Randomize(-1, 2) // Initialize the biases randomly
+		biases.Randomize(-0.1, 0.2) // Initialize the biases randomly
 		n.Biases[i] = biases
 	}
 
@@ -181,9 +181,6 @@ func (n *NeuralNetwork) backpropagate(ds DataSample) {
 	var gradients matrix.Matrix
 	var deltas matrix.Matrix
 
-	// Setting the condition to be i >= 0 causes NaN activations
-	// when the learning rate is set to 1
-	// ???
 	for i := lenWeights - 1; i >= 0; i-- {
 		// The next error is equal to the current error multiplied
 		// by the previous weight matrix but transposed!

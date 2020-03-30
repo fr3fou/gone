@@ -30,14 +30,8 @@ func main() {
 		},
 		gone.Layer{
 			Nodes: 1,
-			// we shouldn't use ReLU on the outputs, so we fallback to Id
 		},
 	)
-
-	fmt.Println("1 0 -> ", g.Predict([]float64{1, 0}), "should've been around 1")
-	fmt.Println("0 1 -> ", g.Predict([]float64{0, 1}), "should've been around 1")
-	fmt.Println("1 1 -> ", g.Predict([]float64{1, 1}), "should've been around 0")
-	fmt.Println("0 0 -> ", g.Predict([]float64{0, 0}), "should've been around 0")
 
 	fmt.Println("Training...")
 
@@ -59,7 +53,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		1000,
+		10000,
 	)
 
 	fmt.Println("Finished...")
