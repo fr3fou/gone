@@ -81,6 +81,7 @@ func New(learningRate float64 /* loss Loss */, layers ...Layer) *NeuralNetwork {
 	return n
 }
 
+// ToggleDebug toggles debug mode
 func (n *NeuralNetwork) ToggleDebug(b bool) {
 	n.DebugMode = b
 }
@@ -184,6 +185,7 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 	}
 }
 
+// Save saves the neural network to a file
 func (n *NeuralNetwork) Save(filename string) error {
 	lenLayers := len(n.Layers)
 	lenWeights := lenLayers - 1
@@ -255,6 +257,7 @@ func (n *NeuralNetwork) Save(filename string) error {
 	return nil
 }
 
+// Load loads a neural network from a file
 func Load(filename string) (*NeuralNetwork, error) {
 	b, err := ioutil.ReadFile(filename)
 	if err != nil {
