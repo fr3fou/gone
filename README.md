@@ -129,6 +129,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Mean Squared Error
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
+- [ ] One Hot Encoding
 
 ### Examples
 
