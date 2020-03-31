@@ -8,6 +8,7 @@ import (
 )
 
 type Mapper func(val float64, x int, y int) float64
+type Folder func(accumulator, val float64, x int, y int) float64
 
 type Matrix struct {
 	Rows    int
@@ -70,6 +71,10 @@ func (m *Matrix) Copy() Matrix {
 
 func (m Matrix) Map(f Mapper) Matrix {
 	return Map(m, f)
+}
+
+func (m Matrix) Fold(f Folder, accumulator float64) float64 {
+	return Fold(m, f, accumulator)
 }
 
 func (m Matrix) Transpose() Matrix {

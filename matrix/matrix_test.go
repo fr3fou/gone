@@ -200,3 +200,13 @@ func TestNewFromArray(t *testing.T) {
 
 	assert.Equal(t, expected, m)
 }
+
+func TestFold(t *testing.T) {
+	m := NewFromArray([]float64{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	expected := 45.0
+
+	assert.Equal(t, expected, m.Fold(func(accumulator, val float64, x, y int) float64 {
+		return accumulator + val
+	}, 0))
+}

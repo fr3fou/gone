@@ -13,6 +13,17 @@ func Map(m Matrix, f Mapper) Matrix {
 	return n
 }
 
+// Fold accumulates the values in a matrix according to a Folder function
+func Fold(m Matrix, f Folder, accumulator float64) float64 {
+	for i := 0; i < m.Rows; i++ {
+		for j := 0; j < m.Columns; j++ {
+			accumulator = f(accumulator, m.Data[i][j], i, j)
+		}
+	}
+
+	return accumulator
+}
+
 func Transpose(m Matrix) Matrix {
 	return Map(New(m.Columns, m.Rows, nil),
 		func(val float64, x, y int) float64 {
