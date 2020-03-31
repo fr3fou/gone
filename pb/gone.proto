@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+option go_package= ".;pb";
+
+message NeuralNetwork {
+  repeated Matrix Weights = 1;
+  repeated Matrix Biases = 2;
+  repeated Matrix Activations = 3;
+  double LearningRate = 4;
+  repeated Layer Layers = 5;
+  bool DebugMode = 6;
+};
+
+message Layer {
+  int32 Nodes = 1;
+  string Activator = 2;
+}
+
+message Matrix {
+  int32 Rows = 1;
+  int32 Columns = 2;
+  repeated double Data = 3; // flattened 2D array
+}

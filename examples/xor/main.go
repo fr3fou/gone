@@ -52,6 +52,10 @@ func main() {
 		2000,
 	)
 
+	if err := g.Save("xor.gone"); err != nil {
+		panic(err)
+	}
+
 	fmt.Println("1 0 -> ", g.Predict([]float64{1, 0}), "should've been around 1")
 	fmt.Println("0 1 -> ", g.Predict([]float64{0, 1}), "should've been around 1")
 	fmt.Println("1 1 -> ", g.Predict([]float64{1, 1}), "should've been around 0")

@@ -3,8 +3,11 @@ package gone
 import (
 	"log"
 	"math/rand"
+	"os"
 
 	"github.com/fr3fou/gone/matrix"
+	"github.com/fr3fou/gone/pb"
+	"google.golang.org/protobuf/proto"
 )
 
 // Layer represents a layer in a neural network
@@ -21,7 +24,6 @@ type NeuralNetwork struct {
 	LearningRate float64
 	Layers       []Layer
 	DebugMode    bool
-	BatchSize    int
 	// Loss         Loss
 }
 
@@ -172,11 +174,82 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 					},
 					0,
 				)
-				err /= float64(outputNodes)
-				err /= float64(len(dataSet))
+				err /= float64(outputNodes)  // shouldn't these be outside?
+				err /= float64(len(dataSet)) // if i put them outside i get wrong values
 			}
 
 			log.Printf("Finished epoch %d/%d with error: %f", i, epochs, err)
 		}
 	}
+}
+
+func (n *NeuralNetwork) Save(filename string) error {
+	lenLayers := len(n.Layers)
+	lenWeights := lenLayers - 1
+
+	weights := make([]*pb.Matrix, lenWeights)
+	biases := make([]*pb.Matrix, lenWeights)
+	activations := make([]*pb.Matrix, lenLayers)
+	layers := make([]*pb.Layer, lenLayers)
+
+	// We need to flatten the data as protobuf doesn't provide a convenient way to store 2D matricies
+	for i := 0; i < lenWeights; i++ {
+		w := n.Weights[i]
+		b := n.Biases[i]
+
+		weights[i] = &pb.Matrix{
+			Rows:    int32(w.Rows),
+			Columns: int32(w.Columns),
+			Data:    w.Flatten(),
+		}
+
+		biases[i] = &pb.Matrix{
+			Rows:    int32(b.Rows),
+			Columns: int32(b.Columns),
+			Data:    b.Flatten(),
+		}
+	}
+
+	for i := 0; i < lenLayers; i++ {
+		a := n.Activations[i]
+		l := n.Layers[i]
+
+		activations[i] = &pb.Matrix{
+			Rows:    int32(a.Rows),
+			Columns: int32(a.Columns),
+			Data:    a.Flatten(),
+		}
+
+		layers[i] = &pb.Layer{
+			Nodes:     int32(l.Nodes),
+			Activator: string(l.Activator.Name),
+		}
+	}
+
+	nn := &pb.NeuralNetwork{
+		Weights:      weights,
+		Biases:       biases,
+		Activations:  activations,
+		Layers:       layers,
+		DebugMode:    n.DebugMode,
+		LearningRate: n.LearningRate,
+	}
+
+	b, err := proto.Marshal(nn)
+	if err != nil {
+		return err
+	}
+
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = file.Write(b)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

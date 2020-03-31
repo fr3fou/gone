@@ -62,7 +62,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [ ] Different loss functions
     - [ ] Mean Squared Error
     - [ ] Cross Entropy Error
-- [ ] Saving data
+- [x] Saving data - Done thanks to protobuf
 - [ ] Loading data
 
 ### `matrix/`
