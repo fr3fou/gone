@@ -15,7 +15,6 @@ func init() {
 func main() {
 	g := gone.New(
 		0.1,
-		gone.GD(),
 		gone.Layer{
 			Nodes: 2,
 		},
@@ -30,24 +29,26 @@ func main() {
 
 	fmt.Println("Training...")
 
-	g.Train(gone.DataSet{
-		{
-			Inputs:  []float64{1, 0},
-			Targets: []float64{1},
+	g.Train(
+		gone.SGD(),
+		gone.DataSet{
+			{
+				Inputs:  []float64{1, 0},
+				Targets: []float64{1},
+			},
+			{
+				Inputs:  []float64{0, 1},
+				Targets: []float64{1},
+			},
+			{
+				Inputs:  []float64{1, 1},
+				Targets: []float64{0},
+			},
+			{
+				Inputs:  []float64{0, 0},
+				Targets: []float64{0},
+			},
 		},
-		{
-			Inputs:  []float64{0, 1},
-			Targets: []float64{1},
-		},
-		{
-			Inputs:  []float64{1, 1},
-			Targets: []float64{0},
-		},
-		{
-			Inputs:  []float64{0, 0},
-			Targets: []float64{0},
-		},
-	},
 		10000,
 	)
 

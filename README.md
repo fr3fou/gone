@@ -7,7 +7,6 @@ A simple neural network library in Go from scratch. 0 dependencies.
 ```go
 	g := gone.New(
 		0.1,
-		gone.SGD()
 		gone.Layer{
 			Nodes: 2,
 		},
@@ -20,7 +19,9 @@ A simple neural network library in Go from scratch. 0 dependencies.
 		},
 	)
 
-	g.Train(gone.DataSet{
+	g.Train(
+		gone.SGD(),
+        gone.DataSet{
 		{
 			Inputs:  []float64{1, 0},
 			Targets: []float64{1},

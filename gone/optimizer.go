@@ -68,13 +68,13 @@ func MGBD(batchSize int) Optimizer {
 			for i := 0; i < lenWeights; i++ {
 				deltas[i] = deltas[i].Map(
 					func(val float64, x, y int) float64 {
-						return val / float64(batchSize)
+						return val / float64(batchSize) // average the changes
 					},
 				)
 
 				gradients[i] = gradients[i].Map(
 					func(val float64, x, y int) float64 {
-						return val / float64(batchSize)
+						return val / float64(batchSize) // average the changes
 					},
 				)
 

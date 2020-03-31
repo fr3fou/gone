@@ -20,12 +20,11 @@ type NeuralNetwork struct {
 	LearningRate float64
 	Layers       []Layer
 	BatchSize    int
-	Optimizer    Optimizer
 	// Loss         Loss
 }
 
 // New creates a neural network
-func New(learningRate float64, optimizer Optimizer /* loss Loss */, layers ...Layer) *NeuralNetwork {
+func New(learningRate float64 /* loss Loss */, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
@@ -34,7 +33,6 @@ func New(learningRate float64, optimizer Optimizer /* loss Loss */, layers ...La
 		Weights:     make([]matrix.Matrix, l-1),
 		Biases:      make([]matrix.Matrix, l-1),
 		Activations: make([]matrix.Matrix, l),
-		Optimizer:   optimizer,
 		// Loss:         loss,
 		Layers: layers,
 		// BatchSize:    batchSize,
@@ -132,7 +130,7 @@ func (t DataSet) Batch(current int, batchSize int) DataSet {
 }
 
 // Train trains the neural network using backpropagation
-func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
+func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) {
 	inputNodes := n.Layers[0].Nodes
 	outputNodes := n.Layers[len(n.Layers)-1].Nodes
 
@@ -148,6 +146,6 @@ func (n *NeuralNetwork) Train(dataSet DataSet, epochs int) {
 	}
 
 	for i := 0; i < epochs; i++ {
-		n.Optimizer(n, dataSet)
+		optimizer(n, dataSet)
 	}
 }
