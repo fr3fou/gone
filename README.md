@@ -1,6 +1,8 @@
 # gone
 
-A simple neural network library in Go from scratch. 0 dependencies.
+A simple neural network library in Go from scratch. 0 dependencies\*
+
+_there are 0 neural network related dependencies, the only dependencies are for testing ([stretchr/testify](github.com/stretchr/testify)) and for persistence ([golang/protobuf](github.com/golang/protobuf))_
 
 ## Example
 
@@ -41,7 +43,17 @@ A simple neural network library in Go from scratch. 0 dependencies.
 	},
 		5000,
 	)
+
+	g.Save("test.gone")
+
 	g.Predict([]float64{1, 2})
+```
+
+### Loading model back into memory
+
+```go
+	g, err := gone.Load("test.gone")
+	// back where we left off
 ```
 
 ## TODO
