@@ -1,5 +1,6 @@
 package matrix
 
+// Map applies f to every element of the matrix and returns the result
 func Map(m Matrix, f Mapper) Matrix {
 	n := New(m.Rows, m.Columns, nil)
 
@@ -24,6 +25,7 @@ func Fold(m Matrix, f Folder, accumulator float64) float64 {
 	return accumulator
 }
 
+// Transpose returns the transposed version of the matrix
 func Transpose(m Matrix) Matrix {
 	return Map(New(m.Columns, m.Rows, nil),
 		func(val float64, x, y int) float64 {
@@ -31,12 +33,14 @@ func Transpose(m Matrix) Matrix {
 		})
 }
 
+// Scale does scalar multiplication
 func Scale(m Matrix, a float64) Matrix {
 	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
 		return m.Data[x][y] * a
 	})
 }
 
+// AddMatrix adds 2 matrices together
 func AddMatrix(m, n Matrix) Matrix {
 	if m.Rows != n.Rows || m.Columns != n.Columns {
 		panic("matrix: can't add different sized matricies")
@@ -47,12 +51,14 @@ func AddMatrix(m, n Matrix) Matrix {
 	})
 }
 
+// Add does scalar addition
 func Add(m Matrix, n float64) Matrix {
 	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
 		return m.Data[x][y] + n
 	})
 }
 
+// SubtractMatrix subtracts 2 matrices
 func SubtractMatrix(m, n Matrix) Matrix {
 	if m.Rows != n.Rows || m.Columns != n.Columns {
 		panic("matrix: can't subtract different sized matricies")
@@ -63,13 +69,14 @@ func SubtractMatrix(m, n Matrix) Matrix {
 	})
 }
 
+// Subtract does scalar subtraction
 func Subtract(m Matrix, n float64) Matrix {
 	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
 		return m.Data[x][y] - n
 	})
 }
 
-// HadamardProduct does Hadamard Product
+// HadamardProduct does Hadamard Product (entrywise)
 func HadamardProduct(m Matrix, n Matrix) Matrix {
 	if m.Columns != n.Columns || m.Rows != n.Rows {
 		panic("matrix: matricies must have the same shape")
