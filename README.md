@@ -63,7 +63,10 @@ A simple neural network library in Go from scratch. 0 dependencies.
     - [ ] Mean Squared Error
     - [ ] Cross Entropy Error
 - [x] Saving data - Done thanks to protobuf
-- [ ] Loading data
+- [x] Loading data
+- [ ] Adam optimizer
+- [ ] Nestrov + Momentum for GD
+- [ ] Fix MSE computation in debug mode (not used in actual backpropagation)
 
 ### `matrix/`
 
@@ -77,8 +80,10 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] Multiply
 - [x] Multiply
 - [x] Flatten
+- [x] Unflatten
 - [x] NewFromArray - makes a single row
 - [x] Map
+- [x] Fold
 - [x] Methods to support chaining
 
 ```go
@@ -107,7 +112,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
 ### Examples
 
 - [x] XOR Problem
-- [ ] Digit Classifier
+- [x] [Digit Classifier](https://github.com/fr3fou/digit-classifier)
 
 ### Shoutouts
 
