@@ -1,6 +1,7 @@
 package gone
 
 import (
+	"log"
 	"math/rand"
 
 	"github.com/fr3fou/gone/matrix"
@@ -19,6 +20,7 @@ type NeuralNetwork struct {
 	Activations  []matrix.Matrix
 	LearningRate float64
 	Layers       []Layer
+	DebugMode    bool
 	BatchSize    int
 	// Loss         Loss
 }
@@ -74,6 +76,10 @@ func New(learningRate float64 /* loss Loss */, layers ...Layer) *NeuralNetwork {
 	}
 
 	return n
+}
+
+func (n *NeuralNetwork) ToggleDebug(b bool) {
+	n.DebugMode = b
 }
 
 // Predict is the feedforward process
@@ -145,7 +151,13 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 		}
 	}
 
-	for i := 0; i < epochs; i++ {
+	for i := 1; i <= epochs; i++ {
+		if n.DebugMode {
+			log.Printf("Beginning epoch %d/%d", i, epochs)
+		}
 		optimizer(n, dataSet)
+		if n.DebugMode {
+			log.Printf("Finished epoch %d/%d", i, epochs)
+		}
 	}
 }
