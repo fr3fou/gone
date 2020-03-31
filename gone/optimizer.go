@@ -8,12 +8,12 @@ type Optimizer func(n *NeuralNetwork, dataSet DataSet)
 // SGD is Stochastic Gradient Descent (On-line Training)
 func SGD() Optimizer {
 	return func(n *NeuralNetwork, dataSet DataSet) {
-		MGBD(1)(n, dataSet)
+		MBGD(1)(n, dataSet)
 	}
 }
 
 // MBGD is a Mini-Batch Gradient Descent (Batch training)
-func MGBD(batchSize int) Optimizer {
+func MBGD(batchSize int) Optimizer {
 	return func(n *NeuralNetwork, dataSet DataSet) {
 		for i := 0; i < len(dataSet); i++ {
 			batch := dataSet.Batch(i, batchSize)
@@ -88,6 +88,6 @@ func MGBD(batchSize int) Optimizer {
 // GD is a normal gradient descent (Optimizes after the entire data set)
 func GD() Optimizer {
 	return func(n *NeuralNetwork, dataSet DataSet) {
-		MGBD(len(dataSet))(n, dataSet)
+		MBGD(len(dataSet))(n, dataSet)
 	}
 }
