@@ -1,8 +1,17 @@
 # gone
 
+[![Github Actions Widget]][github actions] [![GoReport Widget]][goreport] [![GoDoc Widget]][godoc]
+
 A simple neural network library in Go from scratch. 0 dependencies\*
 
 _there are 0 neural network related dependencies, the only dependencies are for testing ([stretchr/testify](github.com/stretchr/testify)) and for persistence ([golang/protobuf](github.com/golang/protobuf))_
+
+[goreport widget]: https://goreportcard.com/badge/github.com/fr3fou/gone
+[goreport]: https://goreportcard.com/report/github.com/fr3fou/gone
+[github actions widget]: https://github.com/fr3fou/gone/workflows/Test/badge.svg
+[github actions]: https://github.com/fr3fou/gone/actions
+[godoc]: http://pkg.go.dev/github.com/fr3fou/gone
+[godoc widget]: https://godoc.org/github.com/fr3fou/gone?status.svg
 
 ## Example
 
