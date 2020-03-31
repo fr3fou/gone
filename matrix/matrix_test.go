@@ -218,3 +218,15 @@ func TestSquare(t *testing.T) {
 
 	assert.Equal(t, expected, m.HadamardProduct(m))
 }
+
+func TestUnflatten(t *testing.T) {
+	m := ([]float64{1, 2, 3, 4, 5, 6})
+
+	expected := New(2, 3, [][]float64{
+		{1, 2, 3},
+		{4, 5, 6},
+	})
+
+	assert.Equal(t, expected, Unflatten(2, 3, m))
+
+}

@@ -126,6 +126,16 @@ func (m Matrix) Flatten() []float64 {
 	return r
 }
 
+func Unflatten(r, c int, data []float64) Matrix {
+	if len(data) != r*c {
+		panic("matrix: invalid shape of data")
+	}
+
+	return Map(New(r, c, nil), func(val float64, x, y int) float64 {
+		return data[x*c+y]
+	})
+}
+
 func (m Matrix) String() string {
 	b := &strings.Builder{}
 	for _, line := range m.Data {
