@@ -1,0 +1,4 @@
+1 0 ->  [0.9999999999999984] should've been around 1
+0 1 ->  [0.999999999999998] should've been around 1
+1 1 ->  [1.8318679906315083e-15] should've been around 0
+0 0 ->  [6.661338147750939e-16] should've been around 0

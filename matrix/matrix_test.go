@@ -210,3 +210,11 @@ func TestFold(t *testing.T) {
 		return accumulator + val
 	}, 0))
 }
+
+func TestSquare(t *testing.T) {
+	m := NewFromArray([]float64{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	expected := NewFromArray([]float64{1, 4, 9, 16, 25, 36, 49, 64, 81})
+
+	assert.Equal(t, expected, m.HadamardProduct(m))
+}

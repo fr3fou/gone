@@ -157,7 +157,26 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 		}
 		optimizer(n, dataSet)
 		if n.DebugMode {
-			log.Printf("Finished epoch %d/%d", i, epochs)
+			err := 0.0
+			for _, ds := range dataSet {
+				input := matrix.NewFromArray(ds.Inputs)
+				output := n.predict(input)
+
+				currentError := matrix.NewFromArray(ds.Targets).SubtractMatrix(output)
+				currentError = output.HadamardProduct(output) // Squared
+				// for some reason squaring it makes it worse? it converges to 0.5 instead of 0
+
+				err += currentError.Fold(
+					func(accumulator, val float64, x, y int) float64 {
+						return val + accumulator
+					},
+					0,
+				)
+				err /= float64(outputNodes)
+				err /= float64(len(dataSet))
+			}
+
+			log.Printf("Finished epoch %d/%d with error: %f", i, epochs, err)
 		}
 	}
 }

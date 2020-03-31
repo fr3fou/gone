@@ -27,6 +27,8 @@ func main() {
 		},
 	)
 
+	g.ToggleDebug(true)
+
 	g.Train(
 		gone.SGD(),
 		gone.DataSet{
@@ -47,7 +49,7 @@ func main() {
 				Targets: []float64{0},
 			},
 		},
-		10000,
+		2000,
 	)
 
 	fmt.Println("1 0 -> ", g.Predict([]float64{1, 0}), "should've been around 1")
