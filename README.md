@@ -95,6 +95,10 @@ A simple neural network library in Go from scratch. 0 dependencies.
 - [x] XOR Problem
 - [ ] Digit Classifier
 
+### Shoutouts
+
+- [Davis Josephs](https://github.com/josephsdavid) - was of HUGE help with algebra and other ML-related questions; also helped me spot some nasty bugs!
+
 ## Resources used:
 
 - https://www.analyticsvidhya.com/blog/2020/01/fundamentals-deep-learning-activation-functions-when-to-use-them/
