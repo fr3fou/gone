@@ -6,27 +6,40 @@ A simple neural network library in Go from scratch. 0 dependencies.
 
 ```go
 	g := gone.New(
-		.1,
-		100,
-		gone.Classification,
-		// gone.MSE,
+		0.1,
+		gone.SGD()
 		gone.Layer{
 			Nodes: 2,
 		},
 		gone.Layer{
-			Nodes:     3,
-			Activator: gone.ReLU(),
-		},
-		gone.Layer{
-			Nodes:     3,
-			Activator: gone.ReLU(),
+			Nodes:     4,
+			Activator: gone.Sigmoid(),
 		},
 		gone.Layer{
 			Nodes: 1,
-			// we shouldn't use ReLU on the outputs, so we fallback to Id
 		},
 	)
 
+	g.Train(gone.DataSet{
+		{
+			Inputs:  []float64{1, 0},
+			Targets: []float64{1},
+		},
+		{
+			Inputs:  []float64{0, 1},
+			Targets: []float64{1},
+		},
+		{
+			Inputs:  []float64{1, 1},
+			Targets: []float64{0},
+		},
+		{
+			Inputs:  []float64{0, 0},
+			Targets: []float64{0},
+		},
+	},
+		5000,
+	)
 	g.Predict([]float64{1, 2})
 ```
 
@@ -44,7 +57,7 @@ A simple neural network library in Go from scratch. 0 dependencies.
   - [x] Support shuffling the data
   - [x] Epochs
   - [x] Backpropagation
-  - [ ] Batching
+  - [x] Batching
   - [ ] Different loss functions
     - [ ] Mean Squared Error
     - [ ] Cross Entropy Error

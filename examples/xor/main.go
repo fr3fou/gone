@@ -15,7 +15,7 @@ func init() {
 func main() {
 	g := gone.New(
 		0.1,
-		gone.SGD(),
+		gone.GD(),
 		gone.Layer{
 			Nodes: 2,
 		},
@@ -48,7 +48,7 @@ func main() {
 			Targets: []float64{0},
 		},
 	},
-		5000,
+		10000,
 	)
 
 	fmt.Println("Finished...")
