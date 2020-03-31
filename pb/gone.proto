@@ -14,7 +14,7 @@ message NeuralNetwork {
 
 message Layer {
   int32 Nodes = 1;
-  string Activator = 2;
+  string Activator = 2; // TODO: store the struct along with configuration
 }
 
 message Matrix {

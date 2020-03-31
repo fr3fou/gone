@@ -1,6 +1,7 @@
 package gone
 
 import (
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
@@ -252,4 +253,54 @@ func (n *NeuralNetwork) Save(filename string) error {
 	}
 
 	return nil
+}
+
+func Load(filename string) (*NeuralNetwork, error) {
+	b, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	nn := &pb.NeuralNetwork{}
+	if err := proto.Unmarshal(b, nn); err != nil {
+		return nil, err
+	}
+
+	lenLayers := len(nn.Layers)
+	lenWeights := lenLayers - 1
+
+	weights := make([]matrix.Matrix, lenWeights)
+	biases := make([]matrix.Matrix, lenWeights)
+	activations := make([]matrix.Matrix, lenLayers)
+	layers := make([]Layer, lenLayers)
+
+	// Unflatten the data as it was stored in a 1D array
+	for i := 0; i < lenWeights; i++ {
+		w := nn.Weights[i]
+		b := nn.Biases[i]
+
+		weights[i] = matrix.Unflatten(int(w.Rows), int(w.Columns), w.Data)
+		biases[i] = matrix.Unflatten(int(b.Rows), int(b.Columns), b.Data)
+	}
+
+	// Unflatten the data as it was stored in a 1D array
+	for i := 0; i < lenLayers; i++ {
+		a := nn.Activations[i]
+		l := nn.Layers[i]
+
+		activations[i] = matrix.Unflatten(int(a.Rows), int(a.Columns), a.Data)
+		layers[i] = Layer{
+			Nodes:     int(l.Nodes),
+			Activator: getFromName(acitvationName(l.Activator)),
+		}
+	}
+
+	return &NeuralNetwork{
+		Weights:      weights,
+		Biases:       biases,
+		Activations:  activations,
+		Layers:       layers,
+		DebugMode:    nn.DebugMode,
+		LearningRate: nn.LearningRate,
+	}, nil
 }

@@ -41,6 +41,8 @@ func New(r, c int, data [][]float64) Matrix {
 	}
 }
 
+// NewFromArray creates a matrix that's basically a one dimensional vector going downwards
+// N amount of rows and 1 column
 func NewFromArray(d []float64) Matrix {
 	return Map(New(len(d), 1, nil), func(val float64, x, y int) float64 {
 		return d[x]

@@ -19,6 +19,21 @@ const (
 	id      acitvationName = "id"
 )
 
+func getFromName(a acitvationName) Activation {
+	switch a {
+	case sigmoid:
+		return Sigmoid()
+	case relu:
+		return ReLU()
+	case softmax:
+		return Softmax()
+	case id:
+		return Identity()
+	default:
+		return Identity()
+	}
+}
+
 // Sigmoid is a sigmoid activation function
 func Sigmoid() Activation {
 	return Activation{
@@ -60,4 +75,8 @@ func Identity() Activation {
 			return 1
 		},
 	}
+}
+
+func Softmax() Activation {
+	panic("TODO: implement")
 }

@@ -27,8 +27,6 @@ func main() {
 		},
 	)
 
-	g.ToggleDebug(true)
-
 	g.Train(
 		gone.SGD(),
 		gone.DataSet{
