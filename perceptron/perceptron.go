@@ -14,7 +14,7 @@ type Perceptron struct {
 	Epochs       int
 }
 
-// NewPerceptron is a constructor for a Perceptron
+// New is a constructor for a Perceptron
 func New(lRate float64, epochs int) *Perceptron {
 	xW := rand.Float(-1, 2)
 	yW := rand.Float(-1, 2)

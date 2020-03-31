@@ -77,6 +77,8 @@ func Identity() Activation {
 	}
 }
 
+// Softmax is a softmax activation function
+// NOT IMPLEMENTED YET
 func Softmax() Activation {
 	panic("TODO: implement")
 }

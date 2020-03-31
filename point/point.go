@@ -2,6 +2,7 @@ package point
 
 import "github.com/fr3fou/gone/rand"
 
+// F is a function
 type F func(float64) float64
 
 // Point represents a point in a coordinate system
@@ -30,6 +31,7 @@ func NewPoint() *Point {
 	}
 }
 
+// AboveF checks if the y is above the slope of a function
 func AboveF(x, y float64, f F) int {
 	if y > f(x) { // f(x) = x
 		return 1
