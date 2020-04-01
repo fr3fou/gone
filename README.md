@@ -138,7 +138,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 ### Shoutouts
 
-- [Davis Josephs](https://github.com/josephsdavid) - was of HUGE help with algebra and other ML-related questions; also helped me spot some nasty bugs!
+- [David Josephs](https://github.com/josephsdavid) - was of HUGE help with algebra and other ML-related questions; also helped me spot some nasty bugs!
 
 ## Resources used:
 
