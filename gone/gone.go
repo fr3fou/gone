@@ -159,6 +159,7 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 		if n.DebugMode {
 			log.Printf("Beginning epoch %d/%d", i, epochs)
 		}
+		dataSet.Shuffle()
 		optimizer(n, dataSet)
 		if n.DebugMode {
 			err := 0.0

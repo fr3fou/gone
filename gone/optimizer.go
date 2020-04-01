@@ -17,7 +17,6 @@ func MBGD(batchSize int) Optimizer {
 	return func(n *NeuralNetwork, dataSet DataSet) {
 		for i := 0; i < len(dataSet); i++ {
 			batch := dataSet.Batch(i, batchSize)
-			batch.Shuffle()
 
 			lenLayers := len(n.Layers)
 			lenWeights := lenLayers - 1
