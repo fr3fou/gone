@@ -149,6 +149,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:properties-of-matrix-addition-and-scalar-multiplication/a/properties-of-matrix-addition
 - https://www.wikiwand.com/en/Matrix_(mathematics)
 - https://www.wikiwand.com/en/Activation_function
+- https://www.wikiwand.com/en/Delta_rule
 - https://www.jeremyjordan.me/intro-to-neural-networks/
 - https://www.arxiv-vanity.com/papers/2003.02139/
 - https://machinelearningmastery.com/gentle-introduction-mini-batch-gradient-descent-configure-batch-size/
