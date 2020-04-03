@@ -160,4 +160,5 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - https://towardsdatascience.com/deep-learning-which-loss-and-activation-functions-should-i-use-ac02f1c56aa8
 - https://github.com/milosgajdos/go-neural
 - https://ml-cheatsheet.readthedocs.io/en/latest/forwardpropagation.html
+- https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 - https://medium.com/coinmonks/representing-neural-network-with-vectors-and-matrices-c6b0e64db9fb
