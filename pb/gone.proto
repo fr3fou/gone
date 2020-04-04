@@ -10,6 +10,7 @@ message NeuralNetwork {
   double LearningRate = 4;
   repeated Layer Layers = 5;
   bool DebugMode = 6;
+  string Loss = 7;
 };
 
 message Layer {

@@ -217,6 +217,7 @@ func (n *NeuralNetwork) Save(filename string) error {
 		Activations:  activations,
 		Layers:       layers,
 		DebugMode:    n.DebugMode,
+		Loss:         string(n.Loss.Name),
 		LearningRate: n.LearningRate,
 	}
 
@@ -284,6 +285,7 @@ func Load(filename string) (*NeuralNetwork, error) {
 		Weights:      weights,
 		Biases:       biases,
 		Activations:  activations,
+		Loss:         getLossFromname(lossName(nn.Loss)),
 		Layers:       layers,
 		DebugMode:    nn.DebugMode,
 		LearningRate: nn.LearningRate,
