@@ -7,7 +7,7 @@ import "github.com/fr3fou/gone/matrix"
 type Loss struct {
 	Name   lossName
 	F      func(y, yHat matrix.Matrix) float64
-	FPrime func(y, yHat matrix.Matrix) float64
+	FPrime func(y, yHat matrix.Matrix) matrix.Matrix
 }
 
 type lossName string
@@ -31,10 +31,12 @@ func MSE() Loss {
 	return Loss{
 		Name: mse,
 		F: func(y, yHat matrix.Matrix) float64 {
-			panic("TODO: implement")
+			out := y.SubtractMatrix(yHat)
+			out = out.HadamardProduct(out)
+			return out.Sum() / float64(y.Rows)
 		},
-		FPrime: func(y, yHat matrix.Matrix) float64 {
-			panic("TODO: implement")
+		FPrime: func(y, yHat matrix.Matrix) matrix.Matrix {
+			panic("todo")
 		},
 	}
 }

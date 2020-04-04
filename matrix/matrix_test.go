@@ -22,7 +22,7 @@ func TestTranspose(t *testing.T) {
 	assert.Equal(t, trans, Transpose(m))
 }
 
-func TestScale(t *testing.T) {
+func TestMultiply(t *testing.T) {
 	m := New(3, 3, [][]float64{
 		{1, 2, 3},
 		{4, 5, 6},
@@ -35,7 +35,7 @@ func TestScale(t *testing.T) {
 		{7 * 0.5, 8 * 0.5, 9 * 0.5},
 	})
 
-	assert.Equal(t, expected, Scale(m, 0.5))
+	assert.Equal(t, expected, Multiply(m, 0.5))
 }
 
 func TestAddMatrix(t *testing.T) {
@@ -128,7 +128,7 @@ func TestDotProduct(t *testing.T) {
 	assert.Equal(t, expected, DotProduct(m, n))
 }
 
-func TestMultiply(t *testing.T) {
+func TestHadamardProduct(t *testing.T) {
 	m := New(2, 1, [][]float64{
 		{1},
 		{2},
@@ -229,4 +229,20 @@ func TestUnflatten(t *testing.T) {
 
 	assert.Equal(t, expected, Unflatten(2, 3, m))
 
+}
+
+func TestDivide(t *testing.T) {
+	m := NewFromArray([]float64{10, 10, 10, 10})
+
+	expected := NewFromArray([]float64{2, 2, 2, 2})
+
+	assert.Equal(t, expected, Divide(m, 5))
+}
+
+func TestSum(t *testing.T) {
+	m := NewFromArray([]float64{1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+	expected := 45.0
+
+	assert.Equal(t, expected, Sum(m))
 }

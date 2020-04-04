@@ -54,7 +54,7 @@ func MBGD(batchSize int) Optimizer {
 							return n.Layers[i+1].Activator.FPrime(val)
 						}).
 						HadamardProduct(err).
-						Scale(n.LearningRate)
+						Multiply(n.LearningRate)
 
 					currentDeltas = currentGradients.
 						DotProduct(n.Activations[i].Transpose())

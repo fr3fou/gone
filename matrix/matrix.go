@@ -94,9 +94,19 @@ func (m Matrix) Transpose() Matrix {
 	return Transpose(m)
 }
 
-// Scale does scalar multiplication
-func (m Matrix) Scale(a float64) Matrix {
-	return Scale(m, a)
+// Multiply does scalar multiplication
+func (m Matrix) Multiply(a float64) Matrix {
+	return Multiply(m, a)
+}
+
+// Divide does scalar multiplication
+func (m Matrix) Divide(a float64) Matrix {
+	return Divide(m, a)
+}
+
+// Sum gives the sum of the elements in the matrix
+func (m Matrix) Sum() float64 {
+	return Sum(m)
 }
 
 // AddMatrix adds 2 matrices together

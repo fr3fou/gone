@@ -33,11 +33,25 @@ func Transpose(m Matrix) Matrix {
 		})
 }
 
-// Scale does scalar multiplication
-func Scale(m Matrix, a float64) Matrix {
+// Multiply does scalar multiplication
+func Multiply(m Matrix, a float64) Matrix {
 	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
 		return m.Data[x][y] * a
 	})
+}
+
+// Divide does scalar division
+func Divide(m Matrix, a float64) Matrix {
+	return Map(New(m.Rows, m.Columns, nil), func(val float64, x, y int) float64 {
+		return m.Data[x][y] / a
+	})
+}
+
+// Sum gives the sum of the elements in the matrix
+func Sum(m Matrix) float64 {
+	return m.Fold(func(accumulator, val float64, x, y int) float64 {
+		return accumulator + val
+	}, 0)
 }
 
 // AddMatrix adds 2 matrices together
