@@ -81,13 +81,13 @@ _there are 0 neural network related dependencies, the only dependencies are for 
   - [x] Backpropagation
   - [x] Batching
   - [ ] Different loss functions
-    - [ ] Mean Squared Error
+    - [x] Mean Squared Error
     - [ ] Cross Entropy Error
 - [x] Saving data - Done thanks to protobuf
 - [x] Loading data
 - [ ] Adam optimizer
 - [ ] Nestrov + Momentum for GD
-- [ ] Fix MSE computation in debug mode (not used in actual backpropagation)
+- [x] Fix MSE computation in debug mode (not used in actual backpropagation)
 
 ### `matrix/`
 
