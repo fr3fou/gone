@@ -162,7 +162,7 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 		dataSet.Shuffle()
 		err := optimizer(n, dataSet)
 		if n.DebugMode && i%debugEpoch == 0 {
-			log.Printf("Finished epoch %d/%d with error: %f", i, epochs, err)
+			log.Printf("Finished epoch %d/%d with error: %f", i, epochs, err/float64(len(dataSet)))
 		}
 	}
 }
