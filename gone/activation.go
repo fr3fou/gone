@@ -19,7 +19,7 @@ const (
 	id      acitvationName = "id"
 )
 
-func getFromName(a acitvationName) Activation {
+func getActivationFromName(a acitvationName) Activation {
 	switch a {
 	case sigmoid:
 		return Sigmoid()
