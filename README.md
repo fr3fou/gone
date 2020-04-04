@@ -163,3 +163,4 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - https://ml-cheatsheet.readthedocs.io/en/latest/forwardpropagation.html
 - https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 - https://medium.com/coinmonks/representing-neural-network-with-vectors-and-matrices-c6b0e64db9fb
+- https://towardsdatascience.com/classifying-cat-pics-with-a-logistic-regression-model-e35dfb9159bb
