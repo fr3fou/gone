@@ -26,17 +26,16 @@ func getLossFromname(a lossName) Loss {
 }
 
 // MSE is the Mean Squared Error
-// NOT IMPLEMENTED YET
 func MSE() Loss {
 	return Loss{
 		Name: mse,
 		F: func(y, yHat matrix.Matrix) float64 {
-			out := y.SubtractMatrix(yHat)
+			out := yHat.SubtractMatrix(y)
 			out = out.HadamardProduct(out)
 			return out.Sum() / float64(y.Rows)
 		},
 		FPrime: func(y, yHat matrix.Matrix) matrix.Matrix {
-			panic("todo")
+			return yHat.SubtractMatrix(y).Divide(float64(y.Rows * y.Columns))
 		},
 	}
 }

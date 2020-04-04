@@ -15,6 +15,7 @@ func init() {
 func main() {
 	g := gone.New(
 		0.1,
+		gone.MSE(),
 		gone.Layer{
 			Nodes: 2,
 		},
@@ -26,6 +27,8 @@ func main() {
 			Nodes: 1,
 		},
 	)
+
+	g.SetDebugMode(true)
 
 	g.Train(
 		gone.SGD(),
@@ -47,7 +50,7 @@ func main() {
 				Targets: []float64{0},
 			},
 		},
-		2000,
+		1500,
 	)
 
 	if err := g.Save("xor.gone"); err != nil {

@@ -25,22 +25,21 @@ type NeuralNetwork struct {
 	LearningRate float64
 	Layers       []Layer
 	DebugMode    bool
-	// Loss         Loss
+	Loss         Loss
 }
 
 // New creates a neural network
-func New(learningRate float64 /* loss Loss */, layers ...Layer) *NeuralNetwork {
+func New(learningRate float64, loss Loss, layers ...Layer) *NeuralNetwork {
 	l := len(layers)
 	if l < 3 { // minimum amount of layers
 		panic("gone: need more layers for a neural network")
 	}
 	n := &NeuralNetwork{
-		Weights:     make([]matrix.Matrix, l-1),
-		Biases:      make([]matrix.Matrix, l-1),
-		Activations: make([]matrix.Matrix, l),
-		// Loss:         loss,
-		Layers: layers,
-		// BatchSize:    batchSize,
+		Weights:      make([]matrix.Matrix, l-1),
+		Biases:       make([]matrix.Matrix, l-1),
+		Activations:  make([]matrix.Matrix, l),
+		Loss:         loss,
+		Layers:       layers,
 		LearningRate: learningRate,
 	}
 
@@ -81,8 +80,8 @@ func New(learningRate float64 /* loss Loss */, layers ...Layer) *NeuralNetwork {
 	return n
 }
 
-// ToggleDebug toggles debug mode
-func (n *NeuralNetwork) ToggleDebug(b bool) {
+// SetDebugMode toggles debug mode
+func (n *NeuralNetwork) SetDebugMode(b bool) {
 	n.DebugMode = b
 }
 
@@ -155,32 +154,14 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 		}
 	}
 
+	debugEpoch := epochs / 10 // every 10% of the batches
 	for i := 1; i <= epochs; i++ {
-		if n.DebugMode {
+		if n.DebugMode && i%debugEpoch == 0 {
 			log.Printf("Beginning epoch %d/%d", i, epochs)
 		}
 		dataSet.Shuffle()
-		optimizer(n, dataSet)
-		if n.DebugMode {
-			err := 0.0
-			for _, ds := range dataSet {
-				input := matrix.NewFromArray(ds.Inputs)
-				output := n.predict(input)
-
-				currentError := matrix.NewFromArray(ds.Targets).SubtractMatrix(output)
-				currentError = output.HadamardProduct(output) // Squared
-				// for some reason squaring it makes it worse? it converges to 0.5 instead of 0
-
-				err += currentError.Fold(
-					func(accumulator, val float64, x, y int) float64 {
-						return val + accumulator
-					},
-					0,
-				)
-				err /= float64(outputNodes)  // shouldn't these be outside?
-				err /= float64(len(dataSet)) // if i put them outside i get wrong values
-			}
-
+		err := optimizer(n, dataSet)
+		if n.DebugMode && i%debugEpoch == 0 {
 			log.Printf("Finished epoch %d/%d with error: %f", i, epochs, err)
 		}
 	}
