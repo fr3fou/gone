@@ -52,7 +52,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 		},
 	}, 5000)
 	
-	g.Predict([]float64{1, 2})
+	g.Predict([]float64{1, 1})
 ```
 
 ### Saving model to disk
