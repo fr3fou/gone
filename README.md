@@ -15,6 +15,8 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 ## Example
 
+### Getting started
+
 ```go
 	g := gone.New(
 		0.1,
@@ -31,9 +33,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 		},
 	)
 
-	g.Train(
-		gone.SGD(),
-        gone.DataSet{
+	g.Train(gone.SGD(), gone.DataSet{
 		{
 			Inputs:  []float64{1, 0},
 			Targets: []float64{1},
@@ -50,20 +50,22 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 			Inputs:  []float64{0, 0},
 			Targets: []float64{0},
 		},
-	},
-		5000,
-	)
+	}, 5000)
+	
+	g.Predict([]float64{1, 2})
+```
 
+### Saving model to disk
+
+```go
 	g.Save("test.gone")
 
-	g.Predict([]float64{1, 2})
 ```
 
 ### Loading model back into memory
 
 ```go
 	g, err := gone.Load("test.gone")
-	// back where we left off
 ```
 
 ## TODO
@@ -128,7 +130,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
   - [x] Stochastic Gradient Descent (SGD)
   - [x] Mini-Batch Gradient Descent (MBGD?)
 - [ ] Softmax (needed for multi class classification!)
-- [ ] Mean Squared Error
+- [x] Mean Squared Error
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
 - [ ] One Hot Encoding
