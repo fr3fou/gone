@@ -18,6 +18,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 ```go
 	g := gone.New(
 		0.1,
+		gone.MSE(),
 		gone.Layer{
 			Nodes: 2,
 		},
