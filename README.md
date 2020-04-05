@@ -71,7 +71,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 ### `gone/`
 
 - [ ] Types of task:
-  - [ ] Classification
+  - [x] Classification
   - [ ] Regression
 - [x] Bias
   - [x] Matrix, rather than a single number
@@ -89,6 +89,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Adam optimizer
 - [ ] Nestrov + Momentum for GD
 - [x] Fix MSE computation in debug mode (not used in actual backpropagation)
+- [ ] Flatten layer
 
 ### `matrix/`
 
