@@ -167,3 +167,4 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - https://medium.com/coinmonks/representing-neural-network-with-vectors-and-matrices-c6b0e64db9fb
 - https://towardsdatascience.com/classifying-cat-pics-with-a-logistic-regression-model-e35dfb9159bb
 - https://towardsdatascience.com/math-neural-network-from-scratch-in-python-d6da9f29ce65
+- https://towardsdatascience.com/gradient-descent-from-scratch-e8b75fa986cc
