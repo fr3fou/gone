@@ -92,6 +92,8 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Nestrov + Momentum for GD
 - [x] Fix MSE computation in debug mode (not used in actual backpropagation)
 - [ ] Flatten layer
+- [ ] Convolutional Layers
+
 
 ### `matrix/`
 
