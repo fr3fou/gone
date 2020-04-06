@@ -51,7 +51,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 			Targets: []float64{0},
 		},
 	}, 5000)
-	
+
 	g.Predict([]float64{1, 1})
 ```
 
@@ -170,3 +170,4 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - https://towardsdatascience.com/classifying-cat-pics-with-a-logistic-regression-model-e35dfb9159bb
 - https://towardsdatascience.com/math-neural-network-from-scratch-in-python-d6da9f29ce65
 - https://towardsdatascience.com/gradient-descent-from-scratch-e8b75fa986cc
+- https://rstudio-pubs-static.s3.amazonaws.com/337306_79a7966fad184532ab3ad66b322fe96e.html
