@@ -277,7 +277,7 @@ func Load(filename string) (*NeuralNetwork, error) {
 		activations[i] = matrix.Unflatten(int(a.Rows), int(a.Columns), a.Data)
 		layers[i] = Layer{
 			Nodes:     int(l.Nodes),
-			Activator: getActivationFromName(acitvationName(l.Activator)),
+			Activator: getActivationFromName(activationName(l.Activator)),
 		}
 	}
 
