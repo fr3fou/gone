@@ -5,21 +5,21 @@ import "math"
 // Activation is an activation function
 // it contains the normal f(x) and the derivative f'(x)
 type Activation struct {
-	Name   acitvationName
+	Name   activationName
 	F      func(x float64) float64
 	FPrime func(x float64) float64
 }
 
-type acitvationName string
+type activationName string
 
 const (
-	sigmoid acitvationName = "sigmoid"
-	relu    acitvationName = "relu"
-	softmax acitvationName = "softmax"
-	id      acitvationName = "id"
+	sigmoid activationName = "sigmoid"
+	relu    activationName = "relu"
+	softmax activationName = "softmax"
+	id      activationName = "id"
 )
 
-func getActivationFromName(a acitvationName) Activation {
+func getActivationFromName(a activationName) Activation {
 	switch a {
 	case sigmoid:
 		return Sigmoid()
