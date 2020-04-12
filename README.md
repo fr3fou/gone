@@ -91,9 +91,9 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Adam optimizer
 - [ ] Nestrov + Momentum for GD
 - [x] Fix MSE computation in debug mode (not used in actual backpropagation)
-- [ ] Flatten layer
+- [ ] Somehow persist configurations for Activation, Loss and Optimizer functions in the protobuf messages (???, if we want to do it like it tensorflow, we'd have to do `interface{}` and do type assertions)
 - [ ] Convolutional Layers
-
+  - [ ] Flatten layer
 
 ### `matrix/`
 
@@ -136,6 +136,9 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Cross Entropy Error (needed for multi class classification!)
 - [ ] How to determine how many layers and nodes to use
 - [ ] One Hot Encoding
+- [ ] Convolutional Layers
+- [ ] Reinforcment learning
+- [ ] Genetic Algorithms
 
 ### Examples
 
@@ -146,7 +149,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 - [David Josephs](https://github.com/josephsdavid) - was of HUGE help with algebra and other ML-related questions; also helped me spot some nasty bugs!
 
-## Resources used:
+## Resources used
 
 - https://www.analyticsvidhya.com/blog/2020/01/fundamentals-deep-learning-activation-functions-when-to-use-them/
 - https://www.youtube.com/watch?v=XJ7HLz9VYz0&list=PLRqwX-V7Uu6Y7MdSCaIfsxc561QI0U0Tb
