@@ -139,6 +139,9 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Convolutional Layers
 - [ ] Reinforcment learning
 - [ ] Genetic Algorithms
+- [ ] Neuroevolution
+- [ ] Simulated Annealing
+- [ ] Q-Learning
 
 ### Examples
 
