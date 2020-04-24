@@ -167,6 +167,21 @@ func (n *NeuralNetwork) Train(optimizer Optimizer, dataSet DataSet, epochs int) 
 	}
 }
 
+// Copy makes a deep copy of the network
+func (n *NeuralNetwork) Copy() *NeuralNetwork {
+	g := New(n.LearningRate, n.Loss, n.Layers...)
+
+	for i := range n.Weights {
+		g.Weights[i] = n.Weights[i].Copy()
+	}
+
+	for i := range n.Biases {
+		g.Biases[i] = n.Biases[i].Copy()
+	}
+
+	return g
+}
+
 // Save saves the neural network to a file
 func (n *NeuralNetwork) Save(filename string) error {
 	lenLayers := len(n.Layers)
