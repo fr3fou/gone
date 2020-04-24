@@ -72,9 +72,9 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 ### `gone/`
 
-- [ ] Types of task:
-  - [x] Classification
-  - [ ] Regression
+- [x] Types of task:
+  - [x] Classification - `softmax` (soon to be implemented) as the last layer's activation function
+  - [x] Regression - `sigmoid` as the last layer's activation function
 - [x] Bias
   - [x] Matrix, rather than a single number
 - [x] Feedforward (Predict)
@@ -94,6 +94,9 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Somehow persist configurations for Activation, Loss and Optimizer functions in the protobuf messages (???, if we want to do it like it tensorflow, we'd have to do `interface{}` and do type assertions)
 - [ ] Convolutional Layers
   - [ ] Flatten layer
+- [x] Copy
+- [ ] Crossover
+- [ ] Mutate
 
 ### `matrix/`
 
