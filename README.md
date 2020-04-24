@@ -147,6 +147,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 - [x] XOR Problem
 - [x] [Digit Classifier](https://github.com/fr3fou/digit-classifier)
+- [ ] [Flappy Bird AI](https://github.com/fr3fou/flappy-go)
 
 ### Shoutouts
 
