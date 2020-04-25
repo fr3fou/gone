@@ -95,7 +95,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Convolutional Layers
   - [ ] Flatten layer
 - [x] Copy
-- [ ] Crossover
+- [x] Crossover
 - [ ] Mutate
 
 ### `matrix/`
@@ -185,3 +185,4 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - <https://rstudio-pubs-static.s3.amazonaws.com/337306_79a7966fad184532ab3ad66b322fe96e.html>
 - <https://gombru.github.io/2018/05/23/cross_entropy_loss>
 - <https://medium.com/@tomvykruta/memory-aid-for-softmax-and-cross-entropy-loss-5704c66d795d>
+- <https://cs.stackexchange.com/questions/90228/crossover-operator-in-genetic-algorithms-in-neural-networks>
