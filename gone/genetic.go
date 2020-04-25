@@ -9,6 +9,7 @@ var (
 	ErrWeightsNotMatch = errors.New("gone: parents must have the exact same amount of weights")
 )
 
+// Crossover applies a crossover between 2 neural networks by getting random bits of both to create a child
 func (firstParent *NeuralNetwork) Crossover(secondParent *NeuralNetwork) (*NeuralNetwork, error) {
 	lenWeights := len(firstParent.Weights)
 	if lenWeights != len(secondParent.Weights) {
@@ -38,4 +39,21 @@ func (firstParent *NeuralNetwork) Crossover(secondParent *NeuralNetwork) (*Neura
 	}
 
 	return child, nil
+}
+
+// Mutate randomly mutates some weights and biases
+func (n *NeuralNetwork) Mutate(mutationRate float64, mutator Mutator) {
+	lenWeights := len(n.Weights)
+
+	for i := 0; i < lenWeights; i++ {
+		n.Weights[i] = n.Weights[i].
+			Map(func(val float64, x, y int) float64 {
+				return mutator(val)
+			})
+
+		n.Biases[i] = n.Biases[i].
+			Map(func(val float64, x, y int) float64 {
+				return mutator(val)
+			})
+	}
 }

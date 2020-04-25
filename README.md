@@ -96,7 +96,8 @@ _there are 0 neural network related dependencies, the only dependencies are for 
   - [ ] Flatten layer
 - [x] Copy
 - [x] Crossover
-- [ ] Mutate
+- [x] Mutate
+  - [x] Gaussian Mutator
 
 ### `matrix/`
 
@@ -186,3 +187,5 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - <https://gombru.github.io/2018/05/23/cross_entropy_loss>
 - <https://medium.com/@tomvykruta/memory-aid-for-softmax-and-cross-entropy-loss-5704c66d795d>
 - <https://cs.stackexchange.com/questions/90228/crossover-operator-in-genetic-algorithms-in-neural-networks>
+- <https://stackoverflow.com/questions/54625643/where-is-the-gaussian-distribution-function-in-the-pseudocode-below>
+- <https://www.wikiwand.com/en/Normal_distribution>
