@@ -13,7 +13,7 @@ type Mutator func(val float64) float64
 func GaussianMutation(mutationRate float64, stdenv, mean float64) Mutator {
 	return func(val float64) float64 {
 		if rand.Float(0, 1) >= mutationRate {
-			mutation := stdrand.NormFloat64()*stdenv + mean // stdev = 0.5
+			mutation := stdrand.NormFloat64()*stdenv + mean
 			return val + mutation
 		}
 
