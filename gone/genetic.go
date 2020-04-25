@@ -42,7 +42,7 @@ func (firstParent *NeuralNetwork) Crossover(secondParent *NeuralNetwork) (*Neura
 }
 
 // Mutate randomly mutates some weights and biases
-func (n *NeuralNetwork) Mutate(mutationRate float64, mutator Mutator) {
+func (n *NeuralNetwork) Mutate(mutator Mutator) {
 	lenWeights := len(n.Weights)
 
 	for i := 0; i < lenWeights; i++ {
