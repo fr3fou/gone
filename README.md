@@ -147,11 +147,23 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [ ] Simulated Annealing
 - [ ] Q-Learning
 
+### Questions
+
+These are some (stupid) questions I have that confuse me:
+
+- Is Neuroevolution considered Reinforcement learning?
+- How is training done with HUGE datasets when they can't fit on your storage device?
+  - Imagine your dataset is a copule of TB big, what do you do?
+- Is Q-Learning only done with a single agent (unlike genetic algorithms / neuroevolution)?
+  - Is Q-Learning the only method for Reinforcement Learning?
+- What's the difference between a Convolutional Neuron and a normal weight matrix?
+- Is Deep Learning really just a Neural Network with a lot of layers? (more than 2)
+
 ### Examples
 
 - [x] XOR Problem
 - [x] [Digit Classifier](https://github.com/fr3fou/digit-classifier)
-- [ ] [Flappy Bird AI](https://github.com/fr3fou/flappy-go)
+- [x] [Flappy Bird AI](https://github.com/fr3fou/flappy-ai)
 
 ### Shoutouts
 
