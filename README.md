@@ -158,6 +158,7 @@ These are some (stupid) questions I have that confuse me:
   - Is Q-Learning the only method for Reinforcement Learning?
 - What's the difference between a Convolutional Neuron and a normal weight matrix?
 - Is Deep Learning really just a Neural Network with a lot of layers? (more than 2)
+- Why do you need multiple CNN layers? Is it to go to a smaller and smaller version of the image? (when working with images that is) (because of MaxPooling?) Why can't you go directly to the smallest size (512x512 -> 16x16 vs 512x512 -> 256x256 -> 128x128 -> ...)?
 
 ### Examples
 
