@@ -199,6 +199,7 @@ These are some (stupid) questions I have that confuse me:
 - <https://rstudio-pubs-static.s3.amazonaws.com/337306_79a7966fad184532ab3ad66b322fe96e.html>
 - <https://gombru.github.io/2018/05/23/cross_entropy_loss>
 - <https://medium.com/@tomvykruta/memory-aid-for-softmax-and-cross-entropy-loss-5704c66d795d>
+- <https://gombru.github.io/2018/05/23/cross_entropy_loss/>
 - <https://cs.stackexchange.com/questions/90228/crossover-operator-in-genetic-algorithms-in-neural-networks>
 - <https://stackoverflow.com/questions/54625643/where-is-the-gaussian-distribution-function-in-the-pseudocode-below>
 - <https://www.wikiwand.com/en/Normal_distribution>
