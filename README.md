@@ -142,10 +142,11 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 - [x] One Hot Encoding
 - [ ] Convolutional Layers
 - [ ] Reinforcment learning
-- [ ] Genetic Algorithms
-- [ ] Neuroevolution
+- [x] Genetic Algorithms~
+- [x] Neuroevolution~
 - [ ] Simulated Annealing
 - [ ] Q-Learning
+- [ ] Linear vs Logistic Regression
 
 ### Questions
 
@@ -159,6 +160,7 @@ These are some (stupid) questions I have that confuse me:
 - What's the difference between a Convolutional Neuron and a normal weight matrix?
 - Is Deep Learning really just a Neural Network with a lot of layers? (more than 2)
 - Why do you need multiple CNN layers? Is it to go to a smaller and smaller version of the image? (when working with images that is) (because of MaxPooling?) Why can't you go directly to the smallest size (512x512 -> 16x16 vs 512x512 -> 256x256 -> 128x128 -> ...)?
+- So if images are stored in a 2D array (but with the RGB channels, making it a 3D array with 3 layers), do we use `Conv2D` or `Conv3D`?
 
 ### Examples
 
