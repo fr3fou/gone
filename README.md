@@ -19,36 +19,36 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 
 ```go
  g := gone.New(
-  0.1,
-  gone.MSE(),
-  gone.Layer{
-   Nodes: 2,
-  },
-  gone.Layer{
-   Nodes:     4,
-   Activator: gone.Sigmoid(),
-  },
-  gone.Layer{
-   Nodes: 1,
-  },
+    0.1,
+    gone.MSE(),
+    gone.Layer{
+      Nodes: 2,
+    },
+    gone.Layer{
+      Nodes:     4,
+      Activator: gone.Sigmoid(),
+    },
+    gone.Layer{
+      Nodes: 1,
+    },
  )
 
  g.Train(gone.SGD(), gone.DataSet{
   {
-   Inputs:  []float64{1, 0},
-   Targets: []float64{1},
+    Inputs:  []float64{1, 0},
+    Targets: []float64{1},
   },
   {
-   Inputs:  []float64{0, 1},
-   Targets: []float64{1},
+    Inputs:  []float64{0, 1},
+    Targets: []float64{1},
   },
   {
-   Inputs:  []float64{1, 1},
-   Targets: []float64{0},
+    Inputs:  []float64{1, 1},
+    Targets: []float64{0},
   },
   {
-   Inputs:  []float64{0, 0},
-   Targets: []float64{0},
+    Inputs:  []float64{0, 0},
+    Targets: []float64{0},
   },
  }, 5000)
 
@@ -172,7 +172,7 @@ These are some (stupid) questions I have that confuse me:
 
 - [David Josephs](https://github.com/josephsdavid) - was of HUGE help with algebra and other ML-related questions; also helped me spot some nasty bugs!
 
-## Resources used
+## References
 
 - <https://www.analyticsvidhya.com/blog/2020/01/fundamentals-deep-learning-activation-functions-when-to-use-them/>
 - <https://www.youtube.com/watch?v=XJ7HLz9VYz0&list=PLRqwX-V7Uu6Y7MdSCaIfsxc561QI0U0Tb>
@@ -205,3 +205,5 @@ These are some (stupid) questions I have that confuse me:
 - <https://cs.stackexchange.com/questions/90228/crossover-operator-in-genetic-algorithms-in-neural-networks>
 - <https://stackoverflow.com/questions/54625643/where-is-the-gaussian-distribution-function-in-the-pseudocode-below>
 - <https://www.wikiwand.com/en/Normal_distribution>
+- <https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/introduction-to-partial-derivatives>
+- <https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/the-gradient>
