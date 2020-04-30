@@ -34,22 +34,22 @@ _there are 0 neural network related dependencies, the only dependencies are for 
  )
 
  g.Train(gone.SGD(), gone.DataSet{
-  {
-    Inputs:  []float64{1, 0},
-    Targets: []float64{1},
-  },
-  {
-    Inputs:  []float64{0, 1},
-    Targets: []float64{1},
-  },
-  {
-    Inputs:  []float64{1, 1},
-    Targets: []float64{0},
-  },
-  {
-    Inputs:  []float64{0, 0},
-    Targets: []float64{0},
-  },
+    {
+      Inputs:  []float64{1, 0},
+      Targets: []float64{1},
+    },
+    {
+      Inputs:  []float64{0, 1},
+      Targets: []float64{1},
+    },
+    {
+      Inputs:  []float64{1, 1},
+      Targets: []float64{0},
+    },
+    {
+      Inputs:  []float64{0, 0},
+      Targets: []float64{0},
+    },
  }, 5000)
 
  g.Predict([]float64{1, 1})
