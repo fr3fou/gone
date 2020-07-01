@@ -18,6 +18,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
 ### Getting started
 
 ```go
+func main() {
  g := gone.New(
     0.1,
     gone.MSE(),
@@ -53,6 +54,7 @@ _there are 0 neural network related dependencies, the only dependencies are for 
  }, 5000)
 
  g.Predict([]float64{1, 1})
+}
 ```
 
 ### Saving model to disk
