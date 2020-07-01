@@ -103,6 +103,8 @@ func main() {
 
 ### `matrix/`
 
+NOTE: all of this was migrated to [github.com/fr3fou/matrigo](https://github.com/fr3fou/matrigo)
+
 - [x] Randomize
 - [x] Transpose
 - [x] Scale
