@@ -6,8 +6,8 @@ import (
 	"math/rand"
 	"os"
 
-	"github.com/fr3fou/gone/matrix"
 	"github.com/fr3fou/gone/pb"
+	"github.com/fr3fou/matrigo"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -19,9 +19,9 @@ type Layer struct {
 
 // NeuralNetwork represents a neural network
 type NeuralNetwork struct {
-	Weights      []matrix.Matrix
-	Biases       []matrix.Matrix
-	Activations  []matrix.Matrix
+	Weights      []matrigo.Matrix
+	Biases       []matrigo.Matrix
+	Activations  []matrigo.Matrix
 	LearningRate float64
 	Layers       []Layer
 	DebugMode    bool
@@ -35,9 +35,9 @@ func New(learningRate float64, loss Loss, layers ...Layer) *NeuralNetwork {
 		panic("gone: need more layers for a neural network")
 	}
 	n := &NeuralNetwork{
-		Weights:      make([]matrix.Matrix, l-1),
-		Biases:       make([]matrix.Matrix, l-1),
-		Activations:  make([]matrix.Matrix, l),
+		Weights:      make([]matrigo.Matrix, l-1),
+		Biases:       make([]matrigo.Matrix, l-1),
+		Activations:  make([]matrigo.Matrix, l),
 		Loss:         loss,
 		Layers:       layers,
 		LearningRate: learningRate,
@@ -47,7 +47,7 @@ func New(learningRate float64, loss Loss, layers ...Layer) *NeuralNetwork {
 	for i := 0; i < l-1; i++ {
 		current := layers[i]
 		next := layers[i+1]
-		weights := matrix.New(
+		weights := matrigo.New(
 			next.Nodes,    // the rows are the inputs of the next one
 			current.Nodes, // the cols are the outputs of the current layer
 			nil,
@@ -55,7 +55,7 @@ func New(learningRate float64, loss Loss, layers ...Layer) *NeuralNetwork {
 		weights.Randomize(-1, 2) // Initialize the weights randomly
 		n.Weights[i] = weights
 
-		biases := matrix.New(
+		biases := matrigo.New(
 			next.Nodes, // the rows are the inputs of the next one
 			1,
 			nil,
@@ -67,7 +67,7 @@ func New(learningRate float64, loss Loss, layers ...Layer) *NeuralNetwork {
 	// Initialize the activations
 	for i := 0; i < l; i++ {
 		current := layers[i]
-		n.Activations[i] = matrix.New(current.Nodes, 1, nil)
+		n.Activations[i] = matrigo.New(current.Nodes, 1, nil)
 	}
 
 	// Set fallbacks
@@ -91,11 +91,11 @@ func (n *NeuralNetwork) Predict(data []float64) []float64 {
 		panic("gone: not enough data in input layer")
 	}
 
-	return n.predict(matrix.NewFromArray(data)).Flatten()
+	return n.predict(matrigo.NewFromArray(data)).Flatten()
 }
 
 // predict is a helper function that uses matricies instead of slices
-func (n *NeuralNetwork) predict(mat matrix.Matrix) matrix.Matrix {
+func (n *NeuralNetwork) predict(mat matrigo.Matrix) matrigo.Matrix {
 	n.Activations[0] = mat // add the original input
 	for i := 0; i < len(n.Weights); i++ {
 		mat = n.Weights[i].
@@ -270,9 +270,9 @@ func Load(filename string) (*NeuralNetwork, error) {
 	lenLayers := len(nn.Layers)
 	lenWeights := lenLayers - 1
 
-	weights := make([]matrix.Matrix, lenWeights)
-	biases := make([]matrix.Matrix, lenWeights)
-	activations := make([]matrix.Matrix, lenLayers)
+	weights := make([]matrigo.Matrix, lenWeights)
+	biases := make([]matrigo.Matrix, lenWeights)
+	activations := make([]matrigo.Matrix, lenLayers)
 	layers := make([]Layer, lenLayers)
 
 	// Unflatten the data as it was stored in a 1D array
@@ -280,8 +280,8 @@ func Load(filename string) (*NeuralNetwork, error) {
 		w := nn.Weights[i]
 		b := nn.Biases[i]
 
-		weights[i] = matrix.Unflatten(int(w.Rows), int(w.Columns), w.Data)
-		biases[i] = matrix.Unflatten(int(b.Rows), int(b.Columns), b.Data)
+		weights[i] = matrigo.Unflatten(int(w.Rows), int(w.Columns), w.Data)
+		biases[i] = matrigo.Unflatten(int(b.Rows), int(b.Columns), b.Data)
 	}
 
 	// Unflatten the data as it was stored in a 1D array
@@ -289,7 +289,7 @@ func Load(filename string) (*NeuralNetwork, error) {
 		a := nn.Activations[i]
 		l := nn.Layers[i]
 
-		activations[i] = matrix.Unflatten(int(a.Rows), int(a.Columns), a.Data)
+		activations[i] = matrigo.Unflatten(int(a.Rows), int(a.Columns), a.Data)
 		layers[i] = Layer{
 			Nodes:     int(l.Nodes),
 			Activator: getActivationFromName(activationName(l.Activator)),

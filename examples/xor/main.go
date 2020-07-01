@@ -29,7 +29,6 @@ func main() {
 	)
 
 	g.SetDebugMode(true)
-
 	g.Train(
 		gone.SGD(),
 		gone.DataSet{

@@ -1,8 +1,8 @@
 package gone
 
-import "github.com/fr3fou/gone/matrix"
+import "github.com/fr3fou/matrigo"
 
-// Optimizer is the optimizer type (returns the error)
+// Optimizer is the optimizer type (returns the error).
 type Optimizer func(n *NeuralNetwork, dataSet DataSet) float64
 
 // SGD is Stochastic Gradient Descent (On-line Training)
@@ -23,27 +23,27 @@ func MBGD(batchSize int) Optimizer {
 			lenLayers := len(n.Layers)
 			lenWeights := lenLayers - 1
 
-			deltas := make([]matrix.Matrix, lenWeights)
-			gradients := make([]matrix.Matrix, lenWeights)
+			deltas := make([]matrigo.Matrix, lenWeights)
+			gradients := make([]matrigo.Matrix, lenWeights)
 
 			// Zero the matrices
 			for i := 0; i < lenWeights; i++ {
-				deltas[i] = matrix.
+				deltas[i] = matrigo.
 					New(n.Weights[i].Rows, n.Weights[i].Columns, nil)
-				gradients[i] = matrix.
+				gradients[i] = matrigo.
 					New(n.Biases[i].Rows, n.Biases[i].Columns, nil)
 			}
 
 			for _, ds := range batch {
-				inputs := matrix.NewFromArray(ds.Inputs)
-				targets := matrix.NewFromArray(ds.Targets)
+				inputs := matrigo.NewFromArray(ds.Inputs)
+				targets := matrigo.NewFromArray(ds.Targets)
 				outputs := n.predict(inputs)
 
 				err += n.Loss.F(outputs, targets)
 				loss := n.Loss.FPrime(outputs, targets)
 
-				var currentGradients matrix.Matrix
-				var currentDeltas matrix.Matrix
+				var currentGradients matrigo.Matrix
+				var currentDeltas matrigo.Matrix
 
 				for i := lenWeights - 1; i >= 0; i-- {
 					// Ignore the first time
