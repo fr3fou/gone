@@ -180,6 +180,8 @@ These are some (stupid) questions I have that confuse me:
 
 ## References
 
+_Note: some of the references weren't used during the development, but are in this section as they were a helpful guidance throughout my AI journey_ 
+
 - <https://www.analyticsvidhya.com/blog/2020/01/fundamentals-deep-learning-activation-functions-when-to-use-them/>
 - <https://www.youtube.com/watch?v=XJ7HLz9VYz0&list=PLRqwX-V7Uu6Y7MdSCaIfsxc561QI0U0Tb>
 - <https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi>
@@ -213,3 +215,4 @@ These are some (stupid) questions I have that confuse me:
 - <https://www.wikiwand.com/en/Normal_distribution>
 - <https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/introduction-to-partial-derivatives>
 - <https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/the-gradient>
+- <https://towardsdatascience.com/e2e-the-every-purpose-ml-method-5d4f20dafee4>
