@@ -34,7 +34,7 @@ func getActivationFromName(a activationName) Activation {
 	}
 }
 
-// Sigmoid is a sigmoid activation function
+// Sigmoid is a sigmoid activation functio
 func Sigmoid() Activation {
 	return Activation{
 		Name: sigmoid,

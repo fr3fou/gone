@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	// ErrWeightsNotMatch is an error for when the parents don't have the same amount of weights.
 	ErrWeightsNotMatch = errors.New("gone: parents must have the exact same amount of weights")
 )
 
