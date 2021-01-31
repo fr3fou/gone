@@ -4,7 +4,7 @@
 
 A simple neural network library in Go from scratch. 0 dependencies\*
 
-_there are 0 neural network related dependencies, the only dependency is for persisting the weights to a file ([golang/protobuf](github.com/golang/protobuf))
+_there are 0 neural network related dependencies, the only dependency is for persisting the weights to a file ([golang/protobuf](github.com/golang/protobuf))_
 
 [goreport widget]: https://goreportcard.com/badge/github.com/fr3fou/gone
 [goreport]: https://goreportcard.com/report/github.com/fr3fou/gone
