@@ -48,7 +48,7 @@ func MBGD(batchSize int) Optimizer {
 				for i := lenWeights - 1; i >= 0; i-- {
 					// Ignore the first time
 					if i < lenWeights-1 {
-						loss = n.Weights[i+1].Transpose().DotProduct(loss)
+						loss = n.Weights[i+1].Transpose().Multiply(loss)
 					}
 
 					currentGradients = n.Activations[i+1].
@@ -56,10 +56,10 @@ func MBGD(batchSize int) Optimizer {
 							return n.Layers[i+1].Activator.FPrime(val)
 						}).
 						HadamardProduct(loss).
-						Multiply(n.LearningRate)
+						Scale(n.LearningRate)
 
 					currentDeltas = currentGradients.
-						DotProduct(n.Activations[i].Transpose())
+						Multiply(n.Activations[i].Transpose())
 
 					deltas[i] = deltas[i].AddMatrix(currentDeltas)
 					gradients[i] = gradients[i].AddMatrix(currentGradients)

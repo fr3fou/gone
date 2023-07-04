@@ -123,7 +123,7 @@ NOTE: all of this was migrated to [github.com/fr3fou/matrigo](https://github.com
 
 ```go
 n.Weights[i].
-    Multiply(output).                         // weighted sum of the previous layer)
+    Multiply(output).                         // weighted sum of the previous layer
     Add(n.Layers[i+1].Bias).                  // bias
     Map(func(val float64, x, y int) float64 { // activation
       return n.Layers[i+1].Activator.F(val)

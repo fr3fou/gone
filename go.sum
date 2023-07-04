@@ -3,6 +3,10 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/fr3fou/gone v0.0.0-20200701155258-b496ba8c825d/go.mod h1:/HcmDso+PQDjwnID34rO69fCAs2OErhLLQFQIH4NOWc=
 github.com/fr3fou/matrigo v0.0.0-20200701163803-11c9d47e0cd9 h1:u15Q3YaBPyzNFf24cduAlyc1w7+6CuqDG33/ulhDHl0=
 github.com/fr3fou/matrigo v0.0.0-20200701163803-11c9d47e0cd9/go.mod h1:Kd4afu4ubgHaSsxgF9aUFKawo4lqR2HUf4U7pk9LEnw=
+github.com/fr3fou/matrigo v0.0.0-20230704084537-1eaf387f6265 h1:1NasHO6VbaWBWJH5vrxCUNybIqVGHbC5SYk9Bg0tUZk=
+github.com/fr3fou/matrigo v0.0.0-20230704084537-1eaf387f6265/go.mod h1:BtVJv2AxN0899iByx/3GzJnD8OJRqKTHAUyyKrcWldU=
+github.com/fr3fou/matrigo v1.0.0 h1:zCNSoiuGfJLK06WjvQLCsnnWOe9BNMPC1HqzQwKdPXQ=
+github.com/fr3fou/matrigo v1.0.0/go.mod h1:BtVJv2AxN0899iByx/3GzJnD8OJRqKTHAUyyKrcWldU=
 github.com/golang/protobuf v1.4.0-rc.1/go.mod h1:ceaxUfeHdC40wWswd/P6IGgMaK3YpKi5j83Wpe3EHw8=
 github.com/golang/protobuf v1.4.0-rc.1.0.20200221234624-67d41d38c208/go.mod h1:xKAWHe0F5eneWXFV3EuXVDTCmh+JuBKY0li0aMyXATA=
 github.com/golang/protobuf v1.4.0-rc.2/go.mod h1:LlEzMj4AhA7rCAGe4KMBDvJI+AwstrUpVNzEA03Pprs=

@@ -99,7 +99,7 @@ func (n *NeuralNetwork) predict(mat matrigo.Matrix) matrigo.Matrix {
 	n.Activations[0] = mat // add the original input
 	for i := 0; i < len(n.Weights); i++ {
 		mat = n.Weights[i].
-			DotProduct(mat).                          // weighted sum of the previous layer)
+			Multiply(mat).                            // weighted sum of the previous layer
 			AddMatrix(n.Biases[i]).                   // bias
 			Map(func(val float64, x, y int) float64 { // activation
 				return n.Layers[i+1].Activator.F(val)
